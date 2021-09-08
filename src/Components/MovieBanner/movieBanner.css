@@ -1,0 +1,144 @@
+.mbContainer{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    background: var(--background);
+    padding-top: 80px;
+}
+.mBanner{
+    display: flex;
+    width: 92%;
+    height: 100%;
+    background: var(--bannerBG);
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.mbDescription{
+    position: absolute;
+    font-weight: 500;
+    font-size: 0.98em;
+    width: 120%;
+    height: 50%;
+    color: rgb(184, 184, 184);
+    margin-top: 0.8rem;
+    line-height: 28px;
+    z-index: 50;
+}
+.mbBtns{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 180px;
+    z-index: 50;
+}
+.WatchMovieBtn{
+    display: flex;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+.bWatchMovie{
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 20px;
+    color: white;
+    transition: 0.2s;
+}
+.WatchMovieBtn span{
+    background: url(https://www.hotstar.com/assets/354b1f5d615ca67922644bf6bd842b8d.svg);
+    width: 17px;
+    height: 20px;
+    background-size: contain;
+    margin-right: 1rem;
+    transition: 0.2s;
+}
+.mBanner:hover .WatchMovieBtn{
+    opacity: 1;
+}
+.WatchMovieBtn2{
+    display: flex;
+    transform: translateY(-20px);
+}
+.wl,.share{
+    display: grid;
+    place-items: center;
+    height: 50px;
+    
+}
+.wl div{
+    background: url(https://www.hotstar.com/assets/1fd3813027f5538464413fb8b08d9dbb.svg);
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+}
+.share{
+    transform: translate(30px, 1px);
+}
+.share div{
+    background: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0xOCAxNi4wOGMtLjc2IDAtMS40NC4zLTEuOTYuNzdMOC45MSAxMi43Yy4wNS0uMjMuMDktLjQ2LjA5LS43cy0uMDQtLjQ3LS4wOS0uN2w3LjA1LTQuMTFjLjU0LjUgMS4yNS44MSAyLjA0LjgxIDEuNjYgMCAzLTEuMzQgMy0zcy0xLjM0LTMtMy0zLTMgMS4zNC0zIDNjMCAuMjQuMDQuNDcuMDkuN0w4LjA0IDkuODFDNy41IDkuMzEgNi43OSA5IDYgOWMtMS42NiAwLTMgMS4zNC0zIDNzMS4zNCAzIDMgM2MuNzkgMCAxLjUtLjMxIDIuMDQtLjgxbDcuMTIgNC4xNmMtLjA1LjIxLS4wOC40My0uMDguNjUgMCAxLjYxIDEuMzEgMi45MiAyLjkyIDIuOTIgMS42MSAwIDIuOTItMS4zMSAyLjkyLTIuOTJzLTEuMzEtMi45Mi0yLjkyLTIuOTJ6Ii8+Cjwvc3ZnPg==);
+    width: 23px;
+    height: 23px;
+    background-size: contain;
+}
+.bWatchList, .bShare{
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+/* .bContents{
+    position: relative;
+    width: 32%;
+    height: 100%;
+    padding: 4.5rem 2rem 4.5rem 3rem;
+}
+.bTitle{
+    font-size: 1.8em;
+    font-weight: 800;
+    padding-bottom: 0.8rem;
+}
+.bCategory{
+    color: rgb(139, 139, 139);
+    font-weight: 600;
+}
+.bDescription{
+    font-weight: 500;
+    height: 50%;
+    color: rgb(184, 184, 184);
+    margin-top: 0.8rem;
+    line-height: 28px;
+}
+.bImages{
+    position: relative;
+    width: 68%;
+}
+.bImage{
+    width: 100%;
+    background-size: cover;
+}
+.bImages::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bannerBG), rgba(0, 0, 0, 0));
+}
+.swiper-button-next,
+.swiper-button-prev {
+    padding-top: 1rem;
+    margin: -0.4rem;
+    color: rgb(182, 182, 182) !important;
+    
+}
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    transition: 0.5s;
+    opacity: 0;
+}
+.mySwiper:hover .swiper-button-next::after,
+.mySwiper:hover .swiper-button-prev::after{
+    opacity: 1;
+} */

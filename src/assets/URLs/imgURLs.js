@@ -1,0 +1,2 @@
+export const Kids = 'https://www.hotstar.com/assets/4aa70ede8904e16b7630300c09219c8e.svg'
+export const Logo = 'https://secure-media.hotstarext.com/web-assets/prod/images/brand-logos/disney-hotstar-logo-dark.svg'

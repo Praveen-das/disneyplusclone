@@ -1,0 +1,80 @@
+.mySwiper{
+    background: var(--background);
+}
+.bContainer{
+    margin: 80px 2.5rem 2rem 2.5rem;
+}
+.banner{
+    display: flex;
+    max-width: 100%;
+    height: 63vh;
+    background: var(--bannerBG);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: -100px;
+    cursor: pointer;
+}
+
+.bContents{
+    position: relative;
+    width: 32%;
+    height: 100%;
+    padding: 4.5rem 2rem 4.5rem 3rem;
+}
+.bTitle{
+    font-size: 1.8em;
+    font-weight: 800;
+    padding-bottom: 0.8rem;
+}
+.bCategory{
+    color: rgb(139, 139, 139);
+    font-weight: 600;
+}
+.bDate{
+    color: rgb(139, 139, 139);
+    font-weight: 600;
+    font-size: 0.95em;
+}
+.bDescription{
+    font-weight: 500;
+    font-size: 0.98em;
+    height: 50%;
+    color: rgb(184, 184, 184);
+    margin-top: 0.8rem;
+    line-height: 28px;
+}
+.bImages{
+    position: relative;
+    right: 0;
+    width: 68%;
+}
+.bImage{
+    width: 800px;
+    
+    background-size: contain;
+}
+.bImages::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bannerBG), rgba(0, 0, 0, 0));
+}
+.swiper-button-next,
+.swiper-button-prev {
+    padding-top: 1rem;
+    margin: -0.4rem;
+    color: rgb(182, 182, 182) !important;
+    
+}
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    transition: 0.5s;
+    opacity: 0;
+}
+.mySwiper:hover .swiper-button-next::after,
+.mySwiper:hover .swiper-button-prev::after{
+    opacity: 1;
+}

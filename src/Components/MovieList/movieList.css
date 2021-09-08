@@ -1,0 +1,173 @@
+.trayContainer{
+    position: relative;
+    max-width: 100%;
+    height: 280px;
+    background: var(--background);
+    overflow: hidden;
+    padding: 0 2.5rem;
+    padding-bottom: 1rem;
+}
+.trayWrapper{
+    transform: translateY(2.5rem);
+}
+.slides{
+    display: flex;
+    position: relative;
+    left: 0;
+    transition: 0.5s ease-in;
+}
+.title{
+    position: absolute;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2.5rem;
+}
+.leftArrow,
+.rightArrow{
+    position: absolute;
+    top: 100px;
+    font-size: 2em;
+    transition: 0.5s;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 0;
+    color: white;
+}
+.leftArrow{
+    left: -30px;
+}
+.leftArrow::after{
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -2.5rem;
+    width: 100px;
+    height: 225px;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.767));
+    transition: 0.5s;
+    z-index: -1;
+}
+.rightArrow{
+    right: -30px;
+}
+.rightArrow::after{
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -2.5rem;
+    width: 100px;
+    height: 225px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.767));
+    transition: 0.5s;
+    z-index: -1;
+}
+.trayWrapper:hover .leftArrow,
+.trayWrapper:hover .leftArrow::before{
+    opacity: 1;
+}
+.trayWrapper:hover .rightArrow,
+.trayWrapper:hover .rightArrow::after{
+    opacity: 1;
+}
+.movieWrapper{
+    min-width: 147px;
+    height: 225px;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+}
+.movieWrapper::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(rgba(0, 0, 0, 0),#192133,#192133);
+    opacity: 0;
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+}
+.movieImage{
+    width: 100%;
+    height: 100%;
+}
+.movieDetalis{
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: auto 35% 25%;
+    align-items: end;
+    padding: 0.5rem;
+    z-index: 10;
+    opacity: 0;
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+}
+
+.movieDetalis label{
+    font-size: 0.7em;
+    font-weight: 500;
+    top: 50px;
+}
+.movieDetalis p{
+    margin-top: 0.1rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.6em;
+    font-weight: 500;
+    width: 120px;
+    line-height: 14px;
+}
+.movieDetalis a{
+    text-decoration: none;
+    font-size: 0.5em;
+    font-weight: 600;
+}
+.wmBtn,
+.atfBtn{
+    width: 127px;
+    height: 18px;
+    box-sizing: border-box;
+    padding: 0.1rem 0.5rem;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+}
+.wmBtn:hover,
+.atfBtn:hover{
+    background: rgba(255, 255, 255, 0.123);
+}
+.wmBtn i{
+    font-size: 15px;
+    margin-right: 10px;
+}
+.atfBtn i{
+    font-size: 10px;
+    margin-right: 10px;
+    margin-left: -2px;
+}
+
+.movieWrapper:hover {
+    transform: scale(1.2);
+    z-index: 20;
+    transition-delay: 0.2s;
+}
+.movieWrapper:hover.movieWrapper::after,
+.movieWrapper:hover .movieDetalis{
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+.movieWrapper:nth-child(1):hover{
+    transform: scale(1.2);
+    transform-origin: left;
+    transition-delay: 0;
+    z-index: 20;
+}

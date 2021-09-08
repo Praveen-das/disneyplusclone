@@ -1,0 +1,63 @@
+.footer{
+    display: flex;
+    background: var(--background);
+    padding: 2.5rem;
+}
+.footer-left{
+    width: 50%;
+}
+.footer-right{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.footer label{
+    font-size: 0.85em;
+    font-weight: 500;
+    padding-right: 1.4rem;
+}
+.footer p{
+    font-size: 0.75em;
+    font-weight: 500;
+    margin-top: 1rem;
+    line-height: 20px;
+}
+
+.fb,.tw{
+    background: url(https://www.hotstar.com/assets/00dd72dcb62378da1988866159d26cca.svg) left bottom no-repeat;
+    background-position: 0 0;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+.tw{
+    background-position: -45px 0;
+}
+.fb:hover{
+    background-position: 0 -45px;
+}
+.tw:hover{
+    background-position: -45px -45px;
+}
+.playstore,.appstore{
+    background: url(https://www.hotstar.com/assets/67764ffe0b6b18e06d60049a00c86335.svg) left bottom no-repeat;
+    background-position: 0 0;
+    width: 135px;
+    height: 40px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+.appstore{
+    background-position: -140px 0;
+}
+.playstore:hover{
+    background-position: 0 -50px;
+}
+.appstore:hover{
+    background-position: -140px -50px;
+}
