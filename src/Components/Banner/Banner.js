@@ -38,7 +38,7 @@ function Banner(props) {
                     <SwiperSlide key={index}>
                         <Link to={{
                             pathname: '/movie',
-                            state: { movie: movie,genres:genres }
+                            state: { movie: movie, genres: genres }
                         }}>
                             <div className="bContainer">
                                 <div key={index} className="banner" ref={bannerRef}>
@@ -51,9 +51,8 @@ function Banner(props) {
                                         )}
                                         <p className='bDescription'>{movie.overview}</p>
                                     </div>
-                                    <div className="bImages">
-                                        <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
-                                    </div>
+                                    <span className="bOverlay"></span>
+                                    <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
                                 </div>
                             </div>
                         </Link>

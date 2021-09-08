@@ -6,6 +6,7 @@
 }
 .banner{
     display: flex;
+    position: relative;
     max-width: 100%;
     height: 63vh;
     background: var(--bannerBG);
@@ -20,6 +21,7 @@
     width: 32%;
     height: 100%;
     padding: 4.5rem 2rem 4.5rem 3rem;
+    z-index: 20;
 }
 .bTitle{
     font-size: 1.8em;
@@ -43,24 +45,21 @@
     margin-top: 0.8rem;
     line-height: 28px;
 }
-.bImages{
-    position: relative;
-    right: 0;
-    width: 68%;
-}
+
 .bImage{
+    position: absolute;
+    right: 0;
     width: 800px;
-    
-    background-size: contain;
+    background-size: cover;
 }
-.bImages::before{
-    content: '';
+.bOverlay{
     position: absolute;
     top: 0;
-    left: 0;
+    right: 40vw;
     width: 20%;
     height: 100%;
     background: linear-gradient(90deg, var(--bannerBG), rgba(0, 0, 0, 0));
+    z-index: 30;
 }
 .swiper-button-next,
 .swiper-button-prev {
