@@ -19,6 +19,8 @@ function Banner(props) {
     const { movies, genres } = OTTList(1, props.url)
     const bannerRef = useRef()
 
+    console.log(genres);
+
     return (
         <>
             <Swiper
@@ -51,8 +53,9 @@ function Banner(props) {
                                         )}
                                         <p className='bDescription'>{movie.overview}</p>
                                     </div>
-                                    <span className="bOverlay"></span>
-                                    <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
+                                    <div className="imgWrapper">
+                                        <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
+                                    </div>
                                 </div>
                             </div>
                         </Link>

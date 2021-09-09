@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useAuth } from '../../contexts/AuthContext'
+import { Link } from 'react-router-dom'
 
 function MovieList(props) {
     const leftRef = useRef()
@@ -9,11 +10,9 @@ function MovieList(props) {
     const [pageNumber, setPageNumber] = useState(1);
     var [currentSlide, setCurrentSlide] = useState(0)
 
-    const {
-        OTTList
-    } = useAuth()
+    const { OTTList } = useAuth()
+    const { movies, genres, loading, hasMore } = OTTList(pageNumber, props.url)
 
-    const { movies, loading, hasMore } = OTTList(pageNumber, props.url)
 
     const lastElementRef = useRef()
     const firstElementRef = useRef()
@@ -33,10 +32,10 @@ function MovieList(props) {
 
     const firstElement = useCallback(node => {
         firstElementRef.current = new IntersectionObserver(entries => {
-            if(entries[0]){
+            if (entries[0]) {
                 if (entries[0].isIntersecting) {
                     leftRef.current.style.display = 'none'
-                } else if(leftRef.current){
+                } else if (leftRef.current) {
                     leftRef.current.style.display = 'inline'
                 }
             }
@@ -62,24 +61,29 @@ function MovieList(props) {
                             movies && movies.map((movie, index) => {
                                 if (movie.poster_path) {
                                     return <div key={index} className="movieWrapper">
-                                        <div className="movieDetalis">
-                                            <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                            <div>
-                                                <div className='wmBtn'>
-                                                    <i className='fa fa-caret-right'></i>
-                                                    <a href="/#">WATCH MOVIE</a><br />
-                                                </div>
-                                                <div className='atfBtn'>
-                                                    <i className='fa fa-plus'></i>
-                                                    <a href="/#">ADD TO WATCHLIST</a>
+                                        <Link to={{
+                                            pathname: '/movie',
+                                            state: { movie: movie, genres: genres }
+                                        }}>
+                                            <div className="movieDetalis">
+                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
+                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
+                                                <div>
+                                                    <div className='wmBtn'>
+                                                        <i className='fa fa-caret-right'></i>
+                                                        {/* <Link to="/">WATCH MOVIE</Link> */}
+                                                    </div>
+                                                    <div className='atfBtn'>
+                                                        <i className='fa fa-plus'></i>
+                                                        {/* <Link to="/#">ADD TO WATCHLIST</Link> */}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {
-                                            index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                                : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                        }
+                                            {
+                                                index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                                    : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                            }
+                                        </Link>
                                     </div>
                                 }
                                 return null

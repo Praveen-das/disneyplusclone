@@ -18,7 +18,7 @@ function MovieBanner(props) {
             <div className="mbContainer">
                 <div className="mBanner" ref={bannerRef}>
                     <div className="bContents">
-                        <h1 className='bTitle'>{movie.title}</h1>
+                        <h1 className='bTitle'>{movie.title ? movie.title : movie.name}</h1>
                         <label className='bDate' htmlFor="">{movie.release_date} &#8901; </label>
                         {genres && genres.map((genre, index) =>
                             genres.length !== index + 1 ?
@@ -29,22 +29,22 @@ function MovieBanner(props) {
                         <div className="mbBtns">
                             <div className="WatchMovieBtn">
                                 <span></span>
-                                <Link className='bWatchMovie'>Watch Movie</Link>
+                                <Link to='/#' className='bWatchMovie'>Watch Movie</Link>
                             </div>
                             <div className="WatchMovieBtn2">
                                 <div className="wl">
                                     <div></div>
-                                    <Link className='bWatchList'>WATCHLIST</Link>
+                                    <Link to='/#' className='bWatchList'>WATCHLIST</Link>
                                 </div>
                                 <div className="share">
                                     <div></div>
-                                    <Link className='bShare'>SHARE</Link>
+                                    <Link to='/#' className='bShare'>SHARE</Link>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div className="bImages">
+                    <div className="imgWrapper">
                         <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
                     </div>
                 </div>
