@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
-import { BaseURL, genresURL } from "../assets/URLs/URLs"
+import { BaseURL, movieGenres, tvShowsGenres } from "../assets/URLs/URLs"
 
 const AuthContext = React.createContext()
 
@@ -14,7 +14,7 @@ export default function AuthProvider({ children }) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
-        const [genresId, setGenresId] = useState()
+        const [movieGenre, setMovieGenre] = useState()
         const [genres, setGenres] = useState()
 
         useEffect(() => {
@@ -24,7 +24,6 @@ export default function AuthProvider({ children }) {
                 url: BaseURL + url,
                 params: { page: pageNumber }
             }).then((res) => {
-                setGenresId(res.data.results[1].genre_ids)
                 setMovies((previousSlide) => {
                     return [
                         ...previousSlide,
@@ -37,12 +36,22 @@ export default function AuthProvider({ children }) {
         }, [pageNumber, url])
 
         useEffect(() => {
-            axios.get(BaseURL + genresURL).then(res => {    
-                if(res && genresId){
-                    setGenres(res.data.genres.filter(element => genresId.includes(element.id)))
+            axios.get(BaseURL + movieGenres).then(res => {    
+                if(res){
+                    setMovieGenre(res.data.genres)
                 } 
             }).catch((err) => console.log(err))
-        }, [genresId])
+        }, [])
+        
+        useEffect(() => {
+            axios.get(BaseURL + tvShowsGenres).then(res => {    
+                if(res && movieGenre){
+                    setGenres(res.data.genres.concat(movieGenre))
+                } 
+            }).catch((err) => console.log(err))
+        }, [movieGenre])
+
+        
 
         return { movies, hasMore, loading, genres }
     }

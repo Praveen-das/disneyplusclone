@@ -6,12 +6,9 @@ import { Link } from 'react-router-dom'
 import './movieBanner.css'
 
 function MovieBanner(props) {
-    console.log(props);
     const bannerRef = useRef()
     const location = useLocation()
     const { movie, genres } = location.state
-
-    console.log(movie);
 
     return (
         <>
@@ -20,9 +17,11 @@ function MovieBanner(props) {
                     <div className="bContents">
                         <h1 className='bTitle'>{movie.title ? movie.title : movie.name}</h1>
                         <label className='bDate' htmlFor="">{movie.release_date} &#8901; </label>
-                        {genres && genres.map((genre, index) =>
-                            genres.length !== index + 1 ?
-                                <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
+                        {genres && genres.filter(elements =>
+                            movie.genre_ids.includes(elements.id)
+                        ).map((genre, index) =>
+                            movie.genre_ids.length !== index + 1 ?
+                                <label key={index} className='bCategory'>{genre.name} - </label> :
                                 <label key={index} className='bCategory'>{genre.name}</label>
                         )}
                         <p className='mbDescription'>{movie.overview}</p>

@@ -18,9 +18,7 @@ function Banner(props) {
     const { OTTList } = useAuth()
     const { movies, genres } = OTTList(1, props.url)
     const bannerRef = useRef()
-
-    console.log(genres);
-
+    console.log(movies);
     return (
         <>
             <Swiper
@@ -46,8 +44,10 @@ function Banner(props) {
                                 <div key={index} className="banner" ref={bannerRef}>
                                     <div className="bContents">
                                         <h1 className='bTitle'>{movie.title}</h1>
-                                        {genres && genres.map((genre, index) =>
-                                            genres.length !== index + 1 ?
+                                        {genres && genres.filter(elements =>
+                                            movie.genre_ids.includes(elements.id)
+                                        ).map((genre, index) =>
+                                            movie.genre_ids.length !== index + 1 ?
                                                 <label key={index} className='bCategory'>{genre.name} - </label> :
                                                 <label key={index} className='bCategory'>{genre.name}</label>
                                         )}
