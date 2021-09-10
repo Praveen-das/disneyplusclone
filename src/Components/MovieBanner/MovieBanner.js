@@ -10,13 +10,15 @@ function MovieBanner(props) {
     const location = useLocation()
     const { movie, genres } = location.state
 
+    console.log(movie);
+
     return (
         <>
             <div className="mbContainer">
                 <div className="mBanner" ref={bannerRef}>
                     <div className="bContents">
-                        <h1 className='bTitle'>{movie.title ? movie.title : movie.name}</h1>
-                        <label className='bDate' htmlFor="">{movie.release_date} &#8901; </label>
+                        <h1 className='bTitle'>{movie.title || movie.name}</h1>
+                        <label className='bDate' htmlFor="">{movie.release_date || movie.first_air_date} &#8901; </label>
                         {genres && genres.filter(elements =>
                             movie.genre_ids.includes(elements.id)
                         ).map((genre, index) =>

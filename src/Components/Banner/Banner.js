@@ -18,7 +18,7 @@ function Banner(props) {
     const { OTTList } = useAuth()
     const { movies, genres } = OTTList(1, props.url)
     const bannerRef = useRef()
-    console.log(movies);
+    
     return (
         <>
             <Swiper

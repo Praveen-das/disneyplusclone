@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
-import { BaseURL, movieGenres, tvShowsGenres } from "../assets/URLs/URLs"
+import { BaseURL, movieGenresURL, tvShowsGenresURL } from "../assets/URLs/URLs"
 
 const AuthContext = React.createContext()
 
@@ -14,7 +14,8 @@ export default function AuthProvider({ children }) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
-        const [movieGenre, setMovieGenre] = useState()
+        let [movieGenres, setMovieGenres] = useState()
+        const [tvGenres, setTvGenres] = useState()
         const [genres, setGenres] = useState()
 
         useEffect(() => {
@@ -36,22 +37,31 @@ export default function AuthProvider({ children }) {
         }, [pageNumber, url])
 
         useEffect(() => {
-            axios.get(BaseURL + movieGenres).then(res => {    
-                if(res){
-                    setMovieGenre(res.data.genres)
-                } 
+            axios.get(BaseURL + movieGenresURL).then(res => {
+                if (res) {
+                    setMovieGenres(res.data.genres)
+                }
             }).catch((err) => console.log(err))
         }, [])
-        
-        useEffect(() => {
-            axios.get(BaseURL + tvShowsGenres).then(res => {    
-                if(res && movieGenre){
-                    setGenres(res.data.genres.concat(movieGenre))
-                } 
-            }).catch((err) => console.log(err))
-        }, [movieGenre])
 
-        
+        useEffect(() => {
+            axios.get(BaseURL + tvShowsGenresURL).then(res => {
+                if (res && movieGenres) {
+                    setTvGenres(res.data.genres)
+                }
+            }).catch((err) => console.log(err))
+        }, [movieGenres])
+
+        useEffect(() => {
+            if (movieGenres && tvGenres) {
+                const merged = movieGenres.concat(tvGenres)
+                const genreMap = merged.map(genre => {
+                    return [genre.id, genre]
+                })
+                const newMap = new Map(genreMap)
+                setGenres([...newMap.values()])
+            }
+        }, [movieGenres, tvGenres])
 
         return { movies, hasMore, loading, genres }
     }
