@@ -23,7 +23,7 @@ function MovieBanner(props) {
                             movie.genre_ids.includes(elements.id)
                         ).map((genre, index) =>
                             movie.genre_ids.length !== index + 1 ?
-                                <label key={index} className='bCategory'>{genre.name} - </label> :
+                                <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
                                 <label key={index} className='bCategory'>{genre.name}</label>
                         )}
                         <p className='mbDescription'>{movie.overview}</p>

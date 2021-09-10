@@ -70,10 +70,14 @@
 .trayWrapper:hover .rightArrow::after{
     opacity: 1;
 }
-.movieWrapper{
+
+
+.slideWrapper{
+    box-sizing: border-box;
     min-width: 147px;
     height: 225px;
     position: relative;
+    padding: 0.5rem;
     border-radius: 5px;
     margin-right: 10px;
     overflow: hidden;
@@ -81,54 +85,59 @@
     transition: 0.3s ease-out;
     transition-delay: 0s;
 }
-.movieWrapper::after{
+.slideWrapper::after{
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 70%;
+    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0),#192133,#192133);
     opacity: 0;
     transition: 0.3s ease-out;
     transition-delay: 0s;
+    z-index: -1;
 }
 .movieImage{
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
+    background-size: contain;
 }
-.movieDetalis{
+.slide{
     width: 100%;
-    height: 60%;
-    position: absolute;
-    bottom: 0;
-    display: grid;
-    grid-template-rows: auto 35% 25%;
-    align-items: end;
-    padding: 0.5rem;
+    height: 100%;
     z-index: 10;
-    opacity: 0;
-    transition: 0.3s ease-out;
-    transition-delay: 0s;
 }
 
-.movieDetalis label{
+.slide label{
     font-size: 0.7em;
     font-weight: 500;
-    top: 50px;
+    display: inline-block;
+    padding-top: 6rem;
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+    opacity: 0;
 }
-.movieDetalis p{
+.slide p{
     margin-top: 0.1rem;
     margin-bottom: 0.2rem;
     font-size: 0.6em;
     font-weight: 500;
     width: 120px;
     line-height: 14px;
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+    opacity: 0;
 }
-.movieDetalis a{
-    text-decoration: none;
-    font-size: 0.5em;
-    font-weight: 600;
+.bBtns{
+    transform: translateY(-35px);
+    transition: 0.3s ease-out;
+    transition-delay: 0s;
+    opacity: 0;
 }
 .wmBtn,
 .atfBtn{
@@ -154,18 +163,23 @@
     margin-right: 10px;
     margin-left: -2px;
 }
-
-.movieWrapper:hover {
+.watchMovie,
+.addToFavourite{
+    font-size: 10px;
+}
+.slideWrapper:hover {
     transform: scale(1.2);
     z-index: 20;
     transition-delay: 0.2s;
 }
-.movieWrapper:hover.movieWrapper::after,
-.movieWrapper:hover .movieDetalis{
+.slideWrapper:hover.slideWrapper::after,
+.slideWrapper:hover .slide label,
+.slideWrapper:hover .slide p,
+.slideWrapper:hover .bBtns{
     opacity: 1;
     transition-delay: 0.2s;
 }
-.movieWrapper:nth-child(1):hover{
+.slideWrapper:nth-child(1):hover{
     transform: scale(1.2);
     transform-origin: left;
     transition-delay: 0;

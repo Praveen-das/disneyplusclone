@@ -7,15 +7,13 @@ import { Link } from 'react-router-dom'
 function MovieList(props) {
     const leftRef = useRef()
     const rightRef = useRef()
+    const lastElementRef = useRef()
+    const firstElementRef = useRef()
     const [pageNumber, setPageNumber] = useState(1);
     var [currentSlide, setCurrentSlide] = useState(0)
 
     const { OTTList } = useAuth()
     const { movies, genres, loading, hasMore } = OTTList(pageNumber, props.url)
-
-
-    const lastElementRef = useRef()
-    const firstElementRef = useRef()
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -60,30 +58,30 @@ function MovieList(props) {
                         {
                             movies && movies.map((movie, index) => {
                                 if (movie.poster_path) {
-                                    return <div key={index} className="movieWrapper">
+                                    return <div key={index} className="slideWrapper">
                                         <Link to={{
                                             pathname: '/movie',
                                             state: { movie: movie, genres: genres }
                                         }}>
-                                            <div className="movieDetalis">
+                                            <div className="slide">
                                                 <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
                                                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                                <div>
-                                                    <div className='wmBtn'>
-                                                        <i className='fa fa-caret-right'></i>
-                                                        {/* <Link to="/">WATCH MOVIE</Link> */}
-                                                    </div>
-                                                    <div className='atfBtn'>
-                                                        <i className='fa fa-plus'></i>
-                                                        {/* <Link to="/#">ADD TO WATCHLIST</Link> */}
-                                                    </div>
-                                                </div>
+                                                {
+                                                    index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                                        : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                                }
                                             </div>
-                                            {
-                                                index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                                    : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                            }
                                         </Link>
+                                        <div className='bBtns'>
+                                            <div className='wmBtn'>
+                                                <i className='fa fa-caret-right'></i>
+                                                <Link className='watchMovie' to="/#">WATCH MOVIE</Link>
+                                            </div>
+                                            <div className='atfBtn'>
+                                                <i className='fa fa-plus'></i>
+                                                <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
+                                            </div>
+                                        </div>
                                     </div>
                                 }
                                 return null

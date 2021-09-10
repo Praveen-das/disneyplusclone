@@ -26,8 +26,6 @@ function Banner(props) {
                 spaceBetween={-65}
                 loop={true}
                 allowTouchMove={false}
-                preloadImages={true}
-                updateOnImagesReady={true}
                 autoplay={{
                     delay: 3000,
                     disableOnInteraction: false
@@ -35,11 +33,13 @@ function Banner(props) {
                 className="mySwiper"
             >
                 {movies && movies.map((movie, index) =>
+                
                     <SwiperSlide key={index}>
                         <Link to={{
                             pathname: '/movie',
                             state: { movie: movie, genres: genres }
                         }}>
+                        
                             <div className="bContainer">
                                 <div key={index} className="banner" ref={bannerRef}>
                                     <div className="bContents">
@@ -48,7 +48,7 @@ function Banner(props) {
                                             movie.genre_ids.includes(elements.id)
                                         ).map((genre, index) =>
                                             movie.genre_ids.length !== index + 1 ?
-                                                <label key={index} className='bCategory'>{genre.name} - </label> :
+                                                <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
                                                 <label key={index} className='bCategory'>{genre.name}</label>
                                         )}
                                         <p className='bDescription'>{movie.overview}</p>
