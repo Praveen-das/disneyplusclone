@@ -58,18 +58,20 @@ function MovieList(props) {
                         {
                             movies && movies.map((movie, index) => {
                                 if (movie.poster_path) {
-                                    return <div key={index} className="slideWrapper">
+                                    return <div key={index} className="slideWrapper expand">
                                         <Link to={{
                                             pathname: '/movie',
                                             state: { movie: movie, genres: genres }
                                         }}>
                                             <div className="slide">
-                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
                                                 {
                                                     index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
                                                         : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
                                                 }
+                                                <div className="slideContents">
+                                                    <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
+                                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
+                                                </div>
                                             </div>
                                         </Link>
                                         <div className='bBtns'>
