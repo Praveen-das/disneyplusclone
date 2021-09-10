@@ -62,6 +62,7 @@ export default function AuthProvider({ children }) {
                 setGenres([...newMap.values()])
             }
         }, [movieGenres, tvGenres])
+        
 
         return { movies, hasMore, loading, genres }
     }

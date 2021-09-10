@@ -1,6 +1,6 @@
 .footer{
     display: flex;
-    background: var(--background);
+    background: #0c111b;
     padding: 2.5rem;
 }
 .footer-left{

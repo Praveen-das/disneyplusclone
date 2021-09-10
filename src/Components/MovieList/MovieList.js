@@ -77,7 +77,10 @@ function MovieList(props) {
                                         <div className='bBtns'>
                                             <div className='wmBtn'>
                                                 <i className='fa fa-caret-right'></i>
-                                                <Link className='watchMovie' to="/#">WATCH MOVIE</Link>
+                                                <Link className='watchMovie' to={{
+                                                    pathname: '/watch',
+                                                    state: { movie: movie, genres: genres }
+                                                }}>WATCH MOVIE</Link>
                                             </div>
                                             <div className='atfBtn'>
                                                 <i className='fa fa-plus'></i>

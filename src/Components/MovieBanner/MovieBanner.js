@@ -30,7 +30,10 @@ function MovieBanner(props) {
                         <div className="mbBtns">
                             <div className="WatchMovieBtn">
                                 <span></span>
-                                <Link to='/#' className='bWatchMovie'>Watch Movie</Link>
+                                <Link to={{
+                                    pathname: '/watch',
+                                    state: { movie: movie, genres: genres }
+                                }} className='bWatchMovie'>Watch Movie</Link>
                             </div>
                             <div className="WatchMovieBtn2">
                                 <div className="wl">

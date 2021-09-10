@@ -1,7 +1,7 @@
 .navbar{
     box-sizing: border-box;
     width: 100%;
-    padding: 35px 3.5rem 0 3.5rem;
+    padding: 35px 3.5rem 0.5rem 3.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,7 +30,7 @@
     padding-right: 1rem;
 }
 .kidsLogo{
-    transform: translateY(-15px);
+    transform: translateY(-14px);
 }
 .left a{
     font-size: 1em;
@@ -41,7 +41,7 @@
 }
 .right{
     display: flex;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 .search{
     width: 230px;
