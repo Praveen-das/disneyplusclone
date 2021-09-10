@@ -12,13 +12,13 @@ function Header() {
                         <span className='line'></span>
                         <span className='line'></span>
                     </div>
-                    <img src={Logo} alt="logo" />
+                    <img className='disneyplus' src={Logo} alt="logo" />
                     <a href="/#">TV</a>
                     <a href="/#">Movies</a>
                     <a href="/#">Sports</a>
                     <a href="/#">Premium</a>
                     <a href="/#">Disney+</a>
-                    <img src={Kids} alt="kids" />
+                    <img className='kidsLogo' src={Kids} alt="kids" />
                 </div>
                 <div className="right">
                     <div className="searchbox">
