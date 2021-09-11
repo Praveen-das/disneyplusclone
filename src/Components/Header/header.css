@@ -7,7 +7,8 @@
     align-items: center;
     background: var(--background);
     position: fixed;
-    z-index: 20;
+    z-index: 100;
+    
 }
 .hamburger{
     display: inline-block;
@@ -27,17 +28,56 @@
 }
 .disneyplus{
     transform: translate(0, -18px);
-    padding-right: 1rem;
+    margin-right: -1rem;
+}
+.dropDown,
+.movieWrapper{
+    display: block;
+    transform: translateY(-5px);
+    
+}
+.dropDownContents h1{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 40px;
+    font-size: 0.9em;
+}
+.dropDownContents{
+    display: block;
+    position: absolute;
+    background: #192133;
+    border-radius: 4px;
+    margin-top: 10px;
+    transform: translate(-20px, 20px);
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+}
+.dropDown:hover .dropDownContents{
+    visibility: visible;
+    transition: 0.3s;
+    transform: translate(-20px, 0);
+    pointer-events: all;
+}
+.dropDownContents h1{
+    padding-left: 1.3rem;
+    width: 100%;
+    margin-right: -0.7rem;
+}
+.dropDownContents h1:hover{
+    background: rgba(0, 0, 0, 0.473);
 }
 .kidsLogo{
     transform: translateY(-14px);
 }
-.left a{
+.left a,
+.left label{
     font-size: 1em;
     font-weight: 500;
     text-decoration: none;
     padding-right: 2rem;
     line-height: 60%;
+    cursor: pointer;
 }
 .right{
     display: flex;
