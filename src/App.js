@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Movie from './pages/Movie';
 import MovieTheater from './pages/MovieTheater';
+import Languages from './pages/Languages';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
         <Router>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/movie' component={Movie} />
-            <Route path='/watch' component={MovieTheater} />
+            <Route exact path='/movies' component={Movie} />
+            <Route path='/movies/watch' component={MovieTheater} />
+            <Route path='/movies/languages/:language' component={Languages} />
           </Switch>
         </Router>
       </AuthProvider>

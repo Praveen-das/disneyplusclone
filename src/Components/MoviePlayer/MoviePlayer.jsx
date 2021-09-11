@@ -8,7 +8,7 @@ import axios from 'axios';
 function MoviePlayer() {
     const location = useLocation()
     const [movieKey, setMovieKey] = useState()
-    const { movie, genres } = location.state
+    const { movie } = location.state
 
     try {
         axios.get(`${BaseURL}/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`).then((res) => {

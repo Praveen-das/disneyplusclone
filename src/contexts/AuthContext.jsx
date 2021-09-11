@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
-import { BaseURL, movieGenresURL, tvShowsGenresURL } from "../assets/URLs/URLs"
+import { BaseURL, movieGenresURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
 
 const AuthContext = React.createContext()
 
@@ -14,9 +14,6 @@ export default function AuthProvider({ children }) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
-        let [movieGenres, setMovieGenres] = useState()
-        const [tvGenres, setTvGenres] = useState()
-        const [genres, setGenres] = useState()
 
         useEffect(() => {
             setLoading(true)
@@ -26,15 +23,20 @@ export default function AuthProvider({ children }) {
                 params: { page: pageNumber }
             }).then((res) => {
                 setMovies((previousSlide) => {
-                    return [
-                        ...previousSlide,
-                        ...res.data.results.map((movie) => movie)
-                    ]
+                    return [...new Set([...previousSlide,...res.data.results])]
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
         }, [pageNumber, url])
+
+        return { movies, hasMore, loading }
+    }
+
+    function Genres() {
+        let [movieGenres, setMovieGenres] = useState()
+        const [tvGenres, setTvGenres] = useState()
+        const [genres, setGenres] = useState()
 
         useEffect(() => {
             axios.get(BaseURL + movieGenresURL).then(res => {
@@ -62,13 +64,41 @@ export default function AuthProvider({ children }) {
                 setGenres([...newMap.values()])
             }
         }, [movieGenres, tvGenres])
-        
 
-        return { movies, hasMore, loading, genres }
+        return genres
+    }
+
+    function SortMovies(language, pageNumber) {
+        const [movies, setMovies] = useState([])
+        const [hasMore, setHasMore] = useState(false)
+        const [loading, setLoading] = useState(true)
+
+        useEffect(()=>{
+            setMovies('')
+        },[language])
+
+        useEffect(() => {
+            setLoading(true)
+            axios({
+                method: 'GET',
+                url: BaseURL + sortURL,
+                params: { page: pageNumber, with_original_language: language, sort_by: 'release_date.desc' }
+            }).then((res) => {
+                setMovies((previousSlide) => {
+                    return [...new Set([...previousSlide,...res.data.results])]
+                })
+                setHasMore(res.data.results.length > 0)
+                setLoading(false)
+            }).catch(err => console.log(err))
+        }, [ language, pageNumber])
+
+        return { movies, hasMore, loading }
     }
 
     const value = {
-        OTTList
+        OTTList,
+        Genres,
+        SortMovies
     }
 
     return (

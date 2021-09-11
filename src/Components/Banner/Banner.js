@@ -15,10 +15,13 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 function Banner(props) {
-    const { OTTList } = useAuth()
-    const { movies, genres } = OTTList(1, props.url)
     const bannerRef = useRef()
+
+    const { OTTList, Genres } = useAuth()
     
+    const { movies } = OTTList(1, props.url)
+    const genres = Genres()
+        
     return (
         <>
             <Swiper
@@ -36,7 +39,7 @@ function Banner(props) {
                 
                     <SwiperSlide key={index}>
                         <Link to={{
-                            pathname: '/movie',
+                            pathname: '/movies',
                             state: { movie: movie, genres: genres }
                         }}>
                         
