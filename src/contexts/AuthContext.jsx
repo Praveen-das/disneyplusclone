@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
-import { BaseURL, movieGenresURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
+import { BaseURL, movieGenresURL, searchURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
 
 const AuthContext = React.createContext()
 
@@ -23,7 +23,7 @@ export default function AuthProvider({ children }) {
                 params: { page: pageNumber }
             }).then((res) => {
                 setMovies((previousSlide) => {
-                    return [...new Set([...previousSlide,...res.data.results])]
+                    return [...new Set([...previousSlide, ...res.data.results])]
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
@@ -73,24 +73,54 @@ export default function AuthProvider({ children }) {
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
 
-        useEffect(()=>{
+        useEffect(() => {
             setMovies('')
-        },[language])
+        }, [language])
 
         useEffect(() => {
             setLoading(true)
             axios({
                 method: 'GET',
                 url: BaseURL + sortURL,
-                params: { page: pageNumber, with_original_language: language, sort_by: 'release_date.desc' }
+                params: {
+                    page: pageNumber,
+                    with_original_language: language,
+                    sort_by: 'popularity.desc'
+                }
             }).then((res) => {
                 setMovies((previousSlide) => {
-                    return [...new Set([...previousSlide,...res.data.results])]
+                    return [...new Set([...previousSlide, ...res.data.results])]
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
-        }, [ language, pageNumber])
+        }, [language, pageNumber])
+
+        return { movies, hasMore, loading }
+    }
+
+    function HandleSearch(query) {
+        const [movies, setMovies] = useState([])
+        const [hasMore, setHasMore] = useState(false)
+        const [loading, setLoading] = useState(true)
+
+        useEffect(()=>{
+            setMovies([])
+        },[query])
+
+        useEffect(() => {
+            if(!query) return
+            setLoading(true)
+            axios({
+                method: 'GET',
+                url: BaseURL + searchURL,
+                params: { query: query }
+            }).then(res => {
+                setMovies(res.data.results.filter(elements=> elements.backdrop_path !== null))
+                setHasMore(res.data.results.length > 0)
+                setLoading(false)
+            }).catch(err => console.log(err))
+        }, [query])
 
         return { movies, hasMore, loading }
     }
@@ -98,7 +128,8 @@ export default function AuthProvider({ children }) {
     const value = {
         OTTList,
         Genres,
-        SortMovies
+        SortMovies,
+        HandleSearch
     }
 
     return (

@@ -10,6 +10,7 @@ function Languages() {
     const { language } = useParams()
     const { Genres, SortMovies } = useAuth()
 
+    const languages = [{id:'en',name:'English'},{id:'hi',name:'Hindi'},{id:'ml',name:'Malayalam'},{id:'ta',name:'Tamil'},{id:'te',name:'Telugu'},{id:'mr',name:'Marathi'},{id:'kn',name:'Kannada'},{id:'bn',name:'Bengali'},]
     const [pageNumber, setPageNumber] = useState(1);
 
     const genres = Genres()
@@ -33,7 +34,9 @@ function Languages() {
 
         <>
             <div className="lTrayContainer">
-                <label className='title' htmlFor="">Title</label>
+                <label className='title' htmlFor="">{
+                    languages.filter((elements)=> language.includes(elements.id))[0].name
+                }</label>
                 <div className="lTrayWrapper">
                     <div className="lSlides">
                         {

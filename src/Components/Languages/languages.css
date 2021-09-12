@@ -1,6 +1,7 @@
 .lTrayContainer{
     position: relative;
     max-width: 100%;
+    min-height: 100vh;
     background: var(--background);
     overflow: hidden;
     padding: 0 2.5rem;

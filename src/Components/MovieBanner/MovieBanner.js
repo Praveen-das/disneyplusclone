@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { useLocation } from 'react-router';
-import { imageURL } from '../../assets/URLs/URLs'
+import { API_KEY, imageURL } from '../../assets/URLs/URLs'
 import { Link } from 'react-router-dom'
-
+import MovieList from '../MovieList/MovieList'
 import './movieBanner.css'
 
 function MovieBanner(props) {
@@ -53,6 +53,7 @@ function MovieBanner(props) {
                     </div>
                 </div>
             </div>
+            <MovieList title='More Like This' url={`${movie.media_type==='tv' ? 'tv' : 'movie'}/${movie.id}/similar?api_key=${API_KEY}&language=en-US`}/>
         </>
     )
 }
