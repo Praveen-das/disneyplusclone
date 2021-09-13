@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom'
 import MovieList from '../MovieList/MovieList'
 import './movieBanner.css'
 
-function MovieBanner(props) {
+function MovieBanner() {
     const bannerRef = useRef()
     const location = useLocation()
     const { movie, genres } = location.state
 
-    console.log(movie);
 
     return (
         <>

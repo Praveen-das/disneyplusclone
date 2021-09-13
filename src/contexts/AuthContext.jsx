@@ -99,7 +99,7 @@ export default function AuthProvider({ children }) {
         return { movies, hasMore, loading }
     }
 
-    function HandleSearch(query) {
+    function HandleSearch(query,page) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
@@ -114,22 +114,26 @@ export default function AuthProvider({ children }) {
             axios({
                 method: 'GET',
                 url: BaseURL + searchURL,
-                params: { query: query }
+                params: { query: query, page:page }
             }).then(res => {
-                setMovies(res.data.results.filter(elements=> elements.backdrop_path !== null))
+                setMovies([...new Set([...res.data.results,...res.data.results.map(elements=> elements.backdrop_path !== null)])])
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
-        }, [query])
+        }, [query,page])
 
         return { movies, hasMore, loading }
+    }
+    function isoCodes(){
+        return [{id:'en',name:'English'},{id:'hi',name:'Hindi'},{id:'ml',name:'Malayalam'},{id:'ta',name:'Tamil'},{id:'te',name:'Telugu'},{id:'mr',name:'Marathi'},{id:'kn',name:'Kannada'},{id:'bn',name:'Bengali'},]
     }
 
     const value = {
         OTTList,
         Genres,
         SortMovies,
-        HandleSearch
+        HandleSearch,
+        isoCodes
     }
 
     return (

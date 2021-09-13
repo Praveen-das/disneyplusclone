@@ -1,20 +1,22 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useLocation, useParams } from 'react-router'
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useAuth } from '../../contexts/AuthContext'
-import './languages.css'
+import './results.css'
 
-function Languages() {
+function SearchResults() {
     const lastElementRef = useRef()
     const location = useLocation()
     const params = location.state
-    const { Genres, SortMovies, isoCodes } = useAuth()
+    const { Genres,HandleSearch } = useAuth()
 
     const [pageNumber, setPageNumber] = useState(1);
 
     const genres = Genres()
-    const { movies, loading, hasMore } = SortMovies(params.language,pageNumber)
+    const { movies, loading, hasMore } = HandleSearch(params.query,pageNumber)
+
+    console.log(movies);
     
     const lastElement = useCallback(node => {
         if (loading) return
@@ -34,9 +36,7 @@ function Languages() {
 
         <>
             <div className="lTrayContainer">
-                <label className='title' htmlFor="">{
-                    isoCodes().filter((elements)=> params.language.includes(elements.id))[0].name
-                }</label>
+                <label className='title' htmlFor="">Showing all results for {params.query}</label>
                 <div className="lTrayWrapper">
                     <div className="lSlides">
                         {
@@ -83,4 +83,4 @@ function Languages() {
     )
 }
 
-export default Languages
+export default SearchResults

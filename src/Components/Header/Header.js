@@ -10,9 +10,30 @@ function Header() {
     const [hasMore, setHasMore] = useState(false)
     const [active, setActive] = useState(false)
     const inputRef = useRef()
+    const searchbox = useRef()
     const { HandleSearch, Genres } = useAuth()
     const { movies, Loading } = HandleSearch(query)
     const genres = Genres()
+
+    useEffect(() => {
+
+        window.onclick = (e) => {
+            if (e.target.className === 'search') {
+                setActive(true)
+            } else {
+                if (['result','moreResults'].includes(e.target.className)) return
+                if(inputRef.current)
+                inputRef.current.value = ''
+                setQuery()
+                setActive(false)
+            }
+        }
+
+    }, [])
+
+
+
+
 
     useEffect(() => {
         if (movies.length > 5 && movies.map((movie) => movie.backdrop_path)) {
@@ -21,10 +42,10 @@ function Header() {
             setHasMore(false)
         }
 
-        if(active){
+        if (active) {
             inputRef.current.style.cssText = 'width:350px; border-bottom: 1px solid #1f80e0;'
-            
-        }else{
+
+        } else {
             inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
         }
 
@@ -43,46 +64,82 @@ function Header() {
                     <div className='dropDown'>
                         <label htmlFor="">Movies</label>
                         <div className='dropDownContents'>
-                            <Link to='/movies/languages/hi'><h1>Hindi</h1></Link>
-                            <Link to='/movies/languages/bn'><h1>Bengali</h1></Link>
-                            <Link to='/movies/languages/te'><h1>Telugu</h1></Link>
-                            <Link to='/movies/languages/ml'><h1>Malayalam</h1></Link>
-                            <Link to='/movies/languages/ta'><h1>Tamil</h1></Link>
-                            <Link to='/movies/languages/mr'><h1>Marathi</h1></Link>
-                            <Link to='/movies/languages/en'><h1>English</h1></Link>
-                            <Link to='/movies/languages/kn'><h1>Kannada</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'hi'}
+                            }}><h1 className='movieLinks' >Hindi</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'bn'}
+                            }}><h1 className='movieLinks' >Bengali</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'te'}
+                            }}><h1 className='movieLinks' >Telugu</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'ml'}
+                            }}><h1 className='movieLinks' >Malayalam</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'ta'}
+                            }}><h1 className='movieLinks' >Tamil</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'mr'}
+                            }}><h1 className='movieLinks' >Marathi</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'en'}
+                            }}><h1 className='movieLinks' >English</h1></Link>
+                            <Link to={{
+                                pathname:'/movies/languages',
+                                state:{language:'kn'}
+                            }}><h1 className='movieLinks' >Kannada</h1></Link>
                         </div>
                     </div>
-                    <label href="/#">Premium</label>
                     <label href="/#">Disney+</label>
                     <img className='kidsLogo' src={Kids} alt="kids" />
                 </div>
                 <div className="right">
-                    <div className="searchbox">
-                        <input onChange={(e) => setQuery(e.target.value)} onFocus={() => setActive(true)} onBlur={() => setActive(false)} className='search' placeholder='Search' type="text" ref={inputRef}></input>
+                    <div className="searchbox" ref={searchbox}>
+                        <input onChange={(e) => setQuery(e.target.value)} className='search' placeholder='Search' type="text" ref={inputRef}></input>
                         <span className='fa fa-search'></span>
                         <div className="searchResults" style={active && query ? { display: 'block' } : { display: 'none' }}>
                             {
                                 movies && movies.map((movie, index) =>
                                     index + 1 <= 5 ?
                                         movie.backdrop_path &&
-                                        <div key={index} className="result">
-                                            <img className='rImage' src={imageURL + 'w300' + movie.backdrop_path} alt="" />
-                                            <div className="resultContents">
-                                                <label className='rTitle' htmlFor="">{movie.title || movie.name}</label>
-                                                {genres && genres.filter(elements =>
-                                                    movie.genre_ids.includes(elements.id)
-                                                ).map((genre, index) =>
-                                                    movie.genre_ids.length !== index + 1 ?
-                                                        <label className='rlGenre' key={index}>{genre.name} ,&nbsp; </label> :
-                                                        <label className='rlGenre' key={index}>{genre.name}</label>
-                                                )}
+                                        <Link
+                                            key={index}
+                                            style={{ padding: '0' }}
+                                            to={{
+                                                pathname: '/movies',
+                                                state: { movie: movie, genres: genres }
+                                            }}
+
+                                        >
+                                            <div key={index} className="result">
+                                                <img className='rImage' src={imageURL + 'w300' + movie.backdrop_path} alt="" />
+                                                <div className="resultContents">
+                                                    <label className='rTitle' htmlFor="">{movie.title || movie.name}</label>
+                                                    {genres && genres.filter(elements =>
+                                                        movie.genre_ids.includes(elements.id)
+                                                    ).map((genre, index) =>
+                                                        movie.genre_ids.length !== index + 1 ?
+                                                            <label className='rlGenre' key={index}>{genre.name} ,&nbsp; </label> :
+                                                            <label className='rlGenre' key={index}>{genre.name}</label>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                         : ''
                                 )
                             }
-                            {hasMore && <label className='moreResults' htmlFor="">MORE RESULTS</label>}
+                            {hasMore && <Link to={{
+                                pathname:'/movies/results',
+                                state:{movies , query}
+                                }}><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                         </div>
                     </div>
                     <button>SUBSCRIBE</button>
