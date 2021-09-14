@@ -1,5 +1,5 @@
 .mySwiper {
-    background: linear-gradient(0deg,#0c111b,var(--background), var(--background));
+    background: linear-gradient(0deg,var(--background),#141a28,#141a28);
 }
 
 .bContainer {
@@ -75,7 +75,7 @@
     position: relative;
     right: 0;
     width: 800px;
-    background-size: cover;
+    object-fit: cover;
 }
 
 .swiper-button-next,

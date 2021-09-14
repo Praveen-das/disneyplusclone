@@ -65,6 +65,8 @@ export default function AuthProvider({ children }) {
             }
         }, [movieGenres, tvGenres])
 
+        console.log(genres);
+
         return genres
     }
 

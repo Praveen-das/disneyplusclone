@@ -94,7 +94,7 @@ function Header() {
                             }}><h1 className='movieLinks' >Kannada</h1></Link>
                         </div>
                     </div>
-                    <label href="/#">Disney+</label>
+                    <Link to="/disneyplus">Disney+</Link>
                     <img className='kidsLogo' src={Kids} alt="kids" />
                 </div>
                 <div className="right">

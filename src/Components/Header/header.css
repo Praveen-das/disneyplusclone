@@ -8,11 +8,9 @@
     background: var(--background);
     position: fixed;
     z-index: 100;
-    
 }
 .hamburger{
     display: inline-block;
-    /* margin-bottom: -5px; */
     margin-top: -2px;
     padding-right: 1rem;
 }

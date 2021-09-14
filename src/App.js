@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Movie from './pages/Movie';
 import MovieTheater from './pages/MovieTheater';
 import Results from './pages/Results';
+import DisneyPlusPage from './pages/Disneyplus';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path='/movies' component={Movie} />
             <Route path='/movies/watch' component={MovieTheater} />
             <Route path='/movies/languages' component={Results} />
+            <Route path='/disneyplus' component={DisneyPlusPage} />
           </Switch>
         </Router>
       </AuthProvider>
