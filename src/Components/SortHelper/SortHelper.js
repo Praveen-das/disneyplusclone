@@ -1,21 +1,26 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { useLocation, useParams } from 'react-router'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useAuth } from '../../contexts/AuthContext'
-import './languages.css'
+import './sortHelper.css'
 
-function Languages() {
+function SortHelper() {
+    const { Genres, SortMovies, isoCodes, HandleSearch } = useAuth()
     const lastElementRef = useRef()
+    const [pageNumber, setPageNumber] = useState(1);
     const location = useLocation()
     const params = location.state
-    const { Genres, SortMovies, isoCodes } = useAuth()
-
-    const [pageNumber, setPageNumber] = useState(1);
-
     const genres = Genres()
-    const { movies, loading, hasMore } = SortMovies(params.language,pageNumber)
-    
+
+    useEffect(() => {
+        setPageNumber(1)
+    }, [params])
+
+    const { movies, loading, hasMore } =
+        (params.language && SortMovies(params.language, pageNumber)) ||
+        (params.query && HandleSearch(params.query, pageNumber))
+
     const lastElement = useCallback(node => {
         if (loading) return
         if (lastElementRef.current) lastElementRef.current.disconnect()
@@ -35,7 +40,9 @@ function Languages() {
         <>
             <div className="lTrayContainer">
                 <label className='title' htmlFor="">{
-                    isoCodes().filter((elements)=> params.language.includes(elements.id))[0].name
+                    params.language ? isoCodes().filter((elements) => params.language.includes(elements.id))[0].name
+                        :
+                        'Showing all results for ' + params.query
                 }</label>
                 <div className="lTrayWrapper">
                     <div className="lSlides">
@@ -83,4 +90,4 @@ function Languages() {
     )
 }
 
-export default Languages
+export default SortHelper

@@ -12,7 +12,7 @@ function Header() {
     const inputRef = useRef()
     const searchbox = useRef()
     const { HandleSearch, Genres } = useAuth()
-    const { movies, Loading } = HandleSearch(query)
+    const { movies } = HandleSearch(query)
     const genres = Genres()
 
     useEffect(() => {
@@ -30,10 +30,6 @@ function Header() {
         }
 
     }, [])
-
-
-
-
 
     useEffect(() => {
         if (movies.length > 5 && movies.map((movie) => movie.backdrop_path)) {
@@ -137,9 +133,11 @@ function Header() {
                                 )
                             }
                             {hasMore && <Link to={{
-                                pathname:'/movies/results',
-                                state:{movies , query}
-                                }}><h1 className='moreResults' >MORE RESULTS</h1></Link>}
+                                pathname:'/movies/languages',
+                                state:{query},
+                                }}
+                                style={{padding:'0'}}
+                                ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                         </div>
                     </div>
                     <button>SUBSCRIBE</button>

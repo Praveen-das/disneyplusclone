@@ -1,16 +1,16 @@
 import React from 'react'
 import Footer from '../Components/Footer/Footer'
 import Header from '../Components/Header/Header'
-import Results from '../Components/SearchResults/Results'
+import SortHelper from '../Components/SortHelper/SortHelper'
 
-function SearchResults() {
+function Results() {
     return (
         <>
             <Header/>
-            <Results/>
+            <SortHelper/>
             <Footer/>
         </>
     )
 }
 
-export default SearchResults
+export default Results

@@ -74,7 +74,7 @@ export default function AuthProvider({ children }) {
         const [loading, setLoading] = useState(true)
 
         useEffect(() => {
-            setMovies('')
+            setMovies([])
         }, [language])
 
         useEffect(() => {
@@ -99,12 +99,13 @@ export default function AuthProvider({ children }) {
         return { movies, hasMore, loading }
     }
 
-    function HandleSearch(query,page) {
+    function HandleSearch(query,pageNumber) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
 
         useEffect(()=>{
+            if(!query) return
             setMovies([])
         },[query])
 
@@ -114,13 +115,16 @@ export default function AuthProvider({ children }) {
             axios({
                 method: 'GET',
                 url: BaseURL + searchURL,
-                params: { query: query, page:page }
+                params: { query: query, page:pageNumber }
             }).then(res => {
-                setMovies([...new Set([...res.data.results,...res.data.results.map(elements=> elements.backdrop_path !== null)])])
+                console.log(res);
+                setMovies(previousMovie=>{
+                    return [...new Set([...previousMovie,...res.data.results])]
+                })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
-        }, [query,page])
+        }, [query,pageNumber])
 
         return { movies, hasMore, loading }
     }
