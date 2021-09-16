@@ -65,8 +65,6 @@ export default function AuthProvider({ children }) {
             }
         }, [movieGenres, tvGenres])
 
-        console.log(genres);
-
         return genres
     }
 
@@ -119,7 +117,6 @@ export default function AuthProvider({ children }) {
                 url: BaseURL + searchURL,
                 params: { query: query, page:pageNumber }
             }).then(res => {
-                console.log(res);
                 setMovies(previousMovie=>{
                     return [...new Set([...previousMovie,...res.data.results])]
                 })
@@ -131,7 +128,7 @@ export default function AuthProvider({ children }) {
         return { movies, hasMore, loading }
     }
     function isoCodes(){
-        return [{id:'en',name:'English'},{id:'hi',name:'Hindi'},{id:'ml',name:'Malayalam'},{id:'ta',name:'Tamil'},{id:'te',name:'Telugu'},{id:'mr',name:'Marathi'},{id:'kn',name:'Kannada'},{id:'bn',name:'Bengali'},]
+        return [{id:'en',language:'English'},{id:'hi',language:'Hindi'},{id:'ml',language:'Malayalam'},{id:'ta',language:'Tamil'},{id:'te',language:'Telugu'},{id:'mr',language:'Marathi'},{id:'kn',language:'Kannada'},{id:'bn',language:'Bengali'},]
     }
 
     const value = {

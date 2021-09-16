@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './disneyplusTray.css'
+
 
 function DisneyplusTray() {
     const disneyRef = useRef()
@@ -21,24 +23,34 @@ function DisneyplusTray() {
         <>
             <div className="tray-wrapper">
                 <div className="tray-carousel">
-                    <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6347/746347-h" alt="" />
-                    <video ref={disneyRef} className='tray-carousel-video' src='disneyplus.mp4' loop muted></video>
+                    <Link to='/channels/disney' style={{ margin: '0' }}>
+                        <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6347/746347-h" alt="" />
+                        <video ref={disneyRef} className='tray-carousel-video' src='disneyplus.mp4' loop muted></video>
+                    </Link>
                 </div>
                 <div className="tray-carousel">
-                    <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6348/746348-h" alt="" />
-                    <video ref={pixarRef} className='tray-carousel-video' src='pixar.mp4' loop muted></video>
+                    <Link to='/channels/pixar' style={{ margin: '0' }}>
+                        <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6348/746348-h" alt="" />
+                        <video ref={pixarRef} className='tray-carousel-video' src='pixar.mp4' loop muted></video>
+                    </Link>
                 </div>
                 <div className="tray-carousel">
-                    <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6349/746349-h" alt="" />
-                    <video ref={marvelRef} className='tray-carousel-video' src='marvel.mp4' loop muted></video>
+                    <Link to='/channels/marvel' style={{ margin: '0' }}>
+                        <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6349/746349-h" alt="" />
+                        <video ref={marvelRef} className='tray-carousel-video' src='marvel.mp4' loop muted></video>
+                    </Link>
                 </div>
                 <div className="tray-carousel">
-                    <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6357/746357-h" alt="" />
-                    <video ref={swRef} className='tray-carousel-video' src='sw.mp4' loop muted></video>
+                    <Link to='/channels/star-wars' style={{ margin: '0' }}>
+                        <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6357/746357-h" alt="" />
+                        <video ref={swRef} className='tray-carousel-video' src='sw.mp4' loop muted></video>
+                    </Link>
                 </div>
                 <div className="tray-carousel">
-                    <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6355/746355-h" alt="" />
-                    <video ref={ngRef} className='tray-carousel-video' src='ng .mp4' loop muted></video>
+                    <Link to='/channels/nat-geo' style={{ margin: '0' }}>
+                        <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6355/746355-h" alt="" />
+                        <video ref={ngRef} className='tray-carousel-video' src='ng.mp4' loop muted></video>
+                    </Link>
                 </div>
             </div>
         </>

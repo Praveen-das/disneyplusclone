@@ -60,38 +60,14 @@ function Header() {
                     <div className='dropDown'>
                         <label htmlFor="">Movies</label>
                         <div className='dropDownContents'>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'hi'}
-                            }}><h1 className='movieLinks' >Hindi</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'bn'}
-                            }}><h1 className='movieLinks' >Bengali</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'te'}
-                            }}><h1 className='movieLinks' >Telugu</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'ml'}
-                            }}><h1 className='movieLinks' >Malayalam</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'ta'}
-                            }}><h1 className='movieLinks' >Tamil</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'mr'}
-                            }}><h1 className='movieLinks' >Marathi</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'en'}
-                            }}><h1 className='movieLinks' >English</h1></Link>
-                            <Link to={{
-                                pathname:'/movies/languages',
-                                state:{language:'kn'}
-                            }}><h1 className='movieLinks' >Kannada</h1></Link>
+                            <Link to={'/movies/languages/hi'}><h1 className='movieLinks' >Hindi</h1></Link>
+                            <Link to={'/movies/languages/bn'}><h1 className='movieLinks' >Bengali</h1></Link>
+                            <Link to={'/movies/languages/te'}><h1 className='movieLinks' >Telugu</h1></Link>
+                            <Link to={'/movies/languages/ml'}><h1 className='movieLinks' >Malayalam</h1></Link>
+                            <Link to={'/movies/languages/ta'}><h1 className='movieLinks' >Tamil</h1></Link>
+                            <Link to={'/movies/languages/mr'}><h1 className='movieLinks' >Marathi</h1></Link>
+                            <Link to={'/movies/languages/en'}><h1 className='movieLinks' >English</h1></Link>
+                            <Link to={'/movies/languages/kn'}><h1 className='movieLinks' >Kannada</h1></Link>
                         </div>
                     </div>
                     <Link to="/disneyplus">Disney+</Link>
@@ -132,10 +108,7 @@ function Header() {
                                         : ''
                                 )
                             }
-                            {hasMore && <Link to={{
-                                pathname:'/movies/languages',
-                                state:{query},
-                                }}
+                            {hasMore && <Link to={`/movies/search/`+ query}
                                 style={{padding:'0'}}
                                 ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                         </div>

@@ -1,0 +1,21 @@
+.cBanner{
+    padding-top: 80px;
+    padding-bottom: 2rem;
+    background: var(--background);
+}
+.cbWrapper{
+    width: 100%;
+    height:34vw;
+    position: relative;
+}
+.cBanner-video,
+.cBanner-image{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+.cBanner-image{
+    position: absolute;
+    left: 0;
+}
+

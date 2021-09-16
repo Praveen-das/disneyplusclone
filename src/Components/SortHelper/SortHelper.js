@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router'
+import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useAuth } from '../../contexts/AuthContext'
@@ -9,17 +9,18 @@ function SortHelper() {
     const { Genres, SortMovies, isoCodes, HandleSearch } = useAuth()
     const lastElementRef = useRef()
     const [pageNumber, setPageNumber] = useState(1);
-    const location = useLocation()
-    const params = location.state
+    const params = useParams()
     const genres = Genres()
 
     useEffect(() => {
         setPageNumber(1)
     }, [params])
 
+    console.log(params.q);
+
     const { movies, loading, hasMore } =
-        (params.language && SortMovies(params.language, pageNumber)) ||
-        (params.query && HandleSearch(params.query, pageNumber))
+        (params.language && SortMovies(params.language , pageNumber)) ||
+        (params.q && HandleSearch(params.q, pageNumber))
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -40,9 +41,9 @@ function SortHelper() {
         <>
             <div className="lTrayContainer">
                 <label className='title' htmlFor="">{
-                    params.language ? isoCodes().filter((elements) => params.language.includes(elements.id))[0].name
+                    params.language ? isoCodes().filter((elements) => params.language.includes(elements.id))[0].language
                         :
-                        'Showing all results for ' + params.query
+                        'Showing all results for ' + params.q
                 }</label>
                 <div className="lTrayWrapper">
                     <div className="lSlides">

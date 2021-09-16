@@ -12,8 +12,10 @@ function MovieList(props) {
     const [pageNumber, setPageNumber] = useState(1);
     var [currentSlide, setCurrentSlide] = useState(0)
 
-    const { OTTList } = useAuth()
-    const { movies, genres, loading, hasMore } = OTTList(pageNumber, props.url)
+    const { OTTList,HandleSearch } = useAuth()
+    const { movies, genres, loading, hasMore } = 
+    (props.url && OTTList(pageNumber, props.url)) ||
+    (props.q && HandleSearch(props.q, pageNumber))
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -21,6 +23,11 @@ function MovieList(props) {
         lastElementRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
                 setPageNumber(previous => previous + 1)
+            }
+            if (entries[0].isIntersecting && !hasMore) {
+                rightRef.current.style.display = 'none'
+            }else{
+                rightRef.current.style.display = 'inline'
             }
         })
 
