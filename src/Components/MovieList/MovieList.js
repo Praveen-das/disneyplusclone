@@ -1,21 +1,29 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
-import { useAuth } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/AuthContext'
 import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/swiper.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import "swiper/components/navigation/navigation.min.css";
+
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
+
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 function MovieList(props) {
-    const leftRef = useRef()
-    const rightRef = useRef()
-    const lastElementRef = useRef()
+    const trayRef = useRef()
     const firstElementRef = useRef()
+    const lastElementRef = useRef()
     const [pageNumber, setPageNumber] = useState(1);
-    var [currentSlide, setCurrentSlide] = useState(0)
 
-    const { OTTList,HandleSearch } = useAuth()
-    const { movies, genres, loading, hasMore } = 
-    (props.url && OTTList(pageNumber, props.url)) ||
-    (props.q && HandleSearch(props.q, pageNumber))
+    const { OTTList, HandleSearch } = useHelper()
+
+    const { movies, genres, loading, hasMore } =
+        (props.url && OTTList(pageNumber, props.url)) ||
+        (props.q && HandleSearch(props.q, pageNumber))
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -24,84 +32,63 @@ function MovieList(props) {
             if (entries[0].isIntersecting && hasMore) {
                 setPageNumber(previous => previous + 1)
             }
-            if (entries[0].isIntersecting && !hasMore) {
-                rightRef.current.style.display = 'none'
-            }else{
-                rightRef.current.style.display = 'inline'
-            }
         })
-
         if (node) lastElementRef.current.observe(node)
+    },[hasMore,loading])
 
-    }, [loading, hasMore])
-
-    const firstElement = useCallback(node => {
-        firstElementRef.current = new IntersectionObserver(entries => {
-            if (entries[0]) {
-                if (entries[0].isIntersecting) {
-                    leftRef.current.style.display = 'none'
-                } else if (leftRef.current) {
-                    leftRef.current.style.display = 'inline'
-                }
-            }
-        })
-
-        if (node) firstElementRef.current.observe(node)
-    }, [])
-
-    const HandleSwipe = (direction) => {
-        direction === 'left' ? setCurrentSlide(currentSlide < 0 ? currentSlide + 99 : '') : setCurrentSlide(currentSlide - 99)
-    }
 
     return (
 
         <>
-            <div className="trayContainer">
+            <div className="trayContainer" ref={trayRef}>
                 <label className='title' htmlFor="">{props.title}</label>
-                <div className="trayWrapper">
-                    <span onClick={() => HandleSwipe('left')} className='fa fa-chevron-left leftArrow' ref={leftRef}></span>
-                    <span onClick={() => HandleSwipe('right')} className='fa fa-chevron-right rightArrow' ref={rightRef}></span>
-                    <div className="slides" style={{ left: `${currentSlide}%` }}>
-                        {
-                            movies && movies.map((movie, index) => {
-                                if (movie.poster_path) {
-                                    return <div key={index} className="slideWrapper expand">
-                                        <Link to={{
-                                            pathname: '/movies',
-                                            state: { movie: movie, genres: genres }
-                                        }}>
-                                            <div className="slide">
-                                                {
-                                                    index === 0 ? <img className='movieImage' ref={firstElement} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                                        : movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> : <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                                }
-                                                <div className="slideContents">
-                                                    <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                        <div className='bBtns'>
-                                            <div className='wmBtn'>
-                                                <i className='fa fa-caret-right'></i>
-                                                <Link className='watchMovie' to={{
-                                                    pathname: '/movies/watch',
-                                                    state: { movie: movie, genres: genres }
-                                                }}>WATCH MOVIE</Link>
-                                            </div>
-                                            <div className='atfBtn'>
-                                                <i className='fa fa-plus'></i>
-                                                <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
+                <Swiper
+                    navigation={true}
+                    spaceBetween={10}
+                    slidesPerGroup={1}
+                    speed={1000}
+                    freeMode={true}
+                    // width={230}
+                    className="mlSlides"
+                >
+                    {
+                        movies && movies.map((movie, index) => {
+                            if (movie.poster_path)
+                                return <SwiperSlide key={index} className='slideWrapper expand'>
+                                    <Link to={{
+                                        pathname: '/movies',
+                                        state: { movie: movie, genres: genres }
+                                    }}>
+                                        <div className="slide">
+                                            {
+                                                index === 0 ? <img className='movieImage' ref={firstElementRef} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" /> :
+                                                    movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> :
+                                                        <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                            }
+                                            <div className="slideContents">
+                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
+                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
                                             </div>
                                         </div>
+                                    </Link>
+                                    <div className='bBtns'>
+                                        <div className='wmBtn'>
+                                            <i className='fa fa-caret-right'></i>
+                                            <Link className='watchMovie' to={{
+                                                pathname: '/movies/watch',
+                                                state: { movie: movie, genres: genres }
+                                            }}>WATCH MOVIE</Link>
+                                        </div>
+                                        <div className='atfBtn'>
+                                            <i className='fa fa-plus'></i>
+                                            <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
+                                        </div>
                                     </div>
-                                }
-                                return null
-                            })
-                        }
-                        <span>{loading && 'loading....'}</span>
-                    </div>
-                </div>
+                                </SwiperSlide>
+                            return null
+                        })
+                    }
+                </Swiper>
             </div>
         </>
     )

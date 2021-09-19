@@ -1,10 +1,10 @@
 import axios from "axios"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { BaseURL, movieGenresURL, searchURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
 
 const AuthContext = React.createContext()
 
-export function useAuth() {
+export function useHelper() {
     return useContext(AuthContext)
 }
 
@@ -99,36 +99,59 @@ export default function AuthProvider({ children }) {
         return { movies, hasMore, loading }
     }
 
-    function HandleSearch(query,pageNumber) {
+    function HandleSearch(query, pageNumber) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
 
-        useEffect(()=>{
-            if(!query) return
+        useEffect(() => {
+            if (!query) return
             setMovies([])
-        },[query])
+        }, [query])
 
         useEffect(() => {
-            if(!query) return
+            if (!query) return
             setLoading(true)
             axios({
                 method: 'GET',
                 url: BaseURL + searchURL,
-                params: { query: query, page:pageNumber }
+                params: { query: query, page: pageNumber }
             }).then(res => {
-                setMovies(previousMovie=>{
-                    return [...new Set([...previousMovie,...res.data.results])]
+                setMovies(previousMovie => {
+                    return [...new Set([...previousMovie, ...res.data.results])]
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
-        }, [query,pageNumber])
+        }, [query, pageNumber])
 
         return { movies, hasMore, loading }
     }
-    function isoCodes(){
-        return [{id:'en',language:'English'},{id:'hi',language:'Hindi'},{id:'ml',language:'Malayalam'},{id:'ta',language:'Tamil'},{id:'te',language:'Telugu'},{id:'mr',language:'Marathi'},{id:'kn',language:'Kannada'},{id:'bn',language:'Bengali'},]
+    function isoCodes() {
+        return [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
+    }
+
+    function useOnScreen(node) {
+        const lastElementRef = useRef()
+        const [isIntersecting, setIntersecting] = useState(false)
+
+        useEffect(() => {
+            if(lastElementRef.current)lastElementRef.current.disconnect()
+            lastElementRef.current = new IntersectionObserver(entries=>{
+                if(entries[0].isIntersecting){
+                    setIntersecting(true)
+                    console.log(entries[0].isIntersecting);
+                }else{
+                    setIntersecting(false)
+                    console.log(entries[0].isIntersecting);
+                }
+            })
+
+            if(node)lastElementRef.current.observe(node)
+
+        }, [node])
+
+        return isIntersecting
     }
 
     const value = {
@@ -136,7 +159,9 @@ export default function AuthProvider({ children }) {
         Genres,
         SortMovies,
         HandleSearch,
-        isoCodes
+        isoCodes,
+        useOnScreen
+
     }
 
     return (

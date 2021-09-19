@@ -1,91 +1,77 @@
+body{
+    /* background: #000; */
+    background: var(--background);
+    width: 100%;
+    overflow-x: hidden;
+}
 .trayContainer{
     position: relative;
-    max-width: 100%;
-    height: 280px;
-    background: #0c111b;
-    overflow: hidden;
-    padding: 0 2.5rem;
-    padding-bottom: 1rem;
+    margin-top: 2.5rem;
+    padding-bottom: 2rem;
 }
-.trayWrapper{
-    transform: translateY(2.5rem);
+.mlSlides{
+    padding:0 2.5rem;
 }
-.slides{
-    display: flex;
-    position: relative;
-    left: 0;
-    transition: 0.3s ease-in;
+.swiper-container{
+    overflow: visible !important;
 }
-.title{
-    position: absolute;
-    font-size: 1.25em;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 2.5rem;
-}
-.leftArrow,
-.rightArrow{
-    position: absolute;
-    top: 100px;
-    font-size: 2em;
-    transition: 0.3s;
-    cursor: pointer;
-    z-index: 20;
+.mlSlides .swiper-button-next,
+.mlSlides .swiper-button-prev {
+    top: 0;
+    width: 50px;
+    height: 232px;
+    z-index: 2;
     opacity: 0;
-    color: white;
+    transition: 0.5s;
 }
-.leftArrow{
-    left: -30px;
+.mlSlides .swiper-button-prev{
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0), var(--background));
+    left: 0;
 }
-.leftArrow::after{
-    content: '';
-    position: absolute;
-    top: -100px;
-    left: -2.5rem;
-    width: 100px;
-    height: 225px;
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.767));
-    transition: 0.3s;
-    z-index: -1;
+.mlSlides .swiper-button-next{
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0),  var(--background));
+    right: 0;
 }
-.rightArrow{
-    right: -30px;
-}
-.rightArrow::after{
-    content: '';
-    position: absolute;
-    top: -100px;
-    right: -2.5rem;
-    width: 100px;
-    height: 225px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.767));
-    transition: 0.3s;
-    z-index: -1;
-}
-.trayWrapper:hover .leftArrow,
-.trayWrapper:hover .leftArrow::before{
+.mlSlides .swiper-button-next::after,
+.mlSlides .swiper-button-prev::after {
+    font-size: 32px;
     opacity: 1;
 }
-.trayWrapper:hover .rightArrow,
-.trayWrapper:hover .rightArrow::after{
+.mlSlides:hover .swiper-button-next,
+.mlSlides:hover .swiper-button-prev {
     opacity: 1;
 }
 
+/* ///////////////////////////////////////////////////////////////// */
 
 .slideWrapper{
     box-sizing: border-box;
-    min-width: 147px;
+    width: 150px !important;
     height: 225px;
     position: relative;
     display: grid;
     grid-template-rows: auto 16%;
     align-items: end;
     border-radius: 5px;
-    margin-right: 10px;
     overflow: hidden;
     cursor: pointer;
+    transition: 0.4s;
 }
 
+.slide{
+    width: 100%;
+    height: 100%;
+    padding: 0.6rem;
+}
+.title{
+    position: absolute;
+    top: -40px;
+    left: 2.5rem;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: white;
+    /* z-index: 10 ; */
+}
 .movieImage{
     position: absolute;
     top: 0;
@@ -93,11 +79,6 @@
     width: 100%;
     height: 100%;
     background-size: contain;
-}
-.slide{
-    width: 100%;
-    height: 100%;
-    padding: 0.6rem;
 }
 .slide::after{
     content: '';
@@ -116,7 +97,7 @@
     transition: 0.3s ease-out;
     transition-delay: 0s;
     z-index: 10;
-    opacity: 0;
+    opacity: 0;pointer-events: none;
 }
 .slide label{
     display: inline-block;
@@ -169,26 +150,23 @@
     font-size: 8px;
     font-weight: 500;
 }
-.expand{
-    transition: 0.3s;
-    z-index: 1;
+.slideWrapper:nth-child(1){
+    transform-origin: left;
 }
-.expand:hover{
-    z-index: 4;
+.slideWrapper:nth-child(8n+1){
+    transform-origin: left;
+}
+.slideWrapper:nth-child(8n){
+    transform-origin: right;
 }
 .slideWrapper:hover {
     transform: scale(1.2);
     transition-delay: 0.3s;
 }
-
 .slideWrapper:hover .slide::after,
 .slideWrapper:hover .slideContents,
 .slideWrapper:hover .bBtns{
     opacity: 1;
     transition-delay: 0.3s;
-}
-.slideWrapper:nth-child(1):hover{
-    transform: scale(1.2);
-    transform-origin: left;
-    transition-delay: 0;
+   
 }

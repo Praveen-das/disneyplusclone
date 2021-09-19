@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
-import { useAuth } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/AuthContext'
 import './sortHelper.css'
 
 function SortHelper() {
-    const { Genres, SortMovies, isoCodes, HandleSearch } = useAuth()
+    const { Genres, SortMovies, isoCodes, HandleSearch } = useHelper()
     const lastElementRef = useRef()
     const [pageNumber, setPageNumber] = useState(1);
     const params = useParams()

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './header.css'
-import { Kids, Logo } from '../../assets/URLs/imgURLs'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/AuthContext'
 import { imageURL } from '../../assets/URLs/URLs'
 
 function Header() {
@@ -11,7 +10,7 @@ function Header() {
     const [active, setActive] = useState(false)
     const inputRef = useRef()
     const searchbox = useRef()
-    const { HandleSearch, Genres } = useAuth()
+    const { HandleSearch, Genres } = useHelper()
     const { movies } = HandleSearch(query)
     const genres = Genres()
 
@@ -56,7 +55,7 @@ function Header() {
                         <span className='line'></span>
                         <span className='line'></span>
                     </div>
-                    <Link to='/'><img className='disneyplus' src={Logo} alt="logo" /></Link>
+                    <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
                     <div className='dropDown'>
                         <label htmlFor="">Movies</label>
                         <div className='dropDownContents'>
@@ -71,7 +70,7 @@ function Header() {
                         </div>
                     </div>
                     <Link to="/disneyplus">Disney+</Link>
-                    <img className='kidsLogo' src={Kids} alt="kids" />
+                    <img className='kidsLogo' src='/kids-logo.svg' alt="kids" />
                 </div>
                 <div className="right">
                     <div className="searchbox" ref={searchbox}>
