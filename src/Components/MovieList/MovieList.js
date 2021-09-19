@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/AuthContext'
@@ -13,9 +13,8 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
+
 function MovieList(props) {
-    const trayRef = useRef()
-    const firstElementRef = useRef()
     const lastElementRef = useRef()
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -34,36 +33,47 @@ function MovieList(props) {
             }
         })
         if (node) lastElementRef.current.observe(node)
-    },[hasMore,loading])
+    }, [hasMore, loading])
 
+    function handleNavigation(e) {
+        if (e.activeIndex !== 0) {
+            e.el.children[0].style.cssText = 'visibility : visible; transition: 0.5s'
+        } else {
+            e.el.children[0].style.cssText = 'visibility : hidden; transition: 0s'
+        }
+    }
 
     return (
 
         <>
-            <div className="trayContainer" ref={trayRef}>
+            <div className="trayContainer">
                 <label className='title' htmlFor="">{props.title}</label>
                 <Swiper
                     navigation={true}
-                    spaceBetween={10}
                     slidesPerGroup={1}
+                    spaceBetween={10}
                     speed={1000}
                     freeMode={true}
-                    // width={230}
+                    onBeforeInit={(e) => handleNavigation(e)}
+                    onActiveIndexChange={(e) => handleNavigation(e)}
                     className="mlSlides"
                 >
                     {
                         movies && movies.map((movie, index) => {
                             if (movie.poster_path)
-                                return <SwiperSlide key={index} className='slideWrapper expand'>
+                                return <SwiperSlide
+                                    key={index} className='expand'>
                                     <Link to={{
                                         pathname: '/movies',
                                         state: { movie: movie, genres: genres }
                                     }}>
+
                                         <div className="slide">
                                             {
-                                                index === 0 ? <img className='movieImage' ref={firstElementRef} src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" /> :
-                                                    movies.length === index + 1 ? <img className='movieImage' ref={lastElement} alt='' /> :
-                                                        <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+
+                                                movies.length === index + 1 ?
+                                                    <div className='slide-loading'><i ref={lastElement} class="fas fa-circle-notch fa-spin" ></i></div> :
+                                                    <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
                                             }
                                             <div className="slideContents">
                                                 <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
