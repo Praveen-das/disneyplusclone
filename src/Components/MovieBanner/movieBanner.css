@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     background: linear-gradient(0deg,#0c111b,var(--background), var(--background));
-    padding-top: 80px;
     padding-bottom: 2rem;
 }
 .mBanner{

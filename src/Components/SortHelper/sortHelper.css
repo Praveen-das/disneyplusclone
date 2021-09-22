@@ -2,11 +2,10 @@
     position: relative;
     max-width: 100%;
     min-height: 100vh;
-    background: var(--background);
+    background: linear-gradient(0deg,var(--background),#141a28,#141a28);
     overflow: hidden;
     padding: 0 2.5rem;
     padding-bottom: 5rem;
-    padding-top: 100px;
     /* transform: translateY(80px); */
 }
 .lTrayWrapper{
@@ -18,10 +17,12 @@
     
 }
 .title{
-    position: absolute;
+    position: relative;
+    top: 1.5rem;
+    left: 0;
     font-size: 1.25em;
-    font-weight: 600;
-    color: white;
+    font-weight: 500;
+    color: rgb(206, 206, 206);
     margin-bottom: 2.5rem;
 }
 .lSlideWrapper{
@@ -141,7 +142,11 @@
     transition-delay: 0.3s;
 }
 .lSlideWrapper:nth-child(1):hover{
-    transform: scale(1.2);
     transform-origin: left;
-    transition-delay: 0;
+}
+.lSlideWrapper:nth-child(7n+1):hover{
+    transform-origin: left;
+}
+.lSlideWrapper:nth-child(7n):hover{
+    transform-origin: right;
 }

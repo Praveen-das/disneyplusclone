@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './header.css'
 import { Link } from 'react-router-dom'
-import { useHelper } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/Contexts'
 import { imageURL } from '../../assets/URLs/URLs'
 
 function Header() {
@@ -20,9 +20,9 @@ function Header() {
             if (e.target.className === 'search') {
                 setActive(true)
             } else {
-                if (['result','moreResults'].includes(e.target.className)) return
-                if(inputRef.current)
-                inputRef.current.value = ''
+                if (['result', 'moreResults'].includes(e.target.className)) return
+                if (inputRef.current)
+                    inputRef.current.value = ''
                 setQuery()
                 setActive(false)
             }
@@ -47,13 +47,19 @@ function Header() {
     }, [movies, active])
 
     return (
-        <div>
+        <div className='navbar-wrapper'>
             <div className="navbar">
                 <div className="left">
-                    <div className="hamburger">
-                        <span className='line'></span>
-                        <span className='line'></span>
-                        <span className='line'></span>
+                    <div className='dropDown'>
+                        <div className="hamburger">
+                            <span className='line'></span>
+                            <span className='line'></span>
+                            <span className='line'></span>
+                        </div>
+                        <div className='dropDownContents h-dropDownContents'>
+                            <Link to={'/languages'}><h1 className='movieLinks' >Languages</h1></Link>
+                            <Link to={'/languages'}><h1 className='movieLinks' >Genres</h1></Link>
+                        </div>
                     </div>
                     <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
                     <div className='dropDown'>
@@ -107,9 +113,9 @@ function Header() {
                                         : ''
                                 )
                             }
-                            {hasMore && <Link to={`/movies/search/`+ query}
-                                style={{padding:'0'}}
-                                ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
+                            {hasMore && <Link to={`/movies/search/` + query}
+                                style={{ padding: '0' }}
+                            ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                         </div>
                     </div>
                     <button>SUBSCRIBE</button>

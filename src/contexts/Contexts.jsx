@@ -2,13 +2,14 @@ import axios from "axios"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { BaseURL, movieGenresURL, searchURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
 
-const AuthContext = React.createContext()
+const Contexts = React.createContext()
 
 export function useHelper() {
-    return useContext(AuthContext)
+    return useContext(Contexts)
 }
 
 export default function AuthProvider({ children }) {
+    const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
 
     function OTTList(pageNumber, url) {
         const [movies, setMovies] = useState([])
@@ -127,9 +128,6 @@ export default function AuthProvider({ children }) {
 
         return { movies, hasMore, loading }
     }
-    function isoCodes() {
-        return [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
-    }
 
     function useOnScreen(node) {
         const lastElementRef = useRef()
@@ -165,8 +163,8 @@ export default function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={value}>
+        <Contexts.Provider value={value}>
             {children}
-        </AuthContext.Provider>
+        </Contexts.Provider>
     )
 }

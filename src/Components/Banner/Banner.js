@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
-import { useHelper } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from 'react-router-dom'
 

@@ -1,3 +1,6 @@
+.navbar-wrapper{
+    padding-bottom: 5rem;
+}
 .navbar{
     box-sizing: border-box;
     width: 100%;
@@ -7,12 +10,14 @@
     align-items: center;
     background: #141a28;
     position: fixed;
-    z-index: 100;
+    z-index: 200;
 }
 .hamburger{
     display: inline-block;
     margin-top: -2px;
     padding-right: 1rem;
+    cursor: pointer;
+    transform: translateY(3.5px);
 }
 .line{
     width: 20px;
@@ -28,11 +33,9 @@
     transform: translate(0, -18px);
     margin-right: -1rem;
 }
-.dropDown,
-.movieWrapper{
+.dropDown{
     display: block;
     transform: translateY(-5px);
-    
 }
 .dropDownContents h1{
     display: inline-block;
@@ -45,16 +48,32 @@
     position: absolute;
     background: #192133;
     border-radius: 4px;
-    margin-top: 10px;
+    margin-top: 15px;
     transform: translate(-20px, 20px);
     visibility: hidden;
     pointer-events: none;
     overflow: hidden;
+    opacity: 0;
 }
 .dropDown:hover .dropDownContents{
     visibility: visible;
     transition: 0.3s;
+    opacity: 1;
     transform: translate(-20px, 0);
+    pointer-events: all;
+}
+.h-dropDownContents{
+    transform: translate(-17px, 0);
+    border-radius: 2px;
+    transition: 0.5s ease-in-out 0.5s;
+    opacity: 1;
+    height: 0;
+    padding-top: 5px;
+}
+.dropDown:hover .h-dropDownContents{
+    transform: translate(-17px, 0);
+    visibility: visible;
+    height: 85px;
     pointer-events: all;
 }
 .dropDownContents h1{

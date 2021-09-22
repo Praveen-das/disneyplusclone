@@ -1,5 +1,5 @@
 import './app.css'
-import AuthProvider from './contexts/AuthContext';
+import AuthProvider from './contexts/Contexts';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'
@@ -8,6 +8,7 @@ import MovieTheater from './pages/MovieTheater';
 import Results from './pages/Results';
 import DisneyPlusPage from './pages/Disneyplus';
 import ChannelsPage from './pages/ChannelsPage';
+import LanguagesPage from './pages/LanguagesPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
             <Route path='/movies/search/:q' component={Results} />
             <Route path='/disneyplus' component={DisneyPlusPage} />
             <Route path='/channels/:q' component={ChannelsPage} />
+            <Route exact path='/languages' component={LanguagesPage} />
+            <Route path='/languages/:language' component={Results} />
           </Switch>
         </Router>
       </AuthProvider>

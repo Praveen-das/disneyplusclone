@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
-import { useHelper } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/Contexts'
 import './sortHelper.css'
 
 function SortHelper() {
     const { Genres, SortMovies, isoCodes, HandleSearch } = useHelper()
     const lastElementRef = useRef()
+    console.log(isoCodes);
     const [pageNumber, setPageNumber] = useState(1);
     const params = useParams()
     const genres = Genres()
@@ -16,7 +17,6 @@ function SortHelper() {
         setPageNumber(1)
     }, [params])
 
-    console.log(params.q);
 
     const { movies, loading, hasMore } =
         (params.language && SortMovies(params.language , pageNumber)) ||
@@ -41,7 +41,7 @@ function SortHelper() {
         <>
             <div className="lTrayContainer">
                 <label className='title' htmlFor="">{
-                    params.language ? isoCodes().filter((elements) => params.language.includes(elements.id))[0].language
+                    params.language ? isoCodes.filter((elements) => params.language.includes(elements.id))[0].language
                         :
                         'Showing all results for ' + params.q
                 }</label>

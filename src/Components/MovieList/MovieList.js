@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
-import { useHelper } from '../../contexts/AuthContext'
+import { useHelper } from '../../contexts/Contexts'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -47,13 +47,14 @@ function MovieList(props) {
 
         <>
             <div className="trayContainer">
-                <label className='title' htmlFor="">{props.title}</label>
+                <label className='list-title' htmlFor="">{props.title}</label>
                 <Swiper
                     navigation={true}
                     slidesPerGroup={1}
                     spaceBetween={10}
                     speed={1000}
-                    freeMode={true}
+                    // freeMode={true}
+                    // mousewheel={false}
                     onBeforeInit={(e) => handleNavigation(e)}
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     className="mlSlides"
@@ -72,7 +73,7 @@ function MovieList(props) {
                                             {
 
                                                 movies.length === index + 1 ?
-                                                    <div className='slide-loading'><i ref={lastElement} class="fas fa-circle-notch fa-spin" ></i></div> :
+                                                    <div className='slide-loading'><i ref={lastElement} className="fas fa-circle-notch fa-spin" ></i></div> :
                                                     <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
                                             }
                                             <div className="slideContents">
