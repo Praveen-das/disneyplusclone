@@ -9,6 +9,7 @@ import Results from './pages/Results';
 import DisneyPlusPage from './pages/Disneyplus';
 import ChannelsPage from './pages/ChannelsPage';
 import LanguagesPage from './pages/LanguagesPage';
+import GenresPage from './pages/GenresPage';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
             <Route path='/channels/:q' component={ChannelsPage} />
             <Route exact path='/languages' component={LanguagesPage} />
             <Route path='/languages/:language' component={Results} />
+            <Route exact path='/genres' component={GenresPage} />
+            <Route exact path='/genres/:genres' component={Results} />
           </Switch>
         </Router>
       </AuthProvider>

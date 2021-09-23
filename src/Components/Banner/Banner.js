@@ -19,7 +19,7 @@ function Banner(props) {
 
     const { OTTList, Genres } = useHelper()
     
-    const { movies } = OTTList(1, props.url)
+    const { movies } = OTTList(props.url,1)
     const genres = Genres()
         
     return (

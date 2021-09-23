@@ -21,14 +21,14 @@ function Header() {
                 setActive(true)
             } else {
                 if (['result', 'moreResults'].includes(e.target.className)) return
-                if (inputRef.current)
-                    inputRef.current.value = ''
+                if (inputRef.current && active){
+                inputRef.current.value = ''
                 setQuery()
-                setActive(false)
+                setActive(false)}
             }
         }
 
-    }, [])
+    }, [active])
 
     useEffect(() => {
         if (movies.length > 5 && movies.map((movie) => movie.backdrop_path)) {
@@ -58,7 +58,7 @@ function Header() {
                         </div>
                         <div className='dropDownContents h-dropDownContents'>
                             <Link to={'/languages'}><h1 className='movieLinks' >Languages</h1></Link>
-                            <Link to={'/languages'}><h1 className='movieLinks' >Genres</h1></Link>
+                            <Link to={'/genres'}><h1 className='movieLinks' >Genres</h1></Link>
                         </div>
                     </div>
                     <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>

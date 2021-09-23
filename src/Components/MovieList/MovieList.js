@@ -21,7 +21,7 @@ function MovieList(props) {
     const { OTTList, HandleSearch } = useHelper()
 
     const { movies, genres, loading, hasMore } =
-        (props.url && OTTList(pageNumber, props.url)) ||
+        (props.url && OTTList(props.url, pageNumber)) ||
         (props.q && HandleSearch(props.q, pageNumber))
 
     const lastElement = useCallback(node => {

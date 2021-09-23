@@ -1,26 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { imageURL } from '../../assets/URLs/URLs'
+import { imageURL, sortURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import './sortHelper.css'
 
 function SortHelper() {
-    const { Genres, SortMovies, isoCodes, HandleSearch } = useHelper()
+    const { Genres, SortMovies, isoCodes, HandleSearch, OTTList } = useHelper()
     const lastElementRef = useRef()
-    console.log(isoCodes);
     const [pageNumber, setPageNumber] = useState(1);
     const params = useParams()
     const genres = Genres()
 
-    useEffect(() => {
-        setPageNumber(1)
-    }, [params])
-
 
     const { movies, loading, hasMore } =
-        (params.language && SortMovies(params.language , pageNumber)) ||
-        (params.q && HandleSearch(params.q, pageNumber))
+        (params.language && SortMovies(params.language, pageNumber)) ||
+        (params.q && HandleSearch(params.q, pageNumber)) ||
+        (params.genres && OTTList(sortURL + `&with_genres=${
+
+            genres && genres.filter(elem=> elem.name === params.genres[0].toUpperCase()+params.genres.slice(1))[0].id}` , pageNumber))
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -42,8 +40,9 @@ function SortHelper() {
             <div className="lTrayContainer">
                 <label className='title' htmlFor="">{
                     params.language ? isoCodes.filter((elements) => params.language.includes(elements.id))[0].language
-                        :
+                        :params.q ?
                         'Showing all results for ' + params.q
+                        : 'Showing all results for ' + params.genres[0].toUpperCase()+params.genres.slice(1)
                 }</label>
                 <div className="lTrayWrapper">
                     <div className="lSlides">

@@ -11,7 +11,7 @@ export function useHelper() {
 export default function AuthProvider({ children }) {
     const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
 
-    function OTTList(pageNumber, url) {
+    function OTTList(url, pageNumber) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
@@ -66,17 +66,17 @@ export default function AuthProvider({ children }) {
             }
         }, [movieGenres, tvGenres])
 
-        return genres
+        return genres 
     }
 
-    function SortMovies(language, pageNumber) {
+    function SortMovies(query, pageNumber) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
         const [loading, setLoading] = useState(true)
 
         useEffect(() => {
             setMovies([])
-        }, [language])
+        }, [query])
 
         useEffect(() => {
             setLoading(true)
@@ -85,7 +85,7 @@ export default function AuthProvider({ children }) {
                 url: BaseURL + sortURL,
                 params: {
                     page: pageNumber,
-                    with_original_language: language,
+                    with_original_language: query,
                     sort_by: 'popularity.desc'
                 }
             }).then((res) => {
@@ -95,7 +95,7 @@ export default function AuthProvider({ children }) {
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
             }).catch(err => console.log(err))
-        }, [language, pageNumber])
+        }, [query, pageNumber])
 
         return { movies, hasMore, loading }
     }
@@ -134,18 +134,18 @@ export default function AuthProvider({ children }) {
         const [isIntersecting, setIntersecting] = useState(false)
 
         useEffect(() => {
-            if(lastElementRef.current)lastElementRef.current.disconnect()
-            lastElementRef.current = new IntersectionObserver(entries=>{
-                if(entries[0].isIntersecting){
+            if (lastElementRef.current) lastElementRef.current.disconnect()
+            lastElementRef.current = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
                     setIntersecting(true)
                     console.log(entries[0].isIntersecting);
-                }else{
+                } else {
                     setIntersecting(false)
                     console.log(entries[0].isIntersecting);
                 }
             })
 
-            if(node)lastElementRef.current.observe(node)
+            if (node) lastElementRef.current.observe(node)
 
         }, [node])
 
@@ -158,7 +158,7 @@ export default function AuthProvider({ children }) {
         SortMovies,
         HandleSearch,
         isoCodes,
-        useOnScreen
+        useOnScreen,
 
     }
 
