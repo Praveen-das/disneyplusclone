@@ -9,6 +9,7 @@ export function useHelper() {
 }
 
 export default function AuthProvider({ children }) {
+
     const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
 
     function OTTList(url, pageNumber) {

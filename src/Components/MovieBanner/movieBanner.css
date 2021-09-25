@@ -3,7 +3,7 @@
     height: 60vh;
     display: flex;
     justify-content: center;
-    background: linear-gradient(0deg,#0c111b,var(--background), var(--background));
+    background: linear-gradient(0deg,var(--background),#141a28,#141a28);
     padding-bottom: 2rem;
 }
 .mBanner{

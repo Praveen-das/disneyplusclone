@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 import Banner from '../Components/Banner/Banner'
@@ -7,6 +7,9 @@ import DisneyplusTray from '../Components/DisneyplusTray/DisneyplusTray'
 import MovieList from '../Components/MovieList/MovieList'
 
 function DisneyPlusPage() {
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     return (
         <>
          <Header/>

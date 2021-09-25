@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { imageURL, sortURL } from '../../assets/URLs/URLs'
@@ -16,9 +16,7 @@ function SortHelper() {
     const { movies, loading, hasMore } =
         (params.language && SortMovies(params.language, pageNumber)) ||
         (params.q && HandleSearch(params.q, pageNumber)) ||
-        (params.genres && OTTList(sortURL + `&with_genres=${
-
-            genres && genres.filter(elem=> elem.name === params.genres[0].toUpperCase()+params.genres.slice(1))[0].id}` , pageNumber))
+        (params.genres && OTTList(sortURL + `&with_genres=${genres && genres.filter(elem => elem.name === params.genres[0].toUpperCase() + params.genres.slice(1))[0].id}`, pageNumber))
 
     const lastElement = useCallback(node => {
         if (loading) return
@@ -37,52 +35,50 @@ function SortHelper() {
     return (
 
         <>
-            <div className="lTrayContainer">
+            <div className="sh-tray-wrapper">
                 <label className='title' htmlFor="">{
                     params.language ? isoCodes.filter((elements) => params.language.includes(elements.id))[0].language
-                        :params.q ?
-                        'Showing all results for ' + params.q
-                        : 'Showing all results for ' + params.genres[0].toUpperCase()+params.genres.slice(1)
+                        : params.q ?
+                            'Showing all results for ' + params.q
+                            : 'Showing all results for ' + params.genres[0].toUpperCase() + params.genres.slice(1)
                 }</label>
-                <div className="lTrayWrapper">
-                    <div className="lSlides">
-                        {
-                            movies && movies.map((movie, index) => {
-                                if (movie.poster_path) {
-                                    return <div key={index} className="lSlideWrapper expand">
-                                        <Link to={{
-                                            pathname: '/movies',
-                                            state: { movie: movie, genres: genres }
-                                        }}>
-                                            <div className="lSlide">
-                                                {
-                                                    movies.length === index + 1 ? <img className='lMovieImage' ref={lastElement} alt='' /> : <img className='lMovieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                                }
-                                                <div className="lSlideContents">
-                                                    <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                        <div className='bBtns'>
-                                            <div className='wmBtn'>
-                                                <i className='fa fa-caret-right'></i>
-                                                <Link className='watchMovie' to={{
-                                                    pathname: '/watch',
-                                                    state: { movie: movie, genres: genres }
-                                                }}>WATCH MOVIE</Link>
-                                            </div>
-                                            <div className='atfBtn'>
-                                                <i className='fa fa-plus'></i>
-                                                <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
+                <div className="sh-tray">
+                    {
+                        movies && movies.map((movie, index) => {
+                            if (movie.poster_path) {
+                                return <div key={index} className="sh-slide-wrapper expand">
+                                    <Link to={{
+                                        pathname: '/movies',
+                                        state: { movie: movie, genres: genres }
+                                    }}>
+                                        <div className="sh-slide">
+                                            {
+                                                movies.length === index + 1 ? <img className='sh-image' ref={lastElement} alt='' /> : <img className='sh-image' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                            }
+                                            <div className="sh-contents">
+                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
+                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
                                             </div>
                                         </div>
+                                    </Link>
+                                    <div className='bBtns'>
+                                        <div className='wmBtn'>
+                                            <i className='fa fa-caret-right'></i>
+                                            <Link className='watchMovie' to={{
+                                                pathname: '/movies/watch',
+                                                state: { movie: movie, genres: genres }
+                                            }}>WATCH MOVIE</Link>
+                                        </div>
+                                        <div className='atfBtn'>
+                                            <i className='fa fa-plus'></i>
+                                            <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
+                                        </div>
                                     </div>
-                                }
-                                return null
-                            })
-                        }
-                    </div>
+                                </div>
+                            }
+                            return null
+                        })
+                    }
                     <span>{loading && 'loading....'}</span>
                 </div>
             </div>

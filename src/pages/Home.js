@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { recommended, trendingMovies, trendingShows } from '../assets/URLs/URLs'
 import Banner from '../Components/Banner/Banner'
 import Footer from '../Components/Footer/Footer'
@@ -6,6 +6,10 @@ import Header from '../Components/Header/Header'
 import MovieList from '../Components/MovieList/MovieList'
 
 function Home() {
+
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     
     return (
         <>

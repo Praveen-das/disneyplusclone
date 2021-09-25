@@ -12,6 +12,7 @@ import LanguagesPage from './pages/LanguagesPage';
 import GenresPage from './pages/GenresPage';
 
 function App() {
+  
   return (
     <>
       <AuthProvider>
