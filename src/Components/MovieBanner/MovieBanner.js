@@ -10,8 +10,6 @@ function MovieBanner() {
     const location = useLocation()
     const { movie, genres } = location.state
 
-    console.log(genres);
-
     return (
         <>
             <div className="mbContainer">
