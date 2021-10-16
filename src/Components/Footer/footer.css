@@ -1,7 +1,9 @@
 .footer{
+    bottom: 0;
     display: flex;
     background: #0c111b;
     padding: 2.5rem;
+    z-index: 400;
 }
 .footer-left{
     width: 50%;

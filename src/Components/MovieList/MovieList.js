@@ -74,7 +74,7 @@ function MovieList(props) {
 
                                                 movies.length === index + 1 ?
                                                     <div className='slide-loading'><i ref={lastElement} className="fas fa-circle-notch fa-spin" ></i></div> :
-                                                    <img className='movieImage' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
+                                                    <img className='movieImage' src={movie.poster_path && imageURL + 'w154' + movie.poster_path} alt="" />
                                             }
                                             <div className="slideContents">
                                                 <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>

@@ -1,6 +1,8 @@
+import React, { useContext, useEffect, useMemo, useState } from "react"
 import axios from "axios"
-import React, { useContext, useEffect, useRef, useState } from "react"
 import { BaseURL, movieGenresURL, searchURL, sortURL, tvShowsGenresURL } from "../assets/URLs/URLs"
+import { GoogleAuthProvider, RecaptchaVerifier, signInWithPopup, signInWithPhoneNumber, updateProfile, sendEmailVerification, updateEmail } from "@firebase/auth"
+import { auth } from "../config/firebase"
 
 const Contexts = React.createContext()
 
@@ -10,9 +12,19 @@ export function useHelper() {
 
 
 export default function AuthProvider({ children }) {
-    
+    const [currentUser, setCurrentUser] = useState()
+    const [loading, setLoading] = useState(true)
     const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
+    const [loginWindow, setLoginWindow] = useState(false)
+    const [alert, setAlert] = useState(false)
 
+    if (alert) {
+        console.log();
+        setTimeout(() => {
+            setAlert(false)
+        }, 1000)
+    }
+    
     function OTTList(url, pageNumber) {
         const [movies, setMovies] = useState([])
         const [hasMore, setHasMore] = useState(false)
@@ -33,7 +45,7 @@ export default function AuthProvider({ children }) {
             }).catch(err => console.log(err))
         }, [pageNumber, url])
 
-        return { movies, hasMore, loading }
+        return ({ movies, hasMore, loading })
     }
 
     function Genres() {
@@ -70,6 +82,7 @@ export default function AuthProvider({ children }) {
 
         return genres
     }
+
 
     function SortMovies(query, pageNumber) {
         const [movies, setMovies] = useState([])
@@ -131,28 +144,39 @@ export default function AuthProvider({ children }) {
         return { movies, hasMore, loading }
     }
 
-    function useOnScreen(node) {
-        const lastElementRef = useRef()
-        const [isIntersecting, setIntersecting] = useState(false)
-
-        useEffect(() => {
-            if (lastElementRef.current) lastElementRef.current.disconnect()
-            lastElementRef.current = new IntersectionObserver(entries => {
-                if (entries[0].isIntersecting) {
-                    setIntersecting(true)
-                    console.log(entries[0].isIntersecting);
-                } else {
-                    setIntersecting(false)
-                    console.log(entries[0].isIntersecting);
-                }
-            })
-
-            if (node) lastElementRef.current.observe(node)
-
-        }, [node])
-
-        return isIntersecting
+    function signInWithGoogle() {
+        return signInWithPopup(auth, new GoogleAuthProvider())
     }
+    async function signinWithPhonenumber(input, type) {
+        if (type === 'phonenumber') {
+            const appVerifier = new RecaptchaVerifier('login-btn', {
+                'size': 'invisible'
+            }, auth);
+            signInWithPhoneNumber(auth, '+1-202-555-0171', appVerifier).then((confirmationResult) => {
+                window.confirmationResult = confirmationResult
+            }).catch((err) => console.log(err))
+            return
+        }
+        return window.confirmationResult.confirm(input).then(() => {
+            updateEmail(auth.currentUser, "praveen97das@gmail.com").then(() => {
+                console.log('emali updated');
+            }).catch((error) => {
+                console.log(error);
+            })
+        })
+    }
+
+    function logout() {
+        return auth.signOut()
+    }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            setCurrentUser(user)
+            setLoading(false)
+        })
+        return unsubscribe
+    }, [])
 
     const value = {
         OTTList,
@@ -160,13 +184,19 @@ export default function AuthProvider({ children }) {
         SortMovies,
         HandleSearch,
         isoCodes,
-        useOnScreen,
-
+        signInWithGoogle,
+        signinWithPhonenumber,
+        logout,
+        currentUser,
+        setLoginWindow,
+        loginWindow,
+        alert,
+        setAlert
     }
 
     return (
         <Contexts.Provider value={value}>
-            {children}
+            {!loading && children}
         </Contexts.Provider>
     )
 }

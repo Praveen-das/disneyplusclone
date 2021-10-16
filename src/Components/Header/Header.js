@@ -3,21 +3,25 @@ import './header.css'
 import { Link } from 'react-router-dom'
 import { useHelper } from '../../contexts/Contexts'
 import { imageURL } from '../../assets/URLs/URLs'
+import Login from '../Login/Login'
+import Alert from '../Alert/Alert'
 
-function Header() {
+function Header(props) {
     const [query, setQuery] = useState()
     const [hasMore, setHasMore] = useState(false)
-    const [loginWindow, setLoginWindow] = useState(false)
-    const [phoneNumber, setPhoneNumber] = useState()
-    const [email, setEmail] = useState()
-    const [haveAlternateMethod, setHaveAlternateMethod] = useState(false)
-
     const inputRef = useRef()
-    const phoneNumberRef = useRef()
     const searchbox = useRef()
     const loginRef = useRef()
 
-    const { HandleSearch, Genres, } = useHelper()
+    const {
+        HandleSearch,
+        Genres,
+        logout,
+        currentUser,
+        setLoginWindow,
+        loginWindow,
+        alert
+    } = useHelper()
 
     const { movies } = HandleSearch(query)
     const genres = Genres()
@@ -26,35 +30,21 @@ function Header() {
         window.onclick = (e) => {
             if (searchbox.current && searchbox.current.contains(e.target))
                 return inputRef.current.style.cssText = 'width:350px; border-bottom: 1px solid #1f80e0;'
-            inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
             if (inputRef.current) {
+                inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
                 inputRef.current.value = ''
                 setQuery()
                 // inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
             }
             if (loginRef.current && loginRef.current === e.target) return setLoginWindow(false)
         }
-    }, [loginRef, phoneNumber, searchbox])
+    }, [loginRef, searchbox, setLoginWindow])
 
     useEffect(() => {
         if (movies.length > 5 && movies.map((movie) => movie.backdrop_path))
             return setHasMore(true)
         return setHasMore(false)
-    }, [movies])
-
-    function handleInput(e, type) {
-        if (type === 'phonenumber') {
-            setPhoneNumber(e.target.value)
-        }
-        if (type === 'email') {
-            setEmail(e.target.value)
-        }
-    }
-
-    function handleStyle(e, active) {
-        active ? e.target.style.cssText = 'box-shadow: inset 0 -2px 0 #1f80e0; padding-bottom: 10px;' :
-            e.target.style.cssText = 'box-shadow: inset 0 -1px 0 #1f80e0; padding-bottom: 5px;'
-    }
+    }, [movies, currentUser])
 
     return (
         <>
@@ -74,19 +64,19 @@ function Header() {
                         </div>
                         <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
                         <div className='dropDown'>
-                            <label htmlFor="">Movies</label>
+                            <label className='title-movies' htmlFor="">Movies</label>
                             <div className='dropDownContents'>
-                                <Link to={'/movies/languages/hi'}><h1 className='movieLinks' >Hindi</h1></Link>
-                                <Link to={'/movies/languages/bn'}><h1 className='movieLinks' >Bengali</h1></Link>
-                                <Link to={'/movies/languages/te'}><h1 className='movieLinks' >Telugu</h1></Link>
-                                <Link to={'/movies/languages/ml'}><h1 className='movieLinks' >Malayalam</h1></Link>
-                                <Link to={'/movies/languages/ta'}><h1 className='movieLinks' >Tamil</h1></Link>
-                                <Link to={'/movies/languages/mr'}><h1 className='movieLinks' >Marathi</h1></Link>
-                                <Link to={'/movies/languages/en'}><h1 className='movieLinks' >English</h1></Link>
-                                <Link to={'/movies/languages/kn'}><h1 className='movieLinks' >Kannada</h1></Link>
+                                <Link className='movieLinks' to={'/movies/languages/hi'}>Hindi</Link>
+                                <Link className='movieLinks' to={'/movies/languages/bn'}>Bengali</Link>
+                                <Link className='movieLinks' to={'/movies/languages/te'}>Telugu</Link>
+                                <Link className='movieLinks' to={'/movies/languages/ml'}>Malayalam</Link>
+                                <Link className='movieLinks' to={'/movies/languages/ta'}>Tamil</Link>
+                                <Link className='movieLinks' to={'/movies/languages/mr'}>Marathi</Link>
+                                <Link className='movieLinks' to={'/movies/languages/en'}>English</Link>
+                                <Link className='movieLinks' to={'/movies/languages/kn'}>Kannada</Link>
                             </div>
                         </div>
-                        <Link to="/disneyplus">Disney+</Link>
+                        <Link className='title-disneyplus' to="/disneyplus">Disney+</Link>
                         <img className='kidsLogo' src='/kids-logo.svg' alt="kids" />
                     </div>
                     <div className="right">
@@ -105,7 +95,6 @@ function Header() {
                                                     pathname: '/movies',
                                                     state: { movie: movie, genres: genres }
                                                 }}
-
                                             >
                                                 <div key={index} className="result">
                                                     <img className='rImage' src={imageURL + 'w300' + movie.backdrop_path} alt="" />
@@ -129,49 +118,39 @@ function Header() {
                                 ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                             </div>
                         </div>
-                        <button className='subscribe-btn'>SUBSCRIBE</button>
-                        <button onClick={() => setLoginWindow(true)} className='header-login-btn'>LOGIN</button>
+
+                        {!props.MyAccountPage && <Link to='/get-started'><button className='subscribe-btn'>SUBSCRIBE</button></Link>}
+                        {
+                            currentUser ?
+                                !props.MyAccountPage && <div className="userInfo">
+                                    <img className='user-profile' src={currentUser && currentUser.photoURL ?
+                                        currentUser.photoURL
+                                        : 'https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg'
+                                    } alt=''></img>
+                                    <div className='userInfo-dropDown'>
+                                        <div className='dropdown-item'>
+                                            <Link to='/#'>Watchlist</Link>
+                                        </div>
+                                        <div className='dropdown-item'>
+                                            <Link to='/my-account'>My Account</Link>
+                                        </div>
+                                        <div className='dropdown-item'>
+                                            <button onClick={() => logout()} className='header-login-btn'>Log out</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                :
+                                <button onClick={() => setLoginWindow(true)} className='header-login-btn'>LOGIN</button>
+                        }
                     </div>
                 </div>
             </div >
             {
                 loginWindow && <div className="login-container-overlay" ref={loginRef}>
-                    {
-                        !haveAlternateMethod ?
-                            <div className="login-container">
-                                {phoneNumber && <i onClick={() => {
-                                    setPhoneNumber(false)
-                                    phoneNumberRef.current.value = ''
-                                }} className="fas fa-arrow-left"></i>}
-                                <i onClick={() => setLoginWindow(false)} className="fas fa-times"></i>
-                                {
-                                    phoneNumber ?
-                                        <label className='login-container-label' htmlFor="">Continue using phone</label> :
-                                        <label className='login-container-label' htmlFor="">Login to continue</label>
-                                }
-                                {!phoneNumber && <button className="fb-login-btn" onClick={() => setHaveAlternateMethod(true)}>Have a Facebook/Email account ?</button>}
-                                {!phoneNumber && <span>or</span>}
-                                <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" />
-                                {/* <label className='login-warning' htmlFor="">Please enter a valid mobile number</label> */}
-                                {phoneNumber && <button className="login-btn">CONTINUE</button>}
-                                {phoneNumber && <p className='login-agree'>By proceeding you Agree to the Terms of use and Privacy policy</p>}
-                            </div> :
-                            <div className="login-container-alternate">
-                                <i onClick={() => setHaveAlternateMethod(false)} className="fas fa-arrow-left"></i>
-                                <i onClick={() => setLoginWindow(false)} className="fas fa-times"></i>
-                                <label className='login-alternate-label' htmlFor="">Have an Email or Facebook account?</label>
-                                <input ref={phoneNumberRef} className="login-email" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'email')} type="email" name="phoneNo" autoComplete='off' placeholder="Enter your Email" />
-                                <button className="login-btn">CONTINUE <i className="fas fa-chevron-right"></i></button>
-                                <span>OR</span>
-                                <button className="login-btn-fb">
-                                    <i className="fab fa-facebook-square"></i>
-                                    LOGIN WITH FACEBOOK
-                                </button>
-                                {/* <label className='login-warning' htmlFor="">Please enter a valid mobile number</label> */}
-                            </div>
-                    }
+                    <Login />
                 </div>
             }
+            {alert && <Alert/>}
         </>
     )
 }

@@ -1,0 +1,255 @@
+header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: fixed;
+  padding: 0 3.5rem;
+  padding-top: 1.5rem;
+  z-index: 100;
+}
+.select {
+  width: 140px;
+  min-height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #1f80e0;
+  border-radius: 3px;
+  background: #194c7d;
+  outline: none;
+  cursor: pointer;
+}
+.select-option {
+  background: none;
+  border: none;
+  color: rgb(231, 231, 231);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  cursor: pointer;
+}
+.fa-chevron-down,
+.fa-chevron-up {
+  font-size: 9px;
+  transform: translateX(40px);
+}
+.options {
+  width: 100%;
+  border-top: 1px solid #1f7fe056;
+  background: #194c7d;
+}
+.option,
+.option-logout {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1f7fe056;
+  color: rgb(231, 231, 231);
+  font-size: 12px;
+  font-weight: 500;
+  height: 30px;
+}
+.option-logout {
+  width: 100%;
+  border-bottom: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.select-option,
+.option,
+.logout,
+.option-logout {
+  padding-left: 15px;
+}
+
+.gs-container {
+  animation: anim 50s linear infinite;
+  margin-bottom: 5rem;
+}
+@keyframes anim {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-500px);
+  }
+}
+.gs-container img {
+  max-width: calc(100% / 11 - 15px);
+  margin: 7.5px;
+  border-radius: 5px;
+}
+.gs-container-overlay {
+  width: 100%;
+  height: 130%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    #0c111bbe,
+    var(--background),
+    var(--background),
+    var(--background),
+    var(--background)
+  );
+}
+
+/* //////////////////////////////////////////////////// */
+
+.subscription-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 9rem;
+}
+.subscription-container label {
+  font-size: 1.5em;
+  color: white;
+  padding-bottom: 1rem;
+}
+.subscription-details {
+  width: 100%;
+  max-width: 880px;
+  background: #192132;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.subscriptions {
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 2rem 2.5rem;
+  width: 780px;
+  margin-top: 2rem;
+  color: rgb(66, 66, 66);
+}
+tr {
+  line-height: 3rem;
+}
+th {
+  line-height: 20px;
+  padding-top: 15px;
+}
+td {
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.048);
+}
+table p {
+  font-size: 12px;
+  line-height: 20px;
+  transform: translateY(-10px);
+  color: #1f80e0;
+}
+td:nth-child(1) {
+  text-align: left;
+}
+th:nth-child(2),
+th:nth-child(3),
+td:nth-child(2),
+td:nth-child(3) {
+  width: 150px;
+}
+/* //////////////////////////////////// */
+.plan-super {
+  color: #fedf7b;
+}
+th:nth-child(2),
+td:nth-child(2) {
+  background: #1e2a48;
+  border-bottom: none;
+}
+/* //////////////////////////////////// */
+
+tr:first-child th:nth-child(2),
+tr:first-child th:nth-child(3) {
+  border-radius: 4px 4px 0 0;
+}
+tr:last-child td:nth-child(2),
+tr:last-child td:nth-child(3) {
+  border-radius: 0 0 4px 4px;
+}
+
+.select-plan {
+  display: flex;
+  gap: 15px;
+}
+.premium-button,
+.super-button {
+  width: 100%;
+  height: 70px;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #465983;
+  background: none;
+  text-align: start;
+  padding-left: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.super-button {
+  border: 1px solid #1f80e0;
+  background: #1f80e066;
+}
+
+.select-plan .label {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 25px;
+}
+.select-plan label {
+  pointer-events: none;
+}
+.select-plan .price {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+}
+.select-plan .validity {
+  font-size: 16px;
+  font-weight: 400;
+}
+.select-plan .fa-check-circle {
+  position: absolute;
+  font-size: 25px;
+  color: white;
+  top: -10px;
+  right: -10px;
+}
+.confirm-plan {
+  border: none;
+  background: #1f80e0;
+  width: 100%;
+  height: 60px;
+  margin-top: 15px;
+  border-radius: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+small {
+  text-align: center;
+  line-height: 55px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(182, 182, 182);
+}
+.current-user {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+}
+.change-current-user {
+  color: #1f80e0;
+  font-size: 13px;
+  line-height: 10px;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}

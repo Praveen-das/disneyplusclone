@@ -1,62 +1,109 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { useHelper } from '../../contexts/Contexts'
 import './login.css'
 
 
 function Login() {
-    const phoneNumberRef = useRef()
     const [phoneNumber, setPhoneNumber] = useState()
-    const loginRef = useRef()
+    const [haveAlternateMethod, setHaveAlternateMethod] = useState(false)
+    const [OTPWindow, setOTPWindow] = useState(false)
+    const [OTP, setOTP] = useState()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
+    const phoneNumberRef = useRef()
 
-    useEffect(() => {
-        window.onclick = (e) => {
+    const {
+        signInWithGoogle,
+        signinWithPhonenumber,
+        setLoginWindow,
+        setAlert
+    } = useHelper()
 
-            // if (e.target.className === 'header-login-btn') return loginRef.current.style.display = 'grid'
-            if (['login-container-overlay', 'fas fa-times'].includes(e.target.className))
-                return loginRef.current.style.display = 'none'
-            if (e.target.className === 'login-phoneNum')
-                return phoneNumberRef.current.style.cssText = 'box-shadow: inset 0 -2px 0 #1f80e0; padding-bottom: 10px;'
-            if (phoneNumber) return
-            return phoneNumberRef.current.style.cssText = 'box-shadow: inset 0 -1px 0 #1f80e0; padding-bottom: 5px;'
-        }
-    }, [loginRef, phoneNumber])
-
-    function handleInput(e) {
-        e.preventDefault()
-        setPhoneNumber(e.target.value)
+    function handleStyle(e, active) {
+        active ? e.target.style.cssText = 'box-shadow: inset 0 -2px 0 #1f80e0; padding-bottom: 10px;' :
+            e.target.style.cssText = 'box-shadow: inset 0 -1px 0 #1f80e0; padding-bottom: 5px;'
     }
+
+    function handleInput(e, type) {
+        if (type === 'phonenumber')
+            setPhoneNumber(e.target.value)
+        if (type === 'otp')
+            setOTP(e.target.value)
+    }
+
+    async function handleLogin(type) {
+        if (type === 'gmail') {
+            setError('')
+            setLoading(true)
+            await signInWithGoogle().then(res => {
+                setLoginWindow(false)
+                setAlert(true)
+                console.log(res);
+            }).catch(err => setError(err))
+        }
+        if (type === 'phonenumber') {
+            setError('')
+            setLoading(true)
+            phoneNumberRef.current.value = ''
+            setOTPWindow(true)
+            await signinWithPhonenumber(phoneNumber,'phonenumber').catch(err => {
+                setError(err) 
+                console.log(err)})
+        }
+        if (OTP) {
+            setError('')
+            setLoading(true)
+            signinWithPhonenumber(OTP,'otp').then(() => {
+                setOTP('')
+                setOTPWindow(false)
+                setLoginWindow(false)
+                setAlert(true)
+            }).catch(err => setError(err))
+        }
+    }
+
 
     return (
         <>
-            <div className="login-container-overlay" ref={loginRef}>
-                <div className="login-container">
-                    <i className="fas fa-times"></i>
-                    {
-                        phoneNumber ?
-                            <label className='login-container-label' htmlFor="">Continue using phone</label> :
-                            <label className='login-container-label' htmlFor="">Login to continue</label>
-                    }
-                    {!phoneNumber && <button className="fb-login-btn">Have a Facebook/Email account ?</button>}
-                    {!phoneNumber && <span>or</span>}
-                    <input
-                        ref={phoneNumberRef}
-                        className="login-phoneNum"
-                        onChange={(e) => handleInput(e)}
-                        maxLength="100"
-                        type="text"
-                        id="phoneNo"
-                        autoComplete="off"
-                        required=""
-                        name="phoneNo"
-                        tabIndex=""
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        placeholder="Enter your mobile number"
-                    />
-                    {/* <label className='login-warning' htmlFor="">Please enter a valid mobile number</label> */}
-                    {phoneNumber && <button className="login-btn">CONTINUE</button>}
-                    {phoneNumber && <p className='login-agree'>By proceeding you Agree to the Terms of use and Privacy policy</p>}
-                </div>
-            </div>
+            {                
+                !haveAlternateMethod ?
+                    <div className="login-container">
+                        {phoneNumber && <i onClick={() => {
+                            setPhoneNumber('')
+                            phoneNumberRef.current.value = ''
+                        }} className="fas fa-arrow-left"></i>}
+                        <i onClick={() => setLoginWindow(false)} className="fas fa-times"></i>
+                        {
+                            OTPWindow ?
+                                <label className='login-container-label' htmlFor="">Enter OTP sent to your phone number</label> :
+                                phoneNumber ?
+                                    <label className='login-container-label' htmlFor="">Continue using phone</label> :
+                                    <label className='login-container-label' htmlFor="">Login to continue</label>
+                        }
+                        {phoneNumber ? '' : OTPWindow ? '' : <button className="fb-login-btn" onClick={() => setHaveAlternateMethod(true)}>Have a Facebook/Email account ?</button>}
+                        {phoneNumber ? '' : OTPWindow ? '' : <span>or</span>}
+                        {OTPWindow ? <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'otp')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /> :
+                            <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" />}
+                        {error && <label className='login-warning' htmlFor="">Invalid phone number</label>}
+                        {(phoneNumber || OTPWindow) && <button onClick={() => OTPWindow ? handleLogin('otp') : handleLogin('phonenumber')} className="login-btn" id='login-btn'>CONTINUE</button>}
+                        {phoneNumber && !OTPWindow && <p className='login-agree'>By proceeding you Agree to the Terms of use and Privacy policy</p>}
+                    </div> :
+
+                    <div className="login-container-alternate">
+                        <i onClick={() => setHaveAlternateMethod(false)} className="fas fa-arrow-left"></i>
+                        <i onClick={() => setLoginWindow(false)} className="fas fa-times"></i>
+                        <label className='login-alternate-label' htmlFor="">Have a Gmail or Facebook account?</label>
+                        <button className="login-btn" onClick={() => handleLogin('gmail')}>
+                            <i className="fab fa-google"></i>
+                            GOOGLE
+                        </button>
+                        <span>OR</span>
+                        <button className="login-btn-fb">
+                            <i className="fab fa-facebook-square"></i>
+                            FACEBOOK
+                        </button>
+                    </div>
+            }
         </>
     )
 }

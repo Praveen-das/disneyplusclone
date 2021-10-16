@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,16 +15,18 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 function Banner(props) {
+
     const bannerRef = useRef()
 
     const { OTTList, Genres } = useHelper()
-    
-    const { movies } = OTTList(props.url,1)
-    const genres = Genres()
-        
+
+    const { movies } = OTTList(props.url, 1)
+    const genres =  Genres()
+
     return (
         <>
             <div className="bannerWrapper">
+
                 <Swiper
                     navigation={true}
                     spaceBetween={-65}
@@ -37,13 +39,13 @@ function Banner(props) {
                     className="mySwiper"
                 >
                     {movies && movies.map((movie, index) =>
-                
+
                         <SwiperSlide key={index}>
                             <Link to={{
                                 pathname: '/movies',
                                 state: { movie: movie, genres: genres }
                             }}>
-                
+
                                 <div className="bContainer">
                                     <div key={index} className="banner" ref={bannerRef}>
                                         <div className="bContents">
@@ -58,7 +60,7 @@ function Banner(props) {
                                             <p className='bDescription'>{movie.overview}</p>
                                         </div>
                                         <div className="imgWrapper">
-                                            <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
+                                            <img className='bImage' src={movie.backdrop_path && imageURL + 'w780' + movie.backdrop_path} alt="" />
                                         </div>
                                     </div>
                                 </div>
