@@ -5,6 +5,7 @@ import { useHelper } from '../../contexts/Contexts'
 import { imageURL } from '../../assets/URLs/URLs'
 import Login from '../Login/Login'
 import Alert from '../Alert/Alert'
+import { useFirebase } from '../../contexts/FirebaseContext'
 
 function Header(props) {
     const [query, setQuery] = useState()
@@ -16,12 +17,15 @@ function Header(props) {
     const {
         HandleSearch,
         Genres,
-        logout,
-        currentUser,
         setLoginWindow,
         loginWindow,
         alert
     } = useHelper()
+
+    const {
+        logout,
+        currentUser
+    } = useFirebase()
 
     const { movies } = HandleSearch(query)
     const genres = Genres()
@@ -129,7 +133,7 @@ function Header(props) {
                                     } alt=''></img>
                                     <div className='userInfo-dropDown'>
                                         <div className='dropdown-item'>
-                                            <Link to='/#'>Watchlist</Link>
+                                            <Link to='/watchlist'>Watchlist</Link>
                                         </div>
                                         <div className='dropdown-item'>
                                             <Link to='/my-account'>My Account</Link>

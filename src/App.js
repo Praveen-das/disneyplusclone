@@ -13,6 +13,7 @@ import GenresPage from './pages/GenresPage';
 import MyAccountPage from './pages/MyAccountPage';
 import GetStartedPage from './pages/GetStartedPage';
 import { useHelper } from './contexts/Contexts'
+import WatchlistPage from './pages/WatchlistPage';
 
 function App() {
   const { currentUser } = useHelper()
@@ -33,6 +34,7 @@ function App() {
           <Route exact path='/genres' component={GenresPage} />
           <Route exact path='/genres/:genres' component={Results} />
           <Route exact path='/get-started' component={GetStartedPage} />
+          <Route exact path='/watchlist' component={WatchlistPage} />
           {currentUser ?
             <Route path='/my-account' component={MyAccountPage} /> : 
             <Redirect to='/'/>

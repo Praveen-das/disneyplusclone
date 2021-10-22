@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { recommended, trendingMovies, trendingShows } from '../assets/URLs/URLs'
 import Banner from '../Components/Banner/Banner'
-import Footer from '../Components/Footer/Footer'
 import Header from '../Components/Header/Header'
+import Footer from '../Components/Footer/Footer'
 import MovieList from '../Components/MovieList/MovieList'
 
 function Home() {
@@ -23,4 +23,4 @@ function Home() {
     )
 }
 
-export default Home
+export default React.memo(Home)

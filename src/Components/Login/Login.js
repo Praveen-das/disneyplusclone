@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useHelper } from '../../contexts/Contexts'
+import { useFirebase } from '../../contexts/FirebaseContext'
 import './login.css'
 
 
@@ -12,12 +13,12 @@ function Login() {
     const [error, setError] = useState()
     const phoneNumberRef = useRef()
 
+    const { setAlert, setLoginWindow } = useHelper()
+
     const {
         signInWithGoogle,
-        signinWithPhonenumber,
-        setLoginWindow,
-        setAlert
-    } = useHelper()
+        signinWithPhonenumber
+    } = useFirebase()
 
     function handleStyle(e, active) {
         active ? e.target.style.cssText = 'box-shadow: inset 0 -2px 0 #1f80e0; padding-bottom: 10px;' :
@@ -46,14 +47,16 @@ function Login() {
             setLoading(true)
             phoneNumberRef.current.value = ''
             setOTPWindow(true)
-            await signinWithPhonenumber(phoneNumber,'phonenumber').catch(err => {
-                setError(err) 
-                console.log(err)})
+            await signinWithPhonenumber(phoneNumber, 'phonenumber').catch(err => {
+                setError(err)
+                console.log(err)
+            })
+            setLoading(false)
         }
         if (OTP) {
             setError('')
             setLoading(true)
-            signinWithPhonenumber(OTP,'otp').then(() => {
+            signinWithPhonenumber(OTP, 'otp').then(() => {
                 setOTP('')
                 setOTPWindow(false)
                 setLoginWindow(false)
@@ -65,7 +68,7 @@ function Login() {
 
     return (
         <>
-            {                
+            {
                 !haveAlternateMethod ?
                     <div className="login-container">
                         {phoneNumber && <i onClick={() => {
@@ -85,7 +88,7 @@ function Login() {
                         {OTPWindow ? <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'otp')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /> :
                             <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" />}
                         {error && <label className='login-warning' htmlFor="">Invalid phone number</label>}
-                        {(phoneNumber || OTPWindow) && <button onClick={() => OTPWindow ? handleLogin('otp') : handleLogin('phonenumber')} className="login-btn" id='login-btn'>CONTINUE</button>}
+                        {(phoneNumber || OTPWindow) && <button style={loading ? { pointerEvents: 'none' } : { pointerEvents: 'initial' }} onClick={() => OTPWindow ? handleLogin('otp') : handleLogin('phonenumber')} className="login-btn" id='login-btn'>CONTINUE</button>}
                         {phoneNumber && !OTPWindow && <p className='login-agree'>By proceeding you Agree to the Terms of use and Privacy policy</p>}
                     </div> :
 

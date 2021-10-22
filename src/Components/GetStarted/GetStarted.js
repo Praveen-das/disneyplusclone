@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./getStarted.css";
 import { useHelper } from "../../contexts/Contexts";
-import { imageURL, trendingMovies } from "../../assets/URLs/URLs";
 
 function GetStarted() {
   const { currentUser } = useHelper();
@@ -14,13 +13,13 @@ function GetStarted() {
   const tbodyRef = useRef([])
 
   const buttonStyle = {
-    style: `border: 1px solid #1f80e0; background: #1f80e066`,
+    style: `border: 1px solid #1f80e0; background: #1f80e066;`,
     none: `border: 1px solid #465983; background: none`
   }
 
   const tabelStyle = {
-    style:`background: #1e2a48; border-bottom: none;`,
-    none:`background: none; border-bottom: 1px solid rgba(255, 255, 255, 0.048);`
+    style:`background: #1e2a48; border-bottom: none; opacity:1;`,
+    none:`background: none; border-bottom: 1px solid rgba(255, 255, 255, 0.048); opacity:0.5;`
   }
   
   function handlePlan(plan) {
@@ -388,7 +387,7 @@ function GetStarted() {
                 </tr>
                 <tr>
                   <td>Ads free movies and shows (except sports)</td>
-                  <td><img style={{ width: 20 }} src="https://secure-media.hotstar.com/static/subscription/paywall_service/comparator/cross/smp/web-1x.png" /></td>
+                  <td><img style={{ width: 20 }} src="https://secure-media.hotstar.com/static/subscription/paywall_service/comparator/cross/smp/web-1x.png" alt='' /></td>
                   <td><i className="fas fa-check"></i></td>
                 </tr>
                 <tr>

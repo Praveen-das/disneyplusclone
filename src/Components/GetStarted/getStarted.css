@@ -138,6 +138,7 @@ tr {
 th {
   line-height: 20px;
   padding-top: 15px;
+  border-bottom: none !important;
 }
 td {
   text-align: center;
@@ -166,6 +167,10 @@ th:nth-child(2),
 td:nth-child(2) {
   background: #1e2a48;
   border-bottom: none;
+}
+th:nth-child(3),
+td:nth-child(3) {
+  opacity: 0.5;
 }
 /* //////////////////////////////////// */
 
@@ -253,3 +258,5 @@ small {
   margin-bottom: 2.5rem;
   font-weight: 500;
 }
+
+

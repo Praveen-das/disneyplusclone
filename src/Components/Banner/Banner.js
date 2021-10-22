@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useRef } from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";

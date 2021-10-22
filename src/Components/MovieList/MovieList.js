@@ -1,9 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useFirebase } from '../../contexts/FirebaseContext'
 
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
@@ -19,6 +20,8 @@ function MovieList(props) {
     const [pageNumber, setPageNumber] = useState(1);
 
     const { OTTList, HandleSearch } = useHelper()
+    const { AddToWatchlist, RemoveFromWatchlist, Watchlist } = useFirebase()
+    const watchlist = Watchlist()
 
     const { movies, genres, loading, hasMore } =
         (props.url && OTTList(props.url, pageNumber)) ||
@@ -44,7 +47,6 @@ function MovieList(props) {
     }
 
     return (
-
         <>
             <div className="trayContainer">
                 <label className='list-title' htmlFor="">{props.title}</label>
@@ -71,7 +73,6 @@ function MovieList(props) {
 
                                         <div className="slide">
                                             {
-
                                                 movies.length === index + 1 ?
                                                     <div className='slide-loading'><i ref={lastElement} className="fas fa-circle-notch fa-spin" ></i></div> :
                                                     <img className='movieImage' src={movie.poster_path && imageURL + 'w154' + movie.poster_path} alt="" />
@@ -90,10 +91,18 @@ function MovieList(props) {
                                                 state: { movie: movie, genres: genres }
                                             }}>WATCH MOVIE</Link>
                                         </div>
-                                        <div className='atfBtn'>
-                                            <i className='fa fa-plus'></i>
-                                            <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
-                                        </div>
+                                        {
+                                            watchlist.filter(elm=> elm.id === movie.id)[0] 
+                                                ?
+                                                <button onClick={() => { RemoveFromWatchlist(movie) }} className='atfBtn'>
+                                                    <i className='fa fa-plus'></i>
+                                                    REMOVE FROM WATCHLIST
+                                                </button> :
+                                                <button onClick={() => { AddToWatchlist(movie) }} className='atfBtn'>
+                                                    <i className='fa fa-plus'></i>
+                                                    ADD TO WATCHLIST
+                                                </button>
+                                        }
                                     </div>
                                 </SwiperSlide>
                             return null
