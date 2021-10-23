@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import { auth } from '../config/firebaseApp'
 import { GoogleAuthProvider, RecaptchaVerifier, signInWithPopup, signInWithPhoneNumber } from "@firebase/auth"
 import { getFirestore, setDoc, getDocs, doc, collection } from 'firebase/firestore'
@@ -11,10 +11,6 @@ export function useFirebase() {
 export default function Firebase({ children }) {
     const [loading, setLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState()
-    const db = getFirestore()
-    const [watchlist, setWatchlist] = useState([])
-    const [addedToWatchlist, setAddedToWatchlist] = useState([])
-
 
     // Authentication
 
@@ -47,39 +43,51 @@ export default function Firebase({ children }) {
         return unsubscribe
     }, [])
 
-    // Firestore
+    // //////////////////////////////////////Firestore///////////////////////////////////////
+    // Set Initial state///////////////////////////////////////
+    const db = getFirestore()
 
-    function Watchlist() {
-        useEffect(() => {
-            getDocs(collection(db, currentUser.uid)).then(res => {
-                res.forEach(doc => {
-                    const snapshot = doc.data().watchlist
-                    if (snapshot) {
-                        setWatchlist(snapshot)
-                    }
-                })
+    const initialState = useMemo(() => [], [])
+    useEffect(() => {
+        if (!currentUser) return
+        getDocs(collection(db, currentUser.uid)).then((doc) =>
+            doc.forEach(doc => {
+                const snapshot = doc.data()
+                if (!snapshot) return
+                snapshot.watchlist.forEach(elm=> initialState.push(elm))
+                console.log(initialState);
             })
-        }, [])
-        return watchlist
+        )
+    }, [db, currentUser,initialState])
+
+    // Set State///////////////////////////////////////
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case 'ADD_TO_WATCHLIST':
+                return { watchlist: [action.payload, ...state.watchlist] }
+            default:
+                return state
+        }
     }
+
+    
+    const [state, dispatch] = useReducer(reducer, { watchlist: initialState ? initialState : [] })
+    
+    // onClick Event///////////////////////////////////////
 
     useEffect(() => {
-        console.log(addedToWatchlist);
-    }, [addedToWatchlist])
+        if (!currentUser) return
+        const watchlistDoc = doc(db, currentUser && currentUser.uid, 'watchlist')
+        try {
+            setDoc(watchlistDoc, (state)).then(() => console.log('movie added to watchlist'))
+        } catch (error) {
+            console.log(error);
+        }
+    }, [state,db])
 
-    async function AddToWatchlist(movie) {
-        watchlist.push(movie)
-        setDoc(doc(db, currentUser && currentUser.uid, 'watchlist'), {
-            watchlist
-        }).catch(err => console.log(err))
-        return watchlist
-    }
-
-    async function RemoveFromWatchlist(movie) {
-        console.log(watchlist.includes(movie));
-        // setDoc(doc(db, currentUser && currentUser.uid, 'watchlist'), {
-        //     watchlist
-        // }).catch(err => console.log(err))
+    function addToWatchlist(movie) {
+        dispatch({ type: 'ADD_TO_WATCHLIST', payload: movie })
     }
 
     const value = {
@@ -87,12 +95,14 @@ export default function Firebase({ children }) {
         signinWithPhonenumber,
         logout,
         currentUser,
-        AddToWatchlist,
-        RemoveFromWatchlist,
-        addedToWatchlist,
-        setAddedToWatchlist,
-        Watchlist,
+        addToWatchlist,
+        watchlist: state.watchlist
     }
+
+    useEffect(()=>{
+        console.log(currentUser);
+    },[currentUser])
+
     return (
         <FirebaseContext.Provider value={value}>
             {!loading && children}

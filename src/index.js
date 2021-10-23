@@ -6,11 +6,11 @@ import Firebase from './contexts/FirebaseContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <Firebase>
+    <Firebase>
+      <AuthProvider>
         <App />
-      </Firebase>
-    </AuthProvider>
+      </AuthProvider>
+    </Firebase>
   </React.StrictMode>,
   document.getElementById('root')
 );

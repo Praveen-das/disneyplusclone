@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './movieList.css'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
@@ -20,8 +20,11 @@ function MovieList(props) {
     const [pageNumber, setPageNumber] = useState(1);
 
     const { OTTList, HandleSearch } = useHelper()
-    const { AddToWatchlist, RemoveFromWatchlist, Watchlist } = useFirebase()
-    const watchlist = Watchlist()
+    const {watchlist, addToWatchlist} = useFirebase()
+
+    // useEffect(()=>{
+    //     console.log(watchlist);
+    // },[watchlist])
 
     const { movies, genres, loading, hasMore } =
         (props.url && OTTList(props.url, pageNumber)) ||
@@ -61,6 +64,7 @@ function MovieList(props) {
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     className="mlSlides"
                 >
+                    {}
                     {
                         movies && movies.map((movie, index) => {
                             if (movie.poster_path)
@@ -92,13 +96,13 @@ function MovieList(props) {
                                             }}>WATCH MOVIE</Link>
                                         </div>
                                         {
-                                            watchlist.filter(elm=> elm.id === movie.id)[0] 
-                                                ?
-                                                <button onClick={() => { RemoveFromWatchlist(movie) }} className='atfBtn'>
-                                                    <i className='fa fa-plus'></i>
-                                                    REMOVE FROM WATCHLIST
-                                                </button> :
-                                                <button onClick={() => { AddToWatchlist(movie) }} className='atfBtn'>
+                                            // console.log(watchlist.filter(elm=> elm.id === movie.id))
+                                                //                                             ?
+                                                // <button className='atfBtn'>
+                                                //     <i className='fa fa-plus'></i>
+                                                //     REMOVE FROM WATCHLIST
+                                                // </button> :
+                                                <button onClick={()=>addToWatchlist(movie)} className='atfBtn'>
                                                     <i className='fa fa-plus'></i>
                                                     ADD TO WATCHLIST
                                                 </button>

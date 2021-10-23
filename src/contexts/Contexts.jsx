@@ -11,7 +11,7 @@ export default function AuthProvider({ children }) {
     const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
     const [loginWindow, setLoginWindow] = useState(false)
     const [alert, setAlert] = useState(false)
-
+    
     if (alert) {
         console.log();
         setTimeout(() => {
@@ -146,7 +146,7 @@ export default function AuthProvider({ children }) {
         setLoginWindow,
         loginWindow,
         alert,
-        setAlert,
+        setAlert
     }
 
     return (
