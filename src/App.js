@@ -12,11 +12,11 @@ import LanguagesPage from './pages/LanguagesPage';
 import GenresPage from './pages/GenresPage';
 import MyAccountPage from './pages/MyAccountPage';
 import GetStartedPage from './pages/GetStartedPage';
-import { useHelper } from './contexts/Contexts'
 import WatchlistPage from './pages/WatchlistPage';
+import { useFirebase } from './contexts/FirebaseContext';
 
 function App() {
-  const { currentUser } = useHelper()
+  const { currentUser } = useFirebase()
 
   return (
     <>

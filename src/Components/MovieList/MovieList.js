@@ -1,16 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import './movieList.css'
-import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
-import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useFirebase } from '../../contexts/FirebaseContext'
 
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
+import VerticalCard from '../Cards/VerticalCard'
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
@@ -20,13 +18,8 @@ function MovieList(props) {
     const [pageNumber, setPageNumber] = useState(1);
 
     const { OTTList, HandleSearch } = useHelper()
-    const {watchlist, addToWatchlist} = useFirebase()
 
-    // useEffect(()=>{
-    //     console.log(watchlist);
-    // },[watchlist])
-
-    const { movies, genres, loading, hasMore } =
+    const { movies, loading, hasMore } =
         (props.url && OTTList(props.url, pageNumber)) ||
         (props.q && HandleSearch(props.q, pageNumber))
 
@@ -64,50 +57,16 @@ function MovieList(props) {
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     className="mlSlides"
                 >
-                    {}
                     {
-                        movies && movies.map((movie, index) => {
+                        movies.length !== 0 && movies.map((movie, index) => {
                             if (movie.poster_path)
                                 return <SwiperSlide
-                                    key={index} className='expand'>
-                                    <Link to={{
-                                        pathname: '/movies',
-                                        state: { movie: movie, genres: genres }
-                                    }}>
-
-                                        <div className="slide">
-                                            {
-                                                movies.length === index + 1 ?
-                                                    <div className='slide-loading'><i ref={lastElement} className="fas fa-circle-notch fa-spin" ></i></div> :
-                                                    <img className='movieImage' src={movie.poster_path && imageURL + 'w154' + movie.poster_path} alt="" />
-                                            }
-                                            <div className="slideContents">
-                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                    <div className='bBtns'>
-                                        <div className='wmBtn'>
-                                            <i className='fa fa-caret-right'></i>
-                                            <Link className='watchMovie' to={{
-                                                pathname: '/movies/watch',
-                                                state: { movie: movie, genres: genres }
-                                            }}>WATCH MOVIE</Link>
-                                        </div>
-                                        {
-                                            // console.log(watchlist.filter(elm=> elm.id === movie.id))
-                                                //                                             ?
-                                                // <button className='atfBtn'>
-                                                //     <i className='fa fa-plus'></i>
-                                                //     REMOVE FROM WATCHLIST
-                                                // </button> :
-                                                <button onClick={()=>addToWatchlist(movie)} className='atfBtn'>
-                                                    <i className='fa fa-plus'></i>
-                                                    ADD TO WATCHLIST
-                                                </button>
-                                        }
-                                    </div>
+                                    key={index} className='active'>
+                                    {
+                                        movies.length === index + 1 ?
+                                            <div ref={lastElement} className='slide-loading'><i className="fas fa-circle-notch fa-spin" ></i></div> :
+                                            <VerticalCard movie={movie} />
+                                    }
                                 </SwiperSlide>
                             return null
                         })

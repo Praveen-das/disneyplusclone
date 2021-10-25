@@ -1,8 +1,8 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useParams } from 'react-router'
-import { Link } from 'react-router-dom'
-import { imageURL, sortURL } from '../../assets/URLs/URLs'
+import {  sortURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
+import VerticalCard from '../Cards/VerticalCard'
 import './sortHelper.css'
 
 function SortHelper() {
@@ -46,34 +46,12 @@ function SortHelper() {
                     {
                         movies && movies.map((movie, index) => {
                             if (movie.poster_path) {
-                                return <div key={index} className="sh-slide-wrapper expand">
-                                    <Link to={{
-                                        pathname: '/movies',
-                                        state: { movie: movie, genres: genres }
-                                    }}>
-                                        <div className="sh-slide">
-                                            {
-                                                movies.length === index + 1 ? <img className='sh-image' ref={lastElement} alt='' /> : <img className='sh-image' src={movie.poster_path && imageURL + 'w300' + movie.poster_path} alt="" />
-                                            }
-                                            <div className="sh-contents">
-                                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                    <div className='bBtns'>
-                                        <div className='wmBtn'>
-                                            <i className='fa fa-caret-right'></i>
-                                            <Link className='watchMovie' to={{
-                                                pathname: '/movies/watch',
-                                                state: { movie: movie, genres: genres }
-                                            }}>WATCH MOVIE</Link>
-                                        </div>
-                                        <div className='atfBtn'>
-                                            <i className='fa fa-plus'></i>
-                                            <Link className='addToFavourite' to="/#">ADD TO WATCHLIST</Link>
-                                        </div>
-                                    </div>
+                                return <div key={index} className="sh-slide-wrapper active">
+                                    {
+                                        movies.length === index + 1 ?
+                                            <div ref={lastElement} className='slide-loading'><i className="fas fa-circle-notch fa-spin" ></i></div> :
+                                            <VerticalCard movie={movie} />
+                                    }
                                 </div>
                             }
                             return null

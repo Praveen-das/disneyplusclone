@@ -11,12 +11,18 @@ export default function AuthProvider({ children }) {
     const isoCodes = [{ id: 'en', language: 'English' }, { id: 'hi', language: 'Hindi' }, { id: 'ml', language: 'Malayalam' }, { id: 'ta', language: 'Tamil' }, { id: 'te', language: 'Telugu' }, { id: 'mr', language: 'Marathi' }, { id: 'kn', language: 'Kannada' }, { id: 'bn', language: 'Bengali' },]
     const [loginWindow, setLoginWindow] = useState(false)
     const [alert, setAlert] = useState(false)
-    
+
     if (alert) {
         console.log();
         setTimeout(() => {
             setAlert(false)
         }, 1000)
+    }
+
+    function removeDuplicates(input) {
+        const movieMap = input.map(o => [o.title || o.id, o])
+        const newMovieMap = new Map(movieMap)
+        return [...newMovieMap.values()]
     }
 
     function OTTList(url, pageNumber) {
@@ -31,8 +37,9 @@ export default function AuthProvider({ children }) {
                 url: BaseURL + url,
                 params: { page: pageNumber }
             }).then((res) => {
-                setMovies((previousSlide) => {
-                    return [...new Set([...previousSlide, ...res.data.results])]
+                setMovies((previousResult) => {
+                    const result = [...new Set([...previousResult, ...res.data.results])]
+                    return removeDuplicates(result)
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
@@ -65,12 +72,8 @@ export default function AuthProvider({ children }) {
 
         useEffect(() => {
             if (movieGenres && tvGenres) {
-                const merged = movieGenres.concat(tvGenres)
-                const genreMap = merged.map(genre => {
-                    return [genre.id, genre]
-                })
-                const newMap = new Map(genreMap)
-                setGenres([...newMap.values()])
+                let merged = movieGenres.concat(tvGenres)
+                setGenres(removeDuplicates(merged))
             }
         }, [movieGenres, tvGenres])
 
@@ -97,8 +100,9 @@ export default function AuthProvider({ children }) {
                     sort_by: 'popularity.desc'
                 }
             }).then((res) => {
-                setMovies((previousSlide) => {
-                    return [...new Set([...previousSlide, ...res.data.results])]
+                setMovies((previousResult) => {
+                    const result = [...new Set([...previousResult, ...res.data.results])]
+                    return removeDuplicates(result)
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)
@@ -126,8 +130,9 @@ export default function AuthProvider({ children }) {
                 url: BaseURL + searchURL,
                 params: { query: query, page: pageNumber }
             }).then(res => {
-                setMovies(previousMovie => {
-                    return [...new Set([...previousMovie, ...res.data.results])]
+                setMovies(previousResult => {
+                    const result = [...new Set([...previousResult, ...res.data.results])]
+                    return removeDuplicates(result)
                 })
                 setHasMore(res.data.results.length > 0)
                 setLoading(false)

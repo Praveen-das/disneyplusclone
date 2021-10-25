@@ -1,12 +1,12 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import './myAccount.css'
-import { useHelper } from '../../contexts/Contexts'
+import { useFirebase } from '../../contexts/FirebaseContext'
 
 
 function MyAccount() {
     const history = useHistory()
-    const { logout, currentUser } = useHelper()
+    const { currentUser,logout } = useFirebase()
 
     return (
         <>

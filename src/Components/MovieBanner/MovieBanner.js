@@ -4,11 +4,17 @@ import { API_KEY, imageURL } from '../../assets/URLs/URLs'
 import { Link } from 'react-router-dom'
 import MovieList from '../MovieList/MovieList'
 import './movieBanner.css'
+import { useHelper } from '../../contexts/Contexts';
+import { useFirebase } from '../../contexts/FirebaseContext';
 
 function MovieBanner() {
     const bannerRef = useRef()
     const location = useLocation()
-    const { movie, genres } = location.state
+    const { movie } = location.state
+    const { Genres } = useHelper()
+    const genres = Genres()
+
+    const { watchlist, addToWatchlist, removeFromWatchlist } = useFirebase()
 
     return (
         <>
@@ -34,10 +40,21 @@ function MovieBanner() {
                                 }} className='bWatchMovie'>Watch Movie</Link>
                             </div>
                             <div className="WatchMovieBtn2">
-                                <div className="wl">
-                                    <div></div>
-                                    <Link to='/#' className='bWatchList'>WATCHLIST</Link>
-                                </div>
+                                {
+                                    watchlist && watchlist.map(o => o.id).includes(movie.id)
+                                        ?
+                                        <div onClick={() => removeFromWatchlist(movie)} className="wl">
+                                            <i className="fas fa-check"></i>
+                                            <label className='bWatchList'>WATCHLIST</label>
+                                        </div>
+                                        :
+                                        <div onClick={() => addToWatchlist(movie)} className="wl">
+                                            <i className="fas fa-plus"></i>
+                                            <label className='bWatchList'>WATCHLIST</label>
+                                        </div>
+
+
+                                }
                                 <div className="share">
                                     <div></div>
                                     <Link to='/#' className='bShare'>SHARE</Link>
@@ -51,7 +68,7 @@ function MovieBanner() {
                     </div>
                 </div>
             </div>
-            <MovieList title='More Like This' url={`${movie.media_type==='tv' ? 'tv' : 'movie'}/${movie.id}/similar?api_key=${API_KEY}&language=en-US`}/>
+            <MovieList title='More Like This' url={`${movie.media_type === 'tv' ? 'tv' : 'movie'}/${movie.id}/similar?api_key=${API_KEY}&language=en-US`} />
         </>
     )
 }

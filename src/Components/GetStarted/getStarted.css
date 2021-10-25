@@ -14,6 +14,7 @@ header {
   width: 140px;
   min-height: 30px;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   border: 1px solid #1f80e0;
@@ -35,7 +36,9 @@ header {
 .fa-chevron-down,
 .fa-chevron-up {
   font-size: 9px;
-  transform: translateX(40px);
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 .options {
   width: 100%;

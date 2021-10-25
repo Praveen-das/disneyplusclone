@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./getStarted.css";
-import { useHelper } from "../../contexts/Contexts";
+import { useFirebase } from "../../contexts/FirebaseContext";
 
 function GetStarted() {
-  const { currentUser } = useHelper();
+  const { currentUser } = useFirebase();
   const [active, setActive] = useState(false);
   const [color,setColor] = useState({super:{color:'#fedf7b'},premium:{color:'white'}})
   const [subscription, setSubscription] = useState({ plan: 'super', price: '899' })
