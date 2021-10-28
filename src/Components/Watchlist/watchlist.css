@@ -1,0 +1,49 @@
+.watchlist-wrapper{
+    padding: 0 2.5rem;
+}
+.watchlist-title{
+    display: flex;
+    font-size: 1.3em;
+    font-weight: 500;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
+}
+.watchlist{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.watchlist-slide-wrapper{
+    width: calc((100% - 5rem + 10px) / 8) !important;
+}
+.wl-Slides{
+    padding: 0 2.5rem;
+}
+.wl-Slides .swiper-button-next,
+.wl-Slides .swiper-button-prev {
+    width: 50px;
+    height: 105%;
+    color: rgb(255, 255, 255) !important;
+    top: 20px;
+    z-index: 2;
+    opacity: 0;
+    transition: 0.5s;
+}
+.wl-Slides .swiper-button-prev{
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0), var(--background));
+    left: 0;
+}
+.wl-Slides .swiper-button-next{
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0),  var(--background));
+    right: 0;
+}
+.wl-Slides .swiper-button-next::after,
+.wl-Slides .swiper-button-prev::after {
+    font-size: 32px;
+    opacity: 1;
+}
+.wl-Slides:hover .swiper-button-next,
+.wl-Slides:hover .swiper-button-prev {
+    opacity: 1;
+}

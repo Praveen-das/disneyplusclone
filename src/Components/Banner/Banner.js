@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,7 +21,7 @@ function Banner(props) {
     const { OTTList, Genres } = useHelper()
 
     const { movies } = OTTList(props.url, 1)
-    const genres =  Genres()
+    const genres = Genres()
 
     return (
         <>
@@ -29,12 +29,25 @@ function Banner(props) {
 
                 <Swiper
                     navigation={true}
-                    spaceBetween={-65}
                     loop={true}
                     allowTouchMove={false}
                     autoplay={{
                         delay: 3000,
                         disableOnInteraction: false
+                    }}
+                    breakpoints={{
+                        "320": {
+                            "spaceBetween": -17
+                        },
+                        "481": {
+                            "spaceBetween": -70
+                        },
+                        "581": {
+                            "spaceBetween": -32
+                        },
+                        "769": {
+                            "spaceBetween": -65
+                        }
                     }}
                     className="mySwiper"
                 >
@@ -50,13 +63,15 @@ function Banner(props) {
                                     <div key={index} className="banner" ref={bannerRef}>
                                         <div className="bContents">
                                             <h1 className='bTitle'>{movie.title}</h1>
-                                            {genres && genres.filter(elements =>
-                                                movie.genre_ids.includes(elements.id)
-                                            ).map((genre, index) =>
-                                                movie.genre_ids.length !== index + 1 ?
-                                                    <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
-                                                    <label key={index} className='bCategory'>{genre.name}</label>
-                                            )}
+                                            <div>
+                                                {genres && genres.filter(elements =>
+                                                    movie.genre_ids.includes(elements.id)
+                                                ).map((genre, index) =>
+                                                    movie.genre_ids.length !== index + 1 ?
+                                                        <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
+                                                        <label key={index} className='bCategory'>{genre.name}</label>
+                                                )}
+                                            </div>
                                             <p className='bDescription'>{movie.overview}</p>
                                         </div>
                                         <div className="imgWrapper">
@@ -74,4 +89,4 @@ function Banner(props) {
     )
 }
 
-export default Banner
+export default React.memo(Banner)

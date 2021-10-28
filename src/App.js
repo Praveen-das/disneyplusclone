@@ -19,7 +19,7 @@ function App() {
   const { currentUser } = useFirebase()
 
   return (
-    <>
+    <div className='body'>
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
@@ -41,7 +41,7 @@ function App() {
           }
         </Switch>
       </Router>
-    </>
+    </div>
   );
 }
 

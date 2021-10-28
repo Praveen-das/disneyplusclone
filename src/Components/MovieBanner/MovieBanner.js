@@ -63,9 +63,9 @@ function MovieBanner() {
                             </div>
                         </div>
                     </div>
-                    <div className="imgWrapper">
+                    {/* <div className="imgWrapper">
                         <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <MovieList title='More Like This' url={`${movie.media_type === 'tv' ? 'tv' : 'movie'}/${movie.id}/similar?api_key=${API_KEY}&language=en-US`} />

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './movieList.css'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,13 +8,14 @@ import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
-import VerticalCard from '../Cards/VerticalCard'
+import MovieCard from '../Cards/MovieCard'
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 
 function MovieList(props) {
     const lastElementRef = useRef()
+    const swiper = useRef()
     const [pageNumber, setPageNumber] = useState(1);
 
     const { OTTList, HandleSearch } = useHelper()
@@ -30,7 +31,7 @@ function MovieList(props) {
             if (entries[0].isIntersecting && hasMore) {
                 setPageNumber(previous => previous + 1)
             }
-        })
+        }, { rootMargin: '100%' })
         if (node) lastElementRef.current.observe(node)
     }, [hasMore, loading])
 
@@ -47,25 +48,39 @@ function MovieList(props) {
             <div className="trayContainer">
                 <label className='list-title' htmlFor="">{props.title}</label>
                 <Swiper
+                    ref={swiper}
                     navigation={true}
-                    slidesPerGroup={1}
-                    spaceBetween={10}
+                    slidesPerGroup={8}
+                    slidesPerView={8}
                     speed={1000}
                     // freeMode={true}
                     // mousewheel={false}
                     onBeforeInit={(e) => handleNavigation(e)}
                     onActiveIndexChange={(e) => handleNavigation(e)}
+                    breakpoints={{
+                        "320": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 20
+                          },
+                          "768": {
+                            "slidesPerView": 4,
+                            "spaceBetween": 40
+                          },
+                          "1024": {
+                            "slidesPerView": 8,
+                            "spaceBetween": 10
+                          }
+                    }}
                     className="mlSlides"
                 >
                     {
                         movies.length !== 0 && movies.map((movie, index) => {
                             if (movie.poster_path)
-                                return <SwiperSlide
-                                    key={index} className='active'>
+                                return <SwiperSlide key={index} >
                                     {
                                         movies.length === index + 1 ?
                                             <div ref={lastElement} className='slide-loading'><i className="fas fa-circle-notch fa-spin" ></i></div> :
-                                            <VerticalCard movie={movie} />
+                                            <MovieCard movie={movie} />
                                     }
                                 </SwiperSlide>
                             return null
@@ -77,4 +92,4 @@ function MovieList(props) {
     )
 }
 
-export default MovieList
+export default React.memo(MovieList)

@@ -1,34 +1,42 @@
-body{
-    background: var(--background);
-    width: 100%;
-    overflow-x: hidden;
-}
+
 .trayContainer{
     position: relative;
     margin-top: 2.5rem;
     padding-bottom: 2rem;
 }
+.list-title{
+    position: absolute;
+    top: -40px;
+    left: 2.5rem;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: rgb(214, 214, 214);
+    /* z-index: 10 ; */
+}
 .mlSlides{
     padding:0 2.5rem;
-    height: 15vw;
 }
 .slide-loading{
-    transform: translate(30px, -45px);
+    width: 100%;
+    aspect-ratio: 0.67;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.014));
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
 }
 .slide-loading i{
-    font-size: 30px;
+    font-size: 50px;
 }
+
 .swiper-container{
     overflow: visible !important;
 }
 .mlSlides .swiper-button-next,
 .mlSlides .swiper-button-prev {
     width: 50px;
-    height: 232px;
+    height: 105%;
     color: rgb(255, 255, 255) !important;
-    top: 0;
-    transform: translateY(-5px);
-    margin: -0.4rem;
+    top: 20px;
     z-index: 2;
     opacity: 0;
     transition: 0.5s;
@@ -54,15 +62,7 @@ body{
 /* ///////////////////////////////////////////////////////////////// */
 
 .mlSlides .swiper-slide{
-    width: calc((100% - 5rem + 10px) / 8) !important;
     margin-right: 10px !important;
 }
-.list-title{
-    position: absolute;
-    top: -40px;
-    left: 2.5rem;
-    font-size: 1.25em;
-    font-weight: 600;
-    color: rgb(214, 214, 214);
-    /* z-index: 10 ; */
-}
+
+

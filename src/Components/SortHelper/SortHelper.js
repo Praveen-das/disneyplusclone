@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import {  sortURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
-import VerticalCard from '../Cards/VerticalCard'
+import MovieCard from '../Cards/MovieCard'
 import './sortHelper.css'
 
 function SortHelper() {
@@ -35,7 +35,7 @@ function SortHelper() {
     return (
 
         <>
-            <div className="sh-tray-wrapper">
+            <div className="sortHelper">
                 <label className='title' htmlFor="">{
                     params.language ? isoCodes.filter((elements) => params.language.includes(elements.id))[0].language
                         : params.q ?
@@ -46,18 +46,17 @@ function SortHelper() {
                     {
                         movies && movies.map((movie, index) => {
                             if (movie.poster_path) {
-                                return <div key={index} className="sh-slide-wrapper active">
+                                return <div key={index} className="sh-slide-wrapper">
                                     {
                                         movies.length === index + 1 ?
                                             <div ref={lastElement} className='slide-loading'><i className="fas fa-circle-notch fa-spin" ></i></div> :
-                                            <VerticalCard movie={movie} />
+                                            <MovieCard movie={movie} />
                                     }
                                 </div>
                             }
                             return null
                         })
                     }
-                    <span>{loading && 'loading....'}</span>
                 </div>
             </div>
         </>

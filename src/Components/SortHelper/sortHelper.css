@@ -1,4 +1,4 @@
-.sh-tray-wrapper{
+.sortHelper{
     position: relative;
     max-width: 100%;
     background: linear-gradient(0deg,var(--background),#141a28,#141a28);
@@ -6,23 +6,18 @@
     padding: 0 2.5rem;
     padding-bottom: 5rem;
 }
+.title{
+    display: flex;
+    font-size: 1.3em;
+    font-weight: 500;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
+}
 .sh-tray{
-    transform: translateY(2.5rem);
     display: flex;
     flex-flow: row wrap;
     gap: 10px;
 }
-
 .sh-slide-wrapper{
-    width: calc(100% / 8 - 10px);
-}
-.title{
-    position: relative;
-    top: 1.5rem;
-    left: 0;
-    font-size: 1.25em;
-    font-weight: 500;
-    color: rgb(206, 206, 206);
-    margin-bottom: 2.5rem;
-    pointer-events: none;
+    width: calc((100% - 5rem + 10px) / 8);
 }

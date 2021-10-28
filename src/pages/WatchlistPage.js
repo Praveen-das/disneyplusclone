@@ -5,6 +5,7 @@ import Watchlist from '../Components/Watchlist/Watchlist'
 
 function WatchlistPage() {
     return (
+        
         <>
             <Header />
             <Watchlist />

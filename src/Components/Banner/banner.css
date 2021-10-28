@@ -1,109 +1,163 @@
 .bannerWrapper .mySwiper {
-    background: linear-gradient(0deg,var(--background),#141a28,#141a28);
-    min-height: 63vh;
+  background: linear-gradient(0deg, var(--background), #141a28, #141a28);
 }
 
 .bContainer {
-    margin: 0 2.5rem 2rem 2.5rem;
+  margin: 0 2.5rem 2rem 2.5rem;
 }
 
 .banner {
-    display: flex;
-    position: relative;
-    max-width: 100%;
-    height: 63vh;
-    background: var(--bannerBG);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-right: -100px;
-    cursor: pointer;
+  display: flex;
+  position: relative;
+  width: 100%;
+  background: var(--bannerBG);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: -100px;
+  cursor: pointer;
 }
 
 .bContents {
-    position: relative;
-    width: 32%;
-    height: 100%;
-    padding: 4.5rem 2rem 4.5rem 3rem;
-    z-index: 50;
+  position: absolute;
+  width: 40%;
+  /* height: 100%; */
+  padding: 4.5rem 2rem 4.5rem 3rem;
+  z-index: 50;
 }
 
 .bTitle {
-    font-size: 1.8em;
-    font-weight: 800;
-    padding-bottom: 0.8rem;
+  font-size: 1.8em;
+  font-weight: 800;
+  padding-bottom: 0.8rem;
 }
 
 .bCategory {
-    color: rgb(139, 139, 139);
-    font-weight: 600;
+  color: rgb(139, 139, 139);
+  font-weight: 600;
 }
 
 .bDate {
-    color: rgb(139, 139, 139);
-    font-weight: 600;
-    font-size: 0.95em;
+  color: rgb(139, 139, 139);
+  font-weight: 600;
+  font-size: 0.95em;
 }
 
 .bDescription {
-    font-weight: 500;
-    font-size: 0.98em;
-    display: -webkit-box;
-    max-width: 400px;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    height: 40%;
-    color: rgb(184, 184, 184);
-    margin-top: 0.8rem;
-    line-height: 28px;
+  font-weight: 500;
+  font-size: 0.98em;
+  display: -webkit-box;
+  max-width: 400px;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgb(184, 184, 184);
+  margin-top: 0.8rem;
+  line-height: 28px;
 }
-.imgWrapper{
-    position: absolute;
-    right: 0;
+.imgWrapper {
+  position: relative;
+  margin-left: auto;
 }
-.imgWrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--bannerBG), #00000000);
-    z-index: 30;
-}
-
 .bImage {
-    position: relative;
-    right: 0;
-    width: 800px;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1.78;
+  background-size: cover;
 }
-
 .mySwiper .swiper-button-next,
 .mySwiper .swiper-button-prev {
-    transform: translateY(-35px);
-    margin: -0.4rem;
-    color: rgb(255, 255, 255) !important;
+  width: 50px;
+  height: 97%;
+  top: 0;
+  margin: -1rem;
 }
-.swiper-button-next::after{
-    font-family: "Font Awesome 5 Free" !important; 
-    font-weight: 900 ; 
-    content: "\f054" !important;
+.swiper-button-next::after {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900;
+  content: "\f054" !important;
+  color: rgb(255, 255, 255) !important;
 }
-.swiper-button-prev::after{
-    font-family: "Font Awesome 5 Free" !important; 
-    font-weight: 900 ; 
-    content: "\f053" !important;
+.swiper-button-prev::after {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900;
+  content: "\f053" !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .mySwiper .swiper-button-next::after,
 .mySwiper .swiper-button-prev::after {
-    transition: 0.5s;
-    opacity: 0;
+  transition: 0.5s;
+  opacity: 0;
 }
 
 .mySwiper:hover .swiper-button-next::after,
 .mySwiper:hover .swiper-button-prev::after {
-    opacity: 1;
+  opacity: 1;
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .bContainer {
+    margin: 0 0.7rem 2rem 0.7rem;
+  }
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 580px) {
+  .bContainer {
+    margin: 0 2.5rem 2rem 2.5rem;
+  }
+}
+@media only screen and (min-device-width: 581px) and (max-device-width: 768px) {
+  .bContainer {
+    margin: 0 1.3rem 2rem 1.3rem;
+  }
+  .bContents {
+    height: 100%;
+    padding: 0;
+    padding-left: 1.2rem;
+    background: linear-gradient(rgba(255, 255, 255, 0),rgba(255, 255, 255, 0) ,rgba(0, 0, 0, 0.877));
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .bContents * {
+    line-height: initial;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.363);
+  }
+  .bTitle {
+    font-size: 1.3em;
+  }
+  .bCategory {
+    color: rgb(168, 168, 168);
+    font-size: 1.05em;
+    line-height: 15px;
+  }
+  .bDescription {
+    margin-bottom: 2rem;
+    width: 80%;
+    color: rgb(216, 216, 216);
+  }
+}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1600px) {
+  .bContainer {
+    margin: 0 1.3rem 2rem 1.3rem;
+  }
+  .imgWrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bannerBG), #00000000);
+    z-index: 30;
+  }
+}
+
+/* 320px — 480px: Mobile devices.
+481px — 768px: iPads, Tablets.
+769px — 1024px: Small screens, laptops.
+1025px — 1200px: Desktops, large screens.
+1201px and more — Extra large screens, TV. */

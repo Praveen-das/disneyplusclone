@@ -5,6 +5,14 @@
     --headerFC:#ced0d2;
     --bannerBG:#030b17;
 }
+
+.body{
+    background: var(--background);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 *{
     margin: 0;
     padding: 0;
@@ -17,3 +25,5 @@
     text-rendering: optimizeLegibility;
     text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
+
+

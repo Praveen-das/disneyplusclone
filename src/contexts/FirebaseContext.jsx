@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { auth } from '../config/firebaseApp'
 import { GoogleAuthProvider, RecaptchaVerifier, signInWithPopup, signInWithPhoneNumber } from "@firebase/auth"
 import { getFirestore, setDoc, getDocs, doc, collection } from 'firebase/firestore'
@@ -41,41 +41,51 @@ export default function Firebase({ children }) {
             setLoading(false)
         })
         return unsubscribe
-    }, [currentUser])
+    }, [])
 
     //Watchlist//////////////////////////////////////////////
     const db = getFirestore()
     const [watchlist, setWatchlist] = useState()
-    const componentDidMounted = useRef(0)
 
     //Set Initial state///////////////////////////////////////
     useEffect(() => {
-        if (!currentUser) return
-        getDocs(collection(db, currentUser.uid)).then((doc) => {
-            if (!doc.empty)
-                return doc.forEach(doc => {
-                    const snapshot = doc.data()
-                    if (!snapshot) return
-                    setWatchlist(snapshot.watchlist)
-                })
-            return setWatchlist([])
-        }
-        )
+        if (currentUser)
+            getDocs(collection(db, currentUser.uid)).then((doc) => {
+                if (!doc.empty)
+                    return doc.forEach(doc => {
+                        const snapshot = doc.data()
+                        if (!snapshot) return
+                        setWatchlist(snapshot.watchlist)
+                    })
+                return setWatchlist([])
+            })
     }, [db, currentUser])
 
     //Handele database on watchlist update///////////////////////////////////////
-    useEffect(() => {
+
+    // useEffect(() => {
+    //     console.log('currentuser rendered');
+    // }, [currentUser])
+    // useEffect(() => {
+    //     console.log('db rendered');
+    
+    // }, [db])
+    // useEffect(() => {
+    //     console.log('watchlist rendered');
+    // }, [watchlist])
+
+    const addToDatabase = useCallback((movie) => {
         if (!currentUser) return
-        if (componentDidMounted.current < 3)
-            return componentDidMounted.current++
+        console.log(currentUser.uid);
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
-        setDoc(watchlistDoc, { watchlist: watchlist })
+        setDoc(watchlistDoc, { watchlist: movie })
             .then(() => console.log('movie added to watchlist')).catch(err => console.log(err))
-    }, [currentUser, watchlist, db, componentDidMounted])
+    }, [currentUser, db])
 
     function addToWatchlist(movie) {
         if (!currentUser) return
         setWatchlist(pre => {
+            addToDatabase([movie, ...pre])
             return [movie, ...pre]
         })
     }

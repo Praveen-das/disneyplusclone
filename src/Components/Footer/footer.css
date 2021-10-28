@@ -4,6 +4,7 @@
     background: #0c111b;
     padding: 2.5rem;
     z-index: 400;
+    margin-top: auto;
 }
 .footer-left{
     width: 50%;
@@ -26,7 +27,7 @@
 }
 
 .fb,.tw{
-    background: url(https://www.hotstar.com/assets/00dd72dcb62378da1988866159d26cca.svg) left bottom no-repeat;
+    background: url('https://www.hotstar.com/assets/00dd72dcb62378da1988866159d26cca.svg') left bottom no-repeat;
     background-position: 0 0;
     width: 40px;
     height: 40px;
@@ -45,7 +46,7 @@
     background-position: -45px -45px;
 }
 .playstore,.appstore{
-    background: url(https://www.hotstar.com/assets/67764ffe0b6b18e06d60049a00c86335.svg) left bottom no-repeat;
+    background: url('https://www.hotstar.com/assets/67764ffe0b6b18e06d60049a00c86335.svg') left bottom no-repeat;
     background-position: 0 0;
     width: 135px;
     height: 40px;
