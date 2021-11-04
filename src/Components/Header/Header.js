@@ -55,19 +55,42 @@ function Header(props) {
             <div className='navbar-wrapper'>
                 <div className="navbar">
                     <div className="left">
-                        <div className='dropDown'>
+                        <div className='dropDown dropDown-hamburger'>
                             <div className="hamburger">
                                 <span className='line'></span>
                                 <span className='line'></span>
                                 <span className='line'></span>
                             </div>
                             <div className='dropDownContents h-dropDownContents'>
-                                <Link to={'/languages'}><h1 className='movieLinks' >Languages</h1></Link>
-                                <Link to={'/genres'}><h1 className='movieLinks' >Genres</h1></Link>
+                                <div className="device-account">
+                                    <img className='h-user-profile' src={currentUser && currentUser.photoURL ?
+                                        currentUser.photoURL
+                                        : 'https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg'
+                                    } alt=''></img>
+                                    <div className='device-user'>
+                                        <label className='device-username' htmlFor="">{currentUser && currentUser.displayName || currentUser.phoneNumber}</label>
+                                        <label className='device-type' htmlFor="">Logged in Via</label>
+                                    </div>
+                                </div>
+                                <Link to='/watchlist' className="device-watchlist">Watchlist</Link>
+                                <div className="main-menus">
+                                    <Link to={'/languages'}>
+                                        <div className="languages movieLinks">
+                                            <div className="languages-icon"></div>
+                                            <h1>Languages</h1>
+                                        </div>
+                                    </Link>
+                                    <Link to={'/genres'}>
+                                        <div className="genres movieLinks">
+                                            <div className="genres-icon"></div>
+                                            <h1>Genres</h1>
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
-                        <div className='dropDown'>
+                        <div className='dropDown dropDown-movies'>
                             <label className='title-movies' htmlFor="">Movies</label>
                             <div className='dropDownContents'>
                                 <Link className='movieLinks' to={'/movies/languages/hi'}>Hindi</Link>
@@ -146,6 +169,7 @@ function Header(props) {
                                 :
                                 <button onClick={() => setLoginWindow(true)} className='header-login-btn'>LOGIN</button>
                         }
+                        <Link to='/#'><span className='fa fa-search device-search'></span></Link>
                     </div>
                 </div>
             </div >
@@ -154,7 +178,7 @@ function Header(props) {
                     <Login />
                 </div>
             }
-            {alert && <Alert/>}
+            {alert && <Alert />}
         </>
     )
 }

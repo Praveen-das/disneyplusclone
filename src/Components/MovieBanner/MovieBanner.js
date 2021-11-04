@@ -8,7 +8,6 @@ import { useHelper } from '../../contexts/Contexts';
 import { useFirebase } from '../../contexts/FirebaseContext';
 
 function MovieBanner() {
-    const bannerRef = useRef()
     const location = useLocation()
     const { movie } = location.state
     const { Genres } = useHelper()
@@ -19,18 +18,20 @@ function MovieBanner() {
     return (
         <>
             <div className="mbContainer">
-                <div className="mBanner" ref={bannerRef}>
-                    <div className="bContents">
-                        <h1 className='bTitle'>{movie.title || movie.name}</h1>
-                        <label className='bDate' htmlFor="">{movie.release_date || movie.first_air_date} &#8901; </label>
-                        {genres && genres.filter(elements =>
-                            movie.genre_ids.includes(elements.id)
-                        ).map((genre, index) =>
-                            movie.genre_ids.length !== index + 1 ?
-                                <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
-                                <label key={index} className='bCategory'>{genre.name}</label>
-                        )}
-                        <p className='mbDescription'>{movie.overview}</p>
+                <div className="mBanner">
+                    <div className="mBanner-contents-wrapper">
+                        <div className='mBanner-contents'>
+                            <h1 className='bTitle'>{movie.title || movie.name}</h1>
+                            <label className='bDate' htmlFor="">{movie.release_date || movie.first_air_date} &#8901; </label>
+                            {genres && genres.filter(elements =>
+                                movie.genre_ids.includes(elements.id)
+                            ).map((genre, index) =>
+                                movie.genre_ids.length !== index + 1 ?
+                                    <label key={index} className='bCategory'>{genre.name} &#8901; </label> :
+                                    <label key={index} className='bCategory'>{genre.name}</label>
+                            )}
+                            <p className='mbDescription'>{movie.overview}</p>
+                        </div>
                         <div className="mbBtns">
                             <div className="WatchMovieBtn">
                                 <span></span>
@@ -52,8 +53,6 @@ function MovieBanner() {
                                             <i className="fas fa-plus"></i>
                                             <label className='bWatchList'>WATCHLIST</label>
                                         </div>
-
-
                                 }
                                 <div className="share">
                                     <div></div>
@@ -63,9 +62,9 @@ function MovieBanner() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="imgWrapper">
+                    <div className="imgWrapper">
                         <img className='bImage' src={movie.backdrop_path && imageURL + 'original' + movie.backdrop_path} alt="" />
-                    </div> */}
+                    </div>
                 </div>
             </div>
             <MovieList title='More Like This' url={`${movie.media_type === 'tv' ? 'tv' : 'movie'}/${movie.id}/similar?api_key=${API_KEY}&language=en-US`} />

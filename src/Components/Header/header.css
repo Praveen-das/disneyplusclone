@@ -1,273 +1,575 @@
-.navbar-wrapper{
-    padding-bottom: 5rem;
+.navbar-wrapper {
+  padding-bottom: 55px;
 }
-.navbar{
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0 3.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #141a28;
-    position: fixed;
-    z-index: 200;
+.navbar {
+  box-sizing: border-box;
+  width: 100%;
+  height: 55px;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141a28;
+  position: fixed;
+  z-index: 200;
 }
-.hamburger{
-    display: block;
-    padding-right: 1rem;
-    cursor: pointer;
-    transform: translateY(3.5px);
-    margin-top: 15px;
-    padding-bottom: 20px;
+.hamburger {
+  display: block;
+  padding-right: 1rem;
+  cursor: pointer;
+  transform: translateY(3.5px);
+  margin-top: 15px;
+  padding-bottom: 20px;
 }
-.line{
-    width: 20px;
-    height: 2px;
-    background: white;
-    display: block;
-    margin-bottom: 3px;
+.line {
+  width: 20px;
+  height: 2px;
+  background: white;
+  display: block;
+  margin-bottom: 3px;
 }
-.left{
-    height: 5rem;
-    display: flex;
-    align-items: center;
+.left {
+  height: 5rem;
+  display: flex;
+  align-items: center;
 }
-.disneyplus{
-    width: 115px;
-    height: 35px;
-    margin-top: -5px;
-    margin-right: 1.2rem;
+.disneyplus {
+  width: 115px;
+  height: 35px;
+  margin-top: -5px;
+  margin-right: 1.2rem;
 }
-.dropDown{
-    display: block;
-    position: relative;
+.dropDown {
+  display: block;
+  position: relative;
 }
-.movieLinks{
-    display: inline-block;
-    width: 90px;
-    padding-left: 20px;
-    font-weight: 500;
-    white-space: nowrap;
-    line-height: 40px;
-    font-size: 0.9em;
+.dropDownContents {
+  display: block;
+  position: absolute;
+  background: #192133;
+  border-radius: 4px;
+  transform: translate(-20px, 20px);
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  padding-right: 20px;
 }
-.dropDownContents{
-    display: block;
-    position: absolute;
-    background: #192133;
-    border-radius: 4px;
-    transform: translate(-20px, 20px);
-    visibility: hidden;
-    pointer-events: none;
-    overflow: hidden;
-    opacity: 0;
+.dropDown:hover .dropDownContents {
+  visibility: visible;
+  transition: 0.3s;
+  opacity: 1;
+  transform: translate(-20px, 0);
+  pointer-events: all;
 }
-.dropDown:hover .dropDownContents{
-    visibility: visible;
-    transition: 0.3s;
-    opacity: 1;
-    transform: translate(-20px, 0);
-    pointer-events: all;
+.h-dropDownContents {
+  transform: translate(-17px, 0);
+  border-radius: 2px;
+  opacity: 1;
+  height: 0;
+  transition: 0.5s ease-in-out 0.5s;
+  padding-top: 5px;
 }
-.h-dropDownContents{
-    transform: translate(-17px, 0);
-    border-radius: 2px;
-    transition: 0.5s ease-in-out 0.5s;
-    opacity: 1;
-    height: 0;
-    padding-top: 5px;
+.dropDown:hover .h-dropDownContents {
+  transform: translate(-17px, 0);
+  visibility: visible;
+  height: 85px;
+  pointer-events: all;
 }
-.dropDown:hover .h-dropDownContents{
-    transform: translate(-17px, 0);
-    visibility: visible;
-    height: 85px;
-    pointer-events: all;
+.movieLinks:hover{
+  background: rgba(0, 0, 0, 0.473);
+}
+.device-account {
+  display: none;
+}
+.device-watchlist {
+  display: none;
+}
+.main-menus {
+  display: block;
+  width: 100%;
+}
+.movieLinks {
+  display: block;
+  width: 100%;
+  padding-left: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 40px;
+  font-size: 0.9em;
 }
 
-.movieLinks:hover{
-    background: rgba(0, 0, 0, 0.473);
-}
-.kidsLogo{
-    width: 40px;
-    height: 35px;
+.kidsLogo {
+  width: 40px;
+  height: 35px;
 }
 .title-disneyplus,
-.title-movies{
-    font-size: 1em;
-    font-weight: 500;
-    text-decoration: none;
-    padding-right: 2rem;
-    cursor: pointer;
+.title-movies {
+  font-size: 1em;
+  font-weight: 500;
+  text-decoration: none;
+  padding-right: 2rem;
+  cursor: pointer;
 }
-.title-movies{
-    display: block;
-    margin-top: 15px;
-    padding-bottom: 15px;
+.title-movies {
+  display: block;
+  margin-top: 15px;
+  padding-bottom: 15px;
 }
-.right{
-    height: 5rem;
-    display: flex;
-    align-items: center;
+.right {
+  height: 5rem;
+  display: flex;
+  align-items: center;
 }
-.searchbox{
-    display: flex;
-    position: relative;
-    margin-top: 2px;
+.searchbox {
+  display: flex;
+  position: relative;
 }
-.searchbox span{
-    transform: translate(-20px, 8px);
+.searchbox span {
+  transform: translate(-20px, 8px);
 }
-.search{
-    width: 230px;
-    height: 30px;
-    color: var(--headerFC);
-    font-weight: 400;
-    border: none;
-    background: none;
-    border-bottom: 1px solid var(--headerFC);
-    outline: none;
-    transition: 0.2s ease-out;
+.search {
+  width: 230px;
+  height: 30px;
+  color: var(--headerFC);
+  font-weight: 400;
+  border: none;
+  background: none;
+  border-bottom: 1px solid var(--headerFC);
+  outline: none;
+  transition: 0.2s ease-out;
 }
-.search::placeholder{
-    color: var(--headerFC);
+.search::placeholder {
+  color: var(--headerFC);
 }
-.searchResults{
-    box-sizing: border-box;
-    width: 350px;
-    min-height: 30px;
-    display: block;
-    position: absolute;
-    top: 33px;
-    left: -3px;
-    background: #0c111b;
-    border-radius: 5px;
-    overflow: hidden;
-    border: 0.1px solid rgba(41, 48, 70, 0.411);
+.searchResults {
+  box-sizing: border-box;
+  width: 350px;
+  min-height: 30px;
+  display: block;
+  position: absolute;
+  top: 33px;
+  left: -3px;
+  background: #0c111b;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 0.1px solid rgba(41, 48, 70, 0.411);
 }
-.result{
-    display: flex;
-    height: 80px;
-    background: #192133;
-    border-radius: 5px;
-    border: 0.1px solid #19213300;
-    margin: 8px;
-    overflow: hidden;
-    cursor: pointer;
+.result {
+  display: flex;
+  height: 80px;
+  background: #192133;
+  border-radius: 5px;
+  border: 0.1px solid #19213300;
+  margin: 8px;
+  overflow: hidden;
+  cursor: pointer;
 }
-.result:hover{
-    box-shadow: 0 0 5px #1e304d;
+.result:hover {
+  box-shadow: 0 0 5px #1e304d;
 }
-.resultContents{
-    pointer-events: none;
+.resultContents {
+  pointer-events: none;
 }
-.rImage{
-    height: 100%;
-    background-size: contain;
-    margin-right: 10px;
-    pointer-events: none;
+.rImage {
+  height: 100%;
+  background-size: contain;
+  margin-right: 10px;
+  pointer-events: none;
 }
-.rTitle{
-    display: block;
-    font-size: 0.95em;
-    color: rgba(255, 255, 255, 0.952);
-    padding-top: 10px;
+.rTitle {
+  display: block;
+  font-size: 0.95em;
+  color: rgba(255, 255, 255, 0.952);
+  padding-top: 10px;
 }
-.rlGenre{
-    font-size: 0.73em;
-    color: rgb(180, 180, 180);
-    font-weight: 500;
+.rlGenre {
+  font-size: 0.73em;
+  color: rgb(180, 180, 180);
+  font-weight: 500;
 }
-.moreResults{
-    display: flex;
-    justify-content: center;
-    background: #192133;
-    font-size: 0.8em;
-    font-weight: 600;
-    line-height: 35px;
+.moreResults {
+  display: flex;
+  justify-content: center;
+  background: #192133;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 35px;
 }
-.subscribe-btn{
-    height: 22px;
-    border: none;
-    color: white;
-    background: rgb(13, 146, 255);
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 0 12px;
-    margin-left: 1rem;
-    cursor: pointer;
+.subscribe-btn {
+  height: 22px;
+  border: none;
+  color: white;
+  background: rgb(13, 146, 255);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 12px;
+  margin-left: 1rem;
+  cursor: pointer;
 }
-.header-login-btn{
-    width: 100%;
-    display: flex;
-    border: none;
-    background: none;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 1rem;
-    line-height: 23px;
+.header-login-btn {
+  width: 100%;
+  display: flex;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 1rem;
+  line-height: 23px;
 }
-.right a{
-    text-decoration: none;
-    font-size: 0.9em;
-    font-weight: 500;
-    padding-left: 1rem;
+.right a {
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  padding-left: 1rem;
+}
+.device-search {
+  display: none;
 }
 
 /* //////////////////////// */
 
-.login-container-overlay{
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.021);
-    backdrop-filter: blur(5px);
-    top: 0;
-    left: 0;
-    z-index: 200;
+.login-container-overlay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.021);
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  z-index: 200;
 }
 
-.userInfo{
-    display: block;
-    margin-left: 1rem;
+.userInfo {
+  display: block;
+  margin-left: 1rem;
 }
-.user-profile{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-size: contain;
-    cursor: pointer;
+.user-profile {
+  width: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-size: contain;
+  cursor: pointer;
 }
-.userInfo-dropDown{
-    display: block;
+.userInfo-dropDown {
+  display: block;
+  position: absolute;
+  background: #192133;
+  border-radius: 4px;
+  transform: translate(-55px, 10px);
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 110px;
+  height: 40px;
+  cursor: pointer;
+}
+.dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.473);
+}
+.userInfo:hover .userInfo-dropDown {
+  transform: translate(-55px, 0px);
+  visibility: visible;
+  transition: 0.3s;
+  opacity: 1;
+  pointer-events: all;
+}
+.languages,
+.genres{
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+.languages-icon,
+.genres-icon{
+  width: 22px;
+  height: 22px;
+  background: url(https://www.hotstar.com/assets/2220b001005f901871764a12537e6407.svg) no-repeat;
+  background-position: -240px -35px;
+}
+.genres-icon{
+  background-position: -274px -35px;
+}
+.languages:hover .languages-icon{
+  background-position: -240px -1px;
+}
+.genres:hover .genres-icon{
+  background-position: -274px -1px;
+}
+
+@media only screen and (max-width: 425px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .dropDown-movies {
+    display: none;
+  }
+  .title-disneyplus {
+    display: none;
+  }
+  .kidsLogo {
+    display: none;
+  }
+  .subscribe-btn {
+    display: none;
+  }
+  .user-profile {
+    display: none;
+  }
+  .searchbox {
+    display: none;
+  }
+  .line {
+    width: 18px;
+    height: 2px;
+  }
+  .device-search {
+    display: inline;
+  }
+}
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .dropDown-movies {
+    display: none;
+  }
+  .title-disneyplus {
+    display: none;
+  }
+  .kidsLogo {
+    display: none;
+  }
+  .subscribe-btn {
     position: absolute;
-    background: #192133;
-    border-radius: 4px;
-    transform: translate(-55px, 10px);
-    visibility: hidden;
-    pointer-events: none;
-    overflow: hidden;
-    opacity: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 11rem;
+    font-size: 0.68em;
+    height: 20px;
+    padding: 0 6px;
+  }
 }
-.dropdown-item{
+@media only screen and (min-width: 376px) and (max-width: 425px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .dropDown-movies {
+    display: none;
+  }
+  .title-disneyplus {
+    display: none;
+  }
+  .kidsLogo {
+    display: none;
+  }
+  .subscribe-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 11rem;
+    font-size: 0.68em;
+    height: 20px;
+    padding: 0 6px;
+  }
+}
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+  .navbar {
+    padding: 0 2rem;
+  }
+  .dropDown-movies {
+    display: none;
+  }
+  .title-disneyplus {
+    display: none;
+  }
+  .kidsLogo {
+    display: none;
+  }
+  .subscribe-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 11rem;
+    font-size: 0.68em;
+    height: 20px;
+    padding: 0 6px;
+  }
+  .userInfo {
+    margin-left: -1rem;
+  }
+  .search {
+    width: 150px;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .navbar-wrapper {
+    padding-bottom: 80px;
+  }
+  .navbar {
+    height: 80px;
+    padding: 0 2.5rem;
+  }
+  .dropDown-movies {
+    display: none;
+  }
+  .title-disneyplus {
+    display: none;
+  }
+  .kidsLogo {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .navbar-wrapper {
+    padding-bottom: 80px;
+  }
+  .navbar {
+    height: 80px;
+    padding: 0 3rem;
+  }
+}
+@media only screen and (min-width: 1201px) {
+  .navbar-wrapper {
+    padding-bottom: 80px;
+  }
+  .navbar {
+    height: 80px;
+    padding: 0 3rem;
+  }
+  
+}
+
+/* device only////////////////////////////////////////////// */
+@media only screen and (max-device-width: 768px) {
+  .dropDown{
+    position: initial;
+  }
+  .dropDownContents {
+    width: 80vw;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.473);
+    left: 0;
+    top: 0;
+    visibility: visible;
+  }
+  .h-dropDownContents {
+    transform: translateX(-110%);
+    transition: 0.3s cubic-bezier(.9,.01,.94,.63);
+    height: 100vh !important;
+  }
+  .dropDown:hover .h-dropDownContents {
+    transform: translateX(0);
+    transition: transform ease-in 0.3s;
+  }
+  .device-account {
     display: flex;
     align-items: center;
-    width: 110px;
-    height: 40px;
+    flex-wrap: wrap;
+    margin: 20px !important;
     cursor: pointer;
+  }
+  .device-account label {
+    display: block;
+    color: rgb(231, 231, 231);
+    padding-left: 1rem;
+    pointer-events: none;
+  }
+  .device-username {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .device-type {
+    font-size: 12px;
+  }
+  .device-watchlist {
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 20px;
+    margin-bottom: 3px;
+    line-height: 40px;
+    border-top: 1px solid rgba(84, 141, 226, 0.219);
+    border-bottom: 1px solid rgba(84, 141, 226, 0.219);
+    cursor: pointer;
+  }
+  .searchbox {
+    display: none;
+  }
+  .device-search {
+    display: inline;
+  }
+  .subscribe-btn {
+    display: none;
+  }
+  .user-profile {
+    display: none;
+  }
+  .h-user-profile {
+    width: 50px;
+  }
 }
-.dropdown-item:hover{
-    background: rgba(0, 0, 0, 0.473);
+@media only screen and (min-device-width: 769px) and (max-device-width: 1200px) {
+  .dropDownContents {
+    width: 220px;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.473);
+  }
+  .dropDown:hover .h-dropDownContents {
+    height: 212px;
+  }
+  .device-account {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+    cursor: pointer;
+  }
+  .device-account label {
+    display: block;
+    color: rgb(231, 231, 231);
+    padding-left: 1rem;
+    pointer-events: none;
+  }
+  .device-username {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .device-type {
+    font-size: 12px;
+  }
+  .device-watchlist {
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 20px;
+    line-height: 40px;
+    border-top: 1px solid rgba(84, 141, 226, 0.219);
+    border-bottom: 1px solid rgba(84, 141, 226, 0.219);
+    cursor: pointer;
+  }
+  .searchbox {
+    display: none;
+  }
+  .device-search {
+    display: inline;
+  }
+  .subscribe-btn {
+    display: none;
+  }
+  .user-profile {
+    display: none;
+  }
+  .h-user-profile {
+    width: 50px;
+  }
 }
-.userInfo:hover .userInfo-dropDown{
-    transform: translate(-55px, 0px);
-    visibility: visible;
-    transition: 0.3s;
-    opacity: 1;
-    pointer-events: all;
-}
-
-

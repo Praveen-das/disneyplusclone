@@ -1,101 +1,177 @@
-/* .mbContainer{
-    width: 100%;
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(0deg,var(--background),#141a28,#141a28);
-    padding-bottom: 2rem;
+.mbContainer {
+  background: linear-gradient(0deg, var(--background), #141a28, #141a28);
 }
-.mBanner{
-    display: flex;
-    position: relative;
-    width: 92%;
-    height: 100%;
-    background: var(--bannerBG);
+.mBanner {
+  display: flex;
+  position: relative;
+  width: 100%;
+  background: var(--bannerBG);
+  overflow: hidden;
+  cursor: pointer;
+}
+.mBanner-contents-wrapper {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto;
+  padding: 1.5rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+}
+.mbDescription {
+  font-weight: 500;
+  font-size: 0.98em;
+  width: 50%;
+  min-height: 20%;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgb(184, 184, 184);
+  margin-top: 0.8rem;
+  line-height: 28px;
+}
+.imgWrapper:before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(#ffffff00, #0000005d, black);
+}
+.mbBtns {
+  display: flex;
+  z-index: 50;
+  padding-right: 3rem;
+}
+.WatchMovieBtn {
+  display: flex;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+.bWatchMovie {
+  font-size: 1.3em;
+  font-weight: 500;
+  line-height: 20px;
+  color: white;
+  transition: 0.2s;
+}
+.WatchMovieBtn span {
+  background: url(https://www.hotstar.com/assets/354b1f5d615ca67922644bf6bd842b8d.svg);
+  width: 17px;
+  height: 20px;
+  background-size: contain;
+  margin-right: 1rem;
+  transition: 0.2s;
+}
+.mBanner:hover .WatchMovieBtn {
+  opacity: 1;
+}
+.WatchMovieBtn2 {
+  display: flex;
+  transform: translateY(-20px);
+}
+.wl,
+.share {
+  display: grid;
+  place-items: center;
+  height: 50px;
+}
+.wl {
+  transform: translateY(2px);
+}
+.wl label {
+  pointer-events: none;
+}
+.wl .fa-plus {
+  font-size: 22px;
+}
+.wl .fa-check {
+  font-size: 22px;
+  color: #1f80e0;
+}
+.share {
+  transform: translate(30px, 1px);
+}
+.share div {
+  background: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0xOCAxNi4wOGMtLjc2IDAtMS40NC4zLTEuOTYuNzdMOC45MSAxMi43Yy4wNS0uMjMuMDktLjQ2LjA5LS43cy0uMDQtLjQ3LS4wOS0uN2w3LjA1LTQuMTFjLjU0LjUgMS4yNS44MSAyLjA0LjgxIDEuNjYgMCAzLTEuMzQgMy0zcy0xLjM0LTMtMy0zLTMgMS4zNC0zIDNjMCAuMjQuMDQuNDcuMDkuN0w4LjA0IDkuODFDNy41IDkuMzEgNi43OSA5IDYgOWMtMS42NiAwLTMgMS4zNC0zIDNzMS4zNCAzIDMgM2MuNzkgMCAxLjUtLjMxIDIuMDQtLjgxbDcuMTIgNC4xNmMtLjA1LjIxLS4wOC40My0uMDguNjUgMCAxLjYxIDEuMzEgMi45MiAyLjkyIDIuOTIgMS42MSAwIDIuOTItMS4zMSAyLjkyLTIuOTJzLTEuMzEtMi45Mi0yLjkyLTIuOTJ6Ii8+Cjwvc3ZnPg==);
+  width: 23px;
+  height: 23px;
+  background-size: contain;
+}
+.bWatchList,
+.bShare {
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .mbContainer{
+    margin-bottom: 1rem;
+  }
+  .mBanner-contents {
+    display: none;
+  }
+  .mbBtns {
+    margin-top: auto;
+    /* position: absolute;
+    bottom: 0; */
+  }
+  .WatchMovieBtn2 {
+    display: none;
+  }
+  .bWatchMovie{
+    font-size: 1em;
+  }
+  .WatchMovieBtn span{
+    width: 15px;
+    height: 18px;
+  }
+}
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+}
+@media only screen and (min-width: 376px) and (max-width: 580px) {
+}
+
+@media only screen and (min-width: 581px) and (max-width: 768px) {
+  
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .mBanner {
     border-radius: 5px;
-    overflow: hidden;
-    cursor: pointer;
-}
-.mbDescription{
-    position: absolute;
-    font-weight: 500;
-    font-size: 0.98em;
-    width: 120%;
-    min-height: 20%;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: rgb(184, 184, 184);
-    margin-top: 0.8rem;
-    line-height: 28px;
-    
-}
-.mbBtns{
-    width: 500px;
-    display: flex;
+  }
+  .mbContainer {
+    padding: 0 0.5rem 2rem 0.5rem;
+  }
+  .mbBtns {
     justify-content: space-between;
-    position: absolute;
-    bottom: 180px;
-    z-index: 50;
+  }
+  .mBanner-contents-wrapper {
+    grid-template-rows: auto 10%;
+    padding: 4.5rem 2rem 4.5rem 3rem;
+  }
+  .imgWrapper:before{
+    display: none;
+  }
 }
-.WatchMovieBtn{
-    display: flex;
-    opacity: 0.7;
-    transition: 0.2s;
+@media only screen and (min-width: 1025px) {
+  .mBanner {
+    border-radius: 5px;
+  }
+  .mbContainer {
+    padding: 0 3rem 2rem 3rem;
+  }
+  .mbBtns {
+    width: 40%;
+    justify-content: space-between;
+  }
+  .mBanner-contents-wrapper {
+    grid-template-rows: auto 10%;
+    padding: 4.5rem 2rem 4.5rem 3rem;
+  }
+  .imgWrapper:before{
+    display: none;
+  }
 }
-.bWatchMovie{
-    font-size: 1.3em;
-    font-weight: 500;
-    line-height: 20px;
-    color: white;
-    transition: 0.2s;
-}
-.WatchMovieBtn span{
-    background: url(https://www.hotstar.com/assets/354b1f5d615ca67922644bf6bd842b8d.svg);
-    width: 17px;
-    height: 20px;
-    background-size: contain;
-    margin-right: 1rem;
-    transition: 0.2s;
-}
-.mBanner:hover .WatchMovieBtn{
-    opacity: 1;
-}
-.WatchMovieBtn2{
-    display: flex;
-    transform: translateY(-20px);
-}
-.wl,.share{
-    display: grid;
-    place-items: center;
-    height: 50px;
-    
-}
-.wl{
-    transform: translateY(2px);
-}
-.wl label{
-    pointer-events: none;
-}
-.wl .fa-plus{
-    font-size: 22px;
-}
-.wl .fa-check{
-    font-size: 22px;
-    color: #1f80e0;
-}
-.share{
-    transform: translate(30px, 1px);
-}
-.share div{
-    background: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0xOCAxNi4wOGMtLjc2IDAtMS40NC4zLTEuOTYuNzdMOC45MSAxMi43Yy4wNS0uMjMuMDktLjQ2LjA5LS43cy0uMDQtLjQ3LS4wOS0uN2w3LjA1LTQuMTFjLjU0LjUgMS4yNS44MSAyLjA0LjgxIDEuNjYgMCAzLTEuMzQgMy0zcy0xLjM0LTMtMy0zLTMgMS4zNC0zIDNjMCAuMjQuMDQuNDcuMDkuN0w4LjA0IDkuODFDNy41IDkuMzEgNi43OSA5IDYgOWMtMS42NiAwLTMgMS4zNC0zIDNzMS4zNCAzIDMgM2MuNzkgMCAxLjUtLjMxIDIuMDQtLjgxbDcuMTIgNC4xNmMtLjA1LjIxLS4wOC40My0uMDguNjUgMCAxLjYxIDEuMzEgMi45MiAyLjkyIDIuOTIgMS42MSAwIDIuOTItMS4zMSAyLjkyLTIuOTJzLTEuMzEtMi45Mi0yLjkyLTIuOTJ6Ii8+Cjwvc3ZnPg==);
-    width: 23px;
-    height: 23px;
-    background-size: contain;
-}
-.bWatchList, .bShare{
-    font-size: 10px;
-    font-weight: 600;
-    color: white;
-} */

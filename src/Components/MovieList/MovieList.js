@@ -50,8 +50,8 @@ function MovieList(props) {
                 <Swiper
                     ref={swiper}
                     navigation={true}
-                    slidesPerGroup={8}
-                    slidesPerView={8}
+                    // slidesPerGroup={8}
+                    slidesPerView={3}
                     speed={1000}
                     // freeMode={true}
                     // mousewheel={false}
@@ -59,17 +59,29 @@ function MovieList(props) {
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     breakpoints={{
                         "320": {
-                            "slidesPerView": 2,
-                            "spaceBetween": 20
-                          },
-                          "768": {
+                            "slidesPerView": 3,
+                            "spaceBetween": 18
+                        },
+                        "481": {
                             "slidesPerView": 4,
-                            "spaceBetween": 40
-                          },
-                          "1024": {
+                            "spaceBetween": 16
+                        },
+                        "581": {
+                            "slidesPerView": 5,
+                            "spaceBetween": 15
+                        },
+                        "769": {
+                            "slidesPerView": 6,
+                            "spaceBetween": 10
+                        },
+                        "1024": {
+                            "slidesPerView": 7,
+                            "spaceBetween": 10
+                        },
+                        "1200": {
                             "slidesPerView": 8,
                             "spaceBetween": 10
-                          }
+                        }
                     }}
                     className="mlSlides"
                 >

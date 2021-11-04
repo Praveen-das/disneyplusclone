@@ -8,7 +8,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Firebase>
       <AuthProvider>
-        <App />
+        <App/>
       </AuthProvider>
     </Firebase>
   </React.StrictMode>,

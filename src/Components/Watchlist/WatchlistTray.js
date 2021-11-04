@@ -51,14 +51,40 @@ function WatchlistTray() {
                 <Swiper
                     ref={swiper}
                     navigation={true}
-                    slidesPerGroup={6}
-                    slidesPerView={6}
+                    // slidesPerGroup={6}
+                    slidesPerView={2}
                     spaceBetween={10}
                     speed={1000}
                     // freeMode={true}
                     // mousewheel={false}
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     onAfterInit={(e) => handleNavigation(e)}
+                    breakpoints={{
+                        "320": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 10
+                        },
+                        "481": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 10
+                        },
+                        "581": {
+                            "slidesPerView": 3,
+                            "spaceBetween": 10
+                        },
+                        "769": {
+                            "slidesPerView": 4,
+                            "spaceBetween": 10
+                        },
+                        "1024": {
+                            "slidesPerView": 5,
+                            "spaceBetween": 10
+                        },
+                        "1200": {
+                            "slidesPerView": 6,
+                            "spaceBetween": 10
+                        }
+                    }}
                     className="wl-Slides"
                 >
                     {

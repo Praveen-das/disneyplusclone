@@ -3,7 +3,7 @@
 }
 
 .bContainer {
-  margin: 0 2.5rem 2rem 2.5rem;
+  margin: 0 0.6rem 2rem 0.6rem;
 }
 
 .banner {
@@ -20,7 +20,6 @@
 .bContents {
   position: absolute;
   width: 40%;
-  /* height: 100%; */
   padding: 4.5rem 2rem 4.5rem 3rem;
   z-index: 50;
 }
@@ -32,12 +31,12 @@
 }
 
 .bCategory {
-  color: rgb(139, 139, 139);
+  color: rgb(190, 190, 190);
   font-weight: 600;
 }
 
 .bDate {
-  color: rgb(139, 139, 139);
+  color: rgb(190, 190, 190);
   font-weight: 600;
   font-size: 0.95em;
 }
@@ -50,13 +49,22 @@
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: rgb(184, 184, 184);
+  color: rgb(218, 218, 218);
   margin-top: 0.8rem;
   line-height: 28px;
 }
 .imgWrapper {
   position: relative;
   margin-left: auto;
+}
+.imgWrapper:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -2px;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(90deg, var(--bannerBG), rgba(255, 255, 255, 0));
 }
 .bImage {
   display: block;
@@ -95,26 +103,22 @@
 .mySwiper:hover .swiper-button-prev::after {
   opacity: 1;
 }
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 320px) {
   .bContainer {
     margin: 0 0.7rem 2rem 0.7rem;
   }
-}
-@media only screen and (min-device-width: 481px) and (max-device-width: 580px) {
-  .bContainer {
-    margin: 0 2.5rem 2rem 2.5rem;
-  }
-}
-@media only screen and (min-device-width: 581px) and (max-device-width: 768px) {
-  .bContainer {
-    margin: 0 1.3rem 2rem 1.3rem;
+  .imgWrapper:after {
+    display: none;
   }
   .bContents {
     height: 100%;
-    padding: 0;
-    padding-left: 1.2rem;
-    background: linear-gradient(rgba(255, 255, 255, 0),rgba(255, 255, 255, 0) ,rgba(0, 0, 0, 0.877));
+    width: 30%;
+    padding: 8px 10px;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.473),
+      rgba(0, 0, 0, 0.699)
+    );
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -123,41 +127,149 @@
     line-height: initial;
     margin: 0;
     padding: 0;
-    font-size: 0.9em;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.363);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.486);
   }
   .bTitle {
-    font-size: 1.3em;
+    font-size: 0.85em;
   }
   .bCategory {
-    color: rgb(168, 168, 168);
-    font-size: 1.05em;
+    font-size: 0.72em;
     line-height: 15px;
+    font-weight: 500;
   }
   .bDescription {
-    margin-bottom: 2rem;
-    width: 80%;
-    color: rgb(216, 216, 216);
+    margin-bottom: 12px;
+    font-size: 0.7em;
+    font-weight: 400;
   }
 }
-@media only screen and (min-device-width: 769px) and (max-device-width: 1600px) {
+@media only screen and (min-width: 321px) and (max-width: 375px) {
   .bContainer {
-    margin: 0 1.3rem 2rem 1.3rem;
+    margin: 0 0.7rem 2rem 0.7rem;
   }
-  .imgWrapper::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -1px;
-    width: 20%;
+  .imgWrapper:after {
+    display: none;
+  }
+  .bContents {
     height: 100%;
-    background: linear-gradient(90deg, var(--bannerBG), #00000000);
-    z-index: 30;
+    width: 30%;
+    padding: 0 14px;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.473),
+      rgba(0, 0, 0, 0.699)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .bContents * {
+    line-height: initial;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.486);
+  }
+  .bTitle {
+    font-size: 0.85em;
+  }
+  .bCategory {
+    font-size: 0.72em;
+    line-height: 15px;
+    font-weight: 500;
+  }
+  .bDescription {
+    margin-bottom: 12px;
+    font-size: 0.7em;
+    font-weight: 400;
+  }
+}
+@media only screen and (min-width: 376px) and (max-width: 580px) {
+  .bContainer {
+    margin: 0 0.8rem 2rem 0.8rem;
+  }
+  .imgWrapper:after {
+    display: none;
+  }
+  .bContents {
+    height: 100%;
+    width: 30%;
+    padding: 0 14px;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.473),
+      rgba(0, 0, 0, 0.699)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .bContents * {
+    line-height: initial;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.486);
+  }
+  .bTitle {
+    font-size: 0.85em;
+  }
+  .bCategory {
+    font-size: 0.72em;
+    line-height: 15px;
+    font-weight: 500;
+  }
+  .bDescription {
+    margin-bottom: 12px;
+    font-size: 0.7em;
+    font-weight: 400;
   }
 }
 
-/* 320px — 480px: Mobile devices.
-481px — 768px: iPads, Tablets.
-769px — 1024px: Small screens, laptops.
-1025px — 1200px: Desktops, large screens.
-1201px and more — Extra large screens, TV. */
+@media only screen and (min-width: 581px) and (max-width: 768px) {
+  .bContainer {
+    margin: 0 1.3rem 2rem 1.3rem;
+  }
+  .bContents {
+    width: 31%;
+    height: 100%;
+    padding: 0 1.1rem;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.473),
+      rgba(0, 0, 0, 0.699)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .bContents * {
+    line-height: initial;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.486);
+  }
+  .bTitle {
+    font-size: 1.4em;
+  }
+  .bCategory {
+    font-size: 1em;
+    line-height: 15px;
+  }
+  .bDescription {
+    font-size: 0.88em;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .imgWrapper:after {
+    display: none;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .bContainer {
+    margin: 0 2.5rem 2rem 2.5rem;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .bContainer {
+    margin: 0 2.5rem 2rem 2.5rem;
+  }
+}

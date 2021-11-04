@@ -16,8 +16,6 @@ SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 function Banner(props) {
 
-    const bannerRef = useRef()
-
     const { OTTList, Genres } = useHelper()
 
     const { movies } = OTTList(props.url, 1)
@@ -29,6 +27,7 @@ function Banner(props) {
 
                 <Swiper
                     navigation={true}
+                    spaceBetween='-17'
                     loop={true}
                     allowTouchMove={false}
                     autoplay={{
@@ -36,31 +35,35 @@ function Banner(props) {
                         disableOnInteraction: false
                     }}
                     breakpoints={{
-                        "320": {
+                        "321": {
                             "spaceBetween": -17
                         },
-                        "481": {
-                            "spaceBetween": -70
+                        "376": {
+                            "spaceBetween": -20
                         },
                         "581": {
-                            "spaceBetween": -32
+                            "spaceBetween": -35
                         },
                         "769": {
                             "spaceBetween": -65
-                        }
+                        },
+                        "1024": {
+                            "spaceBetween": -70
+                        },
+                        "1440": {
+                            "spaceBetween": -80
+                        },
                     }}
                     className="mySwiper"
                 >
                     {movies && movies.map((movie, index) =>
-
                         <SwiperSlide key={index}>
                             <Link to={{
                                 pathname: '/movies',
                                 state: { movie: movie, genres: genres }
                             }}>
-
                                 <div className="bContainer">
-                                    <div key={index} className="banner" ref={bannerRef}>
+                                    <div className="banner">
                                         <div className="bContents">
                                             <h1 className='bTitle'>{movie.title}</h1>
                                             <div>
