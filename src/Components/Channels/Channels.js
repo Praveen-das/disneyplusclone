@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { URLs } from '../../assets/URLs/URLs'
 import MovieList from '../MovieList/MovieList'

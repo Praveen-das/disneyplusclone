@@ -13,6 +13,14 @@
   position: fixed;
   z-index: 200;
 }
+
+.screen-overlay{
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(182, 182, 182, 0.411);
+  /* z-index: 100; */
+}
 .hamburger {
   display: block;
   padding-right: 1rem;
@@ -57,7 +65,7 @@
 }
 .dropDown:hover .dropDownContents {
   visibility: visible;
-  transition: 0.3s;
+  transition: 0.3s, width;
   opacity: 1;
   transform: translate(-20px, 0);
   pointer-events: all;
@@ -67,20 +75,39 @@
   border-radius: 2px;
   opacity: 1;
   height: 0;
-  transition: 0.5s ease-in-out 0.5s;
   padding-top: 5px;
+  z-index: 2;
+  transition: 0.5s ease-in-out 0.5s, width;
 }
 .dropDown:hover .h-dropDownContents {
   transform: translate(-17px, 0);
   visibility: visible;
   height: 85px;
   pointer-events: all;
+  transition: 0.5s ease-in-out,width;
 }
-.movieLinks:hover{
+.movieLinks:hover {
   background: rgba(0, 0, 0, 0.473);
 }
 .device-account {
   display: none;
+}
+.device-login {
+  display: none;
+  margin: 20px !important;
+  cursor: pointer;
+}
+.device-login label{
+  display: block;
+  font-weight: 500;
+  color: rgb(245, 245, 245);
+}
+.device-login label:nth-child(2){
+  display: block;
+  padding-top: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: rgb(202, 202, 202);
 }
 .device-watchlist {
   display: none;
@@ -88,6 +115,11 @@
 .main-menus {
   display: block;
   width: 100%;
+}
+.main-menus h1 {
+  padding: 0 15px;
+  font-size: 0.95em;
+  font-weight: 400;
 }
 .movieLinks {
   display: block;
@@ -149,7 +181,7 @@
   display: block;
   position: absolute;
   top: 33px;
-  left: -3px;
+  right: 18px;
   background: #0c111b;
   border-radius: 5px;
   overflow: hidden;
@@ -196,17 +228,23 @@
   font-weight: 600;
   line-height: 35px;
 }
+
 .subscribe-btn {
-  height: 22px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 11rem;
   border: none;
   color: white;
   background: rgb(13, 146, 255);
   border-radius: 3px;
-  font-size: 12px;
   font-weight: 700;
-  padding: 0 12px;
   margin-left: 1rem;
+  transform: translateY(-55%);
+  font-size: 0.68em;
+  padding: 0 6px;
   cursor: pointer;
+  z-index: 1;
 }
 .header-login-btn {
   width: 100%;
@@ -214,14 +252,14 @@
   border: none;
   background: none;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
   margin-left: 1rem;
   line-height: 23px;
 }
-.right a {
+.userInfo-dropDown a {
   text-decoration: none;
-  font-size: 0.9em;
+  font-size: 14px;
   font-weight: 500;
   padding-left: 1rem;
 }
@@ -230,19 +268,6 @@
 }
 
 /* //////////////////////// */
-
-.login-container-overlay {
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 255, 255, 0.021);
-  backdrop-filter: blur(5px);
-  top: 0;
-  left: 0;
-  z-index: 200;
-}
 
 .userInfo {
   display: block;
@@ -254,6 +279,7 @@
   border-radius: 50%;
   background-size: contain;
   cursor: pointer;
+  opacity: 0.7;
 }
 .userInfo-dropDown {
   display: block;
@@ -284,26 +310,31 @@
   pointer-events: all;
 }
 .languages,
-.genres{
+.genres {
   display: flex;
   align-items: center;
   padding-left: 20px;
 }
 .languages-icon,
-.genres-icon{
-  width: 22px;
-  height: 22px;
-  background: url(https://www.hotstar.com/assets/2220b001005f901871764a12537e6407.svg) no-repeat;
+.genres-icon {
+  width: 20px;
+  height: 20px;
+  background: url(https://www.hotstar.com/assets/2220b001005f901871764a12537e6407.svg)
+    no-repeat;
   background-position: -240px -35px;
 }
-.genres-icon{
+.genres-icon {
   background-position: -274px -35px;
 }
-.languages:hover .languages-icon{
+.languages:hover .languages-icon,
+.languages:hover .menu-languages {
   background-position: -240px -1px;
+  color: rgb(255, 255, 255);
 }
-.genres:hover .genres-icon{
+.genres:hover .genres-icon,
+.genres:hover .menu-genres {
   background-position: -274px -1px;
+  color: rgb(255, 255, 255);
 }
 
 @media only screen and (max-width: 425px) {
@@ -336,6 +367,7 @@
     display: inline;
   }
 }
+
 @media only screen and (min-width: 321px) and (max-width: 375px) {
   .navbar {
     padding: 0 1rem;
@@ -348,15 +380,6 @@
   }
   .kidsLogo {
     display: none;
-  }
-  .subscribe-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 11rem;
-    font-size: 0.68em;
-    height: 20px;
-    padding: 0 6px;
   }
 }
 @media only screen and (min-width: 376px) and (max-width: 425px) {
@@ -372,15 +395,6 @@
   .kidsLogo {
     display: none;
   }
-  .subscribe-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 11rem;
-    font-size: 0.68em;
-    height: 20px;
-    padding: 0 6px;
-  }
 }
 @media only screen and (min-width: 426px) and (max-width: 768px) {
   .navbar {
@@ -395,20 +409,8 @@
   .kidsLogo {
     display: none;
   }
-  .subscribe-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 11rem;
-    font-size: 0.68em;
-    height: 20px;
-    padding: 0 6px;
-  }
-  .userInfo {
-    margin-left: -1rem;
-  }
   .search {
-    width: 150px;
+    width: 150px !important;
   }
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
@@ -428,6 +430,11 @@
   .kidsLogo {
     display: none;
   }
+  .subscribe-btn {
+    position: static ;
+    transform: translateY(-2px);
+    margin-left: 0;
+  }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
   .navbar-wrapper {
@@ -436,6 +443,11 @@
   .navbar {
     height: 80px;
     padding: 0 3rem;
+  }
+  .subscribe-btn {
+    position: static ;
+    transform: translateY(-2px);
+    margin-left: 0;
   }
 }
 @media only screen and (min-width: 1201px) {
@@ -446,36 +458,57 @@
     height: 80px;
     padding: 0 3rem;
   }
-  
+  .subscribe-btn {
+    position: static ;
+    transform: translateY(-2px);
+    margin-left: 0;
+  }
 }
 
 /* device only////////////////////////////////////////////// */
+@media only screen and (max-device-width: 425px) {
+  .subscribe-btn{
+    margin-left: 0;
+  }
+  
+}
 @media only screen and (max-device-width: 768px) {
-  .dropDown{
+  .header-login-btn{
+    display: none;
+  }
+  .dropDown {
     position: initial;
   }
   .dropDownContents {
-    width: 80vw;
+    width: 75vw;
     box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.473);
     left: 0;
     top: 0;
     visibility: visible;
   }
   .h-dropDownContents {
-    transform: translateX(-110%);
-    transition: 0.3s cubic-bezier(.9,.01,.94,.63);
+    visibility: hidden;
+    left: -76vw;
+    transition: 0.3s cubic-bezier(0.9, 0.01, 0.94, 0.63),width;
     height: 100vh !important;
   }
   .dropDown:hover .h-dropDownContents {
-    transform: translateX(0);
-    transition: transform ease-in 0.3s;
+    visibility: visible;
+    left: 17px;
+    transition: ease-in 0.3s,width;
   }
-  .device-account {
+  .h-dropDownContents::backdrop{
+    background: #000;
+  }
+  .device-account{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin: 20px !important;
     cursor: pointer;
+  }
+  .device-login{
+    display: block;
   }
   .device-account label {
     display: block;
@@ -484,11 +517,12 @@
     pointer-events: none;
   }
   .device-username {
-    font-size: 14px;
+    font-size: 16px;
+    padding-bottom: 3px;
     font-weight: 500;
   }
   .device-type {
-    font-size: 12px;
+    font-size: 14px;
   }
   .device-watchlist {
     display: flex;
@@ -497,9 +531,9 @@
     font-weight: 500;
     padding-left: 20px;
     margin-bottom: 3px;
-    line-height: 40px;
-    border-top: 1px solid rgba(84, 141, 226, 0.219);
-    border-bottom: 1px solid rgba(84, 141, 226, 0.219);
+    line-height: 50px;
+    border-top: 1px solid rgba(84, 141, 226, 0.342);
+    border-bottom: 1px solid rgba(84, 141, 226, 0.342);
     cursor: pointer;
   }
   .searchbox {
@@ -509,7 +543,7 @@
     display: inline;
   }
   .subscribe-btn {
-    display: none;
+    display: block;
   }
   .user-profile {
     display: none;
@@ -517,8 +551,16 @@
   .h-user-profile {
     width: 50px;
   }
+  .userInfo {
+    display: none;
+    margin-left: 0;
+  }
 }
+
 @media only screen and (min-device-width: 769px) and (max-device-width: 1200px) {
+  .header-login-btn{
+    display: none;
+  }
   .dropDownContents {
     width: 220px;
     box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.473);
@@ -533,6 +575,9 @@
     margin: 20px;
     cursor: pointer;
   }
+  .device-login{
+    display: block;
+  }
   .device-account label {
     display: block;
     color: rgb(231, 231, 231);
@@ -540,11 +585,12 @@
     pointer-events: none;
   }
   .device-username {
-    font-size: 14px;
+    font-size: 16px;
+    padding-bottom: 3px;
     font-weight: 500;
   }
   .device-type {
-    font-size: 12px;
+    font-size: 14px;
   }
   .device-watchlist {
     display: flex;
@@ -553,7 +599,7 @@
     font-weight: 500;
     padding-left: 20px;
     line-height: 40px;
-    border-top: 1px solid rgba(84, 141, 226, 0.219);
+    /* border-top: 1px solid rgba(84, 141, 226, 0.219); */
     border-bottom: 1px solid rgba(84, 141, 226, 0.219);
     cursor: pointer;
   }
@@ -564,12 +610,33 @@
     display: inline;
   }
   .subscribe-btn {
-    display: none;
+    display: block;
+    position: static;
+    height: 22px;
+    font-size: 12px;
+    padding: 0 12px;
+    transform: translateY(-2px);
+    margin-left: 1rem;
   }
   .user-profile {
     display: none;
   }
   .h-user-profile {
     width: 50px;
+  }
+  .userInfo {
+    display: none;
+    margin-left: 0;
+  }
+}
+@media only screen and (min-device-width: 1201px){
+  .subscribe-btn {
+    display: block;
+    position: static;
+    height: 22px;
+    font-size: 12px;
+    padding: 0 12px;
+    transform: translateY(0px);
+    margin-left: 0;
   }
 }

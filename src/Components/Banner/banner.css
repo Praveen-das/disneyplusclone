@@ -1,9 +1,9 @@
+.bannerWrapper{
+  width: 100%;
+  overflow: hidden;
+}
 .bannerWrapper .mySwiper {
   background: linear-gradient(0deg, var(--background), #141a28, #141a28);
-}
-
-.bContainer {
-  margin: 0 0.6rem 2rem 0.6rem;
 }
 
 .banner {
@@ -16,7 +16,6 @@
   margin-right: -100px;
   cursor: pointer;
 }
-
 .bContents {
   position: absolute;
   width: 40%;
@@ -103,9 +102,13 @@
 .mySwiper:hover .swiper-button-prev::after {
   opacity: 1;
 }
+
+/* /////////////////////////////////////////////////////////////////////// */
+
 @media only screen and (max-width: 320px) {
+  
   .bContainer {
-    margin: 0 0.7rem 2rem 0.7rem;
+    margin: 0 0.7rem 1rem 0.7rem;
   }
   .imgWrapper:after {
     display: none;
@@ -121,7 +124,7 @@
     );
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
   }
   .bContents * {
     line-height: initial;
@@ -145,7 +148,7 @@
 }
 @media only screen and (min-width: 321px) and (max-width: 375px) {
   .bContainer {
-    margin: 0 0.7rem 2rem 0.7rem;
+    margin: 0 0.7rem 1rem 0.7rem;
   }
   .imgWrapper:after {
     display: none;
@@ -161,7 +164,7 @@
     );
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
   }
   .bContents * {
     line-height: initial;
@@ -185,7 +188,7 @@
 }
 @media only screen and (min-width: 376px) and (max-width: 580px) {
   .bContainer {
-    margin: 0 0.8rem 2rem 0.8rem;
+    margin: 0 0.8rem 1.5rem 0.8rem;
   }
   .imgWrapper:after {
     display: none;
@@ -201,7 +204,7 @@
     );
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
   }
   .bContents * {
     line-height: initial;
@@ -239,7 +242,7 @@
     );
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
   }
   .bContents * {
     line-height: initial;

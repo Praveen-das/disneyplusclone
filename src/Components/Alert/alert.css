@@ -15,7 +15,8 @@
     position: relative;
     display: grid;
     place-items: center;
-    width: 460px;
+    width: 100%;
+    max-width: 460px;
     height: 440px;
     background: #182031;
     border-radius: 3px;

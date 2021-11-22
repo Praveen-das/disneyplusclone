@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useFirebase } from '../../contexts/FirebaseContext';
@@ -17,7 +17,7 @@ function MovieCard({ movie, type }) {
                 }}>
                     <div className="slide-container">
                         {horizontal ?
-                            <img className='movieImage' src={movie.backdrop_path && imageURL + 'w154' + movie.backdrop_path} alt="" />
+                            <img className='movieImage' src={movie.backdrop_path && imageURL + 'w300' + movie.backdrop_path} alt="" />
                             :
                             <img className='movieImage' src={movie.poster_path && imageURL + 'w154' + movie.poster_path} alt="" />
                         }

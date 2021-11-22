@@ -1,0 +1,72 @@
+.Bottom-navbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background: #000;
+  z-index: 150;
+  background: var(--background);
+  border-top: 1px solid rgba(51, 84, 133, 0.274);
+}
+.nb-links {
+  width: calc(100% / 5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+}
+.nb-links img {
+  width: 55px;
+  height: 100%;
+  transform: ;
+}
+.device-home,
+.device-tv,
+.device-movies,
+.device-sports {
+  width: 25px;
+  aspect-ratio: 1;
+  background: url(https://www.hotstar.com/assets/2220b001005f901871764a12537e6407.svg)
+    no-repeat;
+  background-position: 0 -34px;
+  margin-top: 5px;
+}
+.device-home {
+  background-position: 1px -34px;
+}
+.device-tv {
+  background-position: -33px -34px;
+}
+.device-movies {
+  background-position: -68px -34px;
+}
+.device-sports {
+  background-position: -103px -34px;
+}
+.nb-links label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(168, 168, 168);
+}
+
+@media only screen and (max-device-width: 425px) {
+  .Bottom-navbar {
+    display: flex;
+  }
+}
+@media only screen and (max-device-width: 768px) {
+  .Bottom-navbar {
+    display: flex;
+  }
+}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1200px) {
+  .Bottom-navbar {
+    display: flex;
+  }
+}
+@media only screen and (min-device-width: 1201px) {
+}

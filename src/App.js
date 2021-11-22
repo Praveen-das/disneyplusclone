@@ -14,15 +14,20 @@ import MyAccountPage from './pages/MyAccountPage';
 import GetStartedPage from './pages/GetStartedPage';
 import WatchlistPage from './pages/WatchlistPage';
 import { useFirebase } from './contexts/FirebaseContext';
+import Searchbox from './Components/Searchbox/Searchbox';
+import LoginPage from './pages/LoginPage';
+import TV from './pages/TV';
+import ComingSoon from './pages/ComingSoon';
 
 function App() {
   const { currentUser } = useFirebase()
 
   return (
-    <div className='body'>
+    <>
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/tv' component={TV} />
           <Route exact path='/movies' component={Movie} />
           <Route path='/movies/watch' component={MovieTheater} />
           <Route path='/movies/languages/:language' component={Results} />
@@ -33,15 +38,18 @@ function App() {
           <Route path='/languages/:language' component={Results} />
           <Route exact path='/genres' component={GenresPage} />
           <Route exact path='/genres/:genres' component={Results} />
-          <Route exact path='/get-started' component={GetStartedPage} />
-          <Route exact path='/watchlist' component={WatchlistPage} />
+          <Route path='/get-started' component={GetStartedPage} />
+          <Route path='/watchlist' component={WatchlistPage} />
+          <Route path='/search' component={Searchbox} />
+          <Route path='/sign-in' component={LoginPage} />
+          <Route path={['/sports','/kids']} component={ComingSoon} />
           {currentUser ?
-            <Route path='/my-account' component={MyAccountPage} /> : 
-            <Redirect to='/'/>
+            <Route path='/my-account' component={MyAccountPage} /> :
+            <Redirect to='/' />
           }
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 

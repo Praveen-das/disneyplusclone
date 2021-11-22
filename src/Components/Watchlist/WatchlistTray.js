@@ -46,7 +46,7 @@ function WatchlistTray() {
 
     return (
         <>
-            <div className="trayContainer">
+            <div className="watchlistTray">
                 <label className='list-title' htmlFor="">Watchlist</label>
                 <Swiper
                     ref={swiper}

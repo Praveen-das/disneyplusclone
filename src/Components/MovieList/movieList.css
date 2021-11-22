@@ -1,16 +1,15 @@
 .trayContainer {
-  position: relative;
-  margin-top: 2.5rem;
+  box-sizing: border-box;
+  width: 100%;
   padding-bottom: 2rem;
+  overflow: hidden;
 }
 .list-title {
-  position: absolute;
-  top: -40px;
-  left: 2.5rem;
+  display: block;
+  padding: 0 0 1rem 0rem;
   font-size: 1.25em;
   font-weight: 600;
   color: rgb(214, 214, 214);
-  /* z-index: 10 ; */
 }
 .mlSlides {
   padding: 0 2.5rem;
@@ -68,35 +67,7 @@
   margin-right: 10px !important;
 }
 
-/* @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .mlSlides {
-    padding: 0;
-  }
-  .list-title {
-    left: 0;
-    font-size: 1em;
-  }
-}
-@media only screen and (min-device-width: 481px) and (max-device-width: 580px) {
-  .mlSlides {
-    padding: 0;
-  }
-  .list-title {
-    left: 0;
-  }
-}
-@media only screen and (min-device-width: 581px) and (max-device-width: 768px) {
-  .mlSlides {
-    padding: 0;
-  }
-  .list-title {
-    left: 0;
-  }
-}
-
-
-/* aaaaaaaaaaaaaaaaaaaaaaaa */
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 320px) {
   .mlSlides {
     padding: 0;
   }
@@ -139,8 +110,12 @@
   }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
-    
+  .list-title {
+    padding: 0 0 1rem 2.5rem;
+  }
 }
 @media only screen and (min-width: 1201px) {
-  
+  .list-title {
+    padding: 0 0 1rem 2.5rem;
+  }
 }

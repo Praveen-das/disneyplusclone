@@ -13,12 +13,11 @@ function Header(props) {
     const inputRef = useRef()
     const searchbox = useRef()
     const loginRef = useRef()
+    const [active, setActive] = useState(false)
 
     const {
         HandleSearch,
         Genres,
-        setLoginWindow,
-        loginWindow,
         alert
     } = useHelper()
 
@@ -38,11 +37,10 @@ function Header(props) {
                 inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
                 inputRef.current.value = ''
                 setQuery()
-                // inputRef.current.style.cssText = 'width:230px; border-bottom: 1px solid var(--headerFC);'
             }
-            if (loginRef.current && loginRef.current === e.target) return setLoginWindow(false)
+            // if (loginRef.current && loginRef.current === e.target) return setLoginWindow(false)
         }
-    }, [loginRef, searchbox, setLoginWindow])
+    }, [loginRef, searchbox])
 
     useEffect(() => {
         if (movies.length > 5 && movies.map((movie) => movie.backdrop_path))
@@ -62,28 +60,35 @@ function Header(props) {
                                 <span className='line'></span>
                             </div>
                             <div className='dropDownContents h-dropDownContents'>
-                                <div className="device-account">
-                                    <img className='h-user-profile' src={currentUser && currentUser.photoURL ?
-                                        currentUser.photoURL
-                                        : 'https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg'
-                                    } alt=''></img>
-                                    <div className='device-user'>
-                                        <label className='device-username' htmlFor="">{currentUser && currentUser.displayName || currentUser.phoneNumber}</label>
-                                        <label className='device-type' htmlFor="">Logged in Via</label>
-                                    </div>
-                                </div>
+                                {currentUser ?
+                                    <Link to='/my-account' className="device-account">
+                                        <img className='h-user-profile' src={currentUser && currentUser.photoURL ?
+                                            currentUser.photoURL
+                                            : '/default-profile-picture.svg'
+                                        } alt=''></img>
+                                        <div className='device-user'>
+                                            <label className='device-username' htmlFor="">{currentUser && (currentUser.displayName || currentUser.phoneNumber)}</label>
+                                            <label className='device-type' htmlFor="">Logged in Via</label>
+                                        </div>
+                                    </Link>
+                                    :
+                                    <Link to='/sign-in' className="device-login">
+                                        <label htmlFor="">Log in</label>
+                                        <label htmlFor="">For a better experience</label>
+                                    </Link>
+                                }
                                 <Link to='/watchlist' className="device-watchlist">Watchlist</Link>
                                 <div className="main-menus">
                                     <Link to={'/languages'}>
                                         <div className="languages movieLinks">
                                             <div className="languages-icon"></div>
-                                            <h1>Languages</h1>
+                                            <h1 className='menu-languages'>Languages</h1>
                                         </div>
                                     </Link>
                                     <Link to={'/genres'}>
                                         <div className="genres movieLinks">
                                             <div className="genres-icon"></div>
-                                            <h1>Genres</h1>
+                                            <h1 className='menu-genres'>Genres</h1>
                                         </div>
                                     </Link>
                                 </div>
@@ -104,7 +109,7 @@ function Header(props) {
                             </div>
                         </div>
                         <Link className='title-disneyplus' to="/disneyplus">Disney+</Link>
-                        <img className='kidsLogo' src='/kids-logo.svg' alt="kids" />
+                        <Link to='/kids'><img className='kidsLogo' src='/kids-logo.svg' alt="kids" /></Link>
                     </div>
                     <div className="right">
                         <div className="searchbox" ref={searchbox}>
@@ -140,19 +145,24 @@ function Header(props) {
                                             : ''
                                     )
                                 }
-                                {hasMore && <Link to={`/movies/search/` + query}
+                                {hasMore && <Link
+                                    to={`/movies/search/` + query}
                                     style={{ padding: '0' }}
+                                    onClick={() => {
+                                        inputRef.current.value = ''
+                                        setQuery()
+                                    }}
                                 ><h1 className='moreResults' >MORE RESULTS</h1></Link>}
                             </div>
                         </div>
-
+                        <Link to='/search'><span className='fa fa-search device-search'></span></Link>
                         {!props.MyAccountPage && <Link to='/get-started'><button className='subscribe-btn'>SUBSCRIBE</button></Link>}
                         {
                             currentUser ?
                                 !props.MyAccountPage && <div className="userInfo">
                                     <img className='user-profile' src={currentUser && currentUser.photoURL ?
                                         currentUser.photoURL
-                                        : 'https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg'
+                                        : '/default-profile-picture.svg'
                                     } alt=''></img>
                                     <div className='userInfo-dropDown'>
                                         <div className='dropdown-item'>
@@ -167,16 +177,13 @@ function Header(props) {
                                     </div>
                                 </div>
                                 :
-                                <button onClick={() => setLoginWindow(true)} className='header-login-btn'>LOGIN</button>
+                                <button onClick={() => setActive(true)} className='header-login-btn'>LOGIN</button>
                         }
-                        <Link to='/#'><span className='fa fa-search device-search'></span></Link>
                     </div>
                 </div>
             </div >
             {
-                loginWindow && <div className="login-container-overlay" ref={loginRef}>
-                    <Login />
-                </div>
+                <Login open={active} onClose={() => setActive(false)} />
             }
             {alert && <Alert />}
         </>

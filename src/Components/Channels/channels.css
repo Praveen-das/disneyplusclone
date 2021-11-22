@@ -1,20 +1,51 @@
-.cBanner{
-    padding-bottom: 2rem;
-    background: var(--background);
+.cBanner {
+  padding-bottom: 1rem;
+  background: var(--background);
 }
-.cbWrapper{
-    width: 100%;
-    height:34vw;
-    position: relative;
+.cbWrapper {
+  width: 100%;
+  height: 60vw;
+  position: relative;
 }
 .cBanner-video,
-.cBanner-image{
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
+.cBanner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.cBanner-image{
-    position: absolute;
-    left: 0;
+.cBanner-image {
+  position: absolute;
+  left: 0;
 }
 
+@media only screen and (max-width: 320px) {
+}
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+}
+@media only screen and (min-width: 376px) and (max-width: 425px) {
+}
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+  .cbWrapper {
+    height: 50vw;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .cBanner {
+    padding-bottom: 2rem;
+  }
+  .cbWrapper {
+    height: 40vw;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .cBanner {
+    padding-bottom: 2rem;
+  }
+  .cbWrapper {
+    height: 32vw;
+  }
+  .cBanner-video,
+  .cBanner-image {
+    object-fit: fill;
+  }
+}

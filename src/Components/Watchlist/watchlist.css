@@ -1,5 +1,13 @@
+.watchlist-wrapper{
+  background: linear-gradient(0deg, var(--background),#141a28);
+}
+.watchlistTray{
+  width: 100%;
+  padding-bottom: 2rem;
+  overflow: hidden;
+}
 .watchlist-wrapper {
-  padding: 0 2.5rem;
+  padding: 0 3rem;
 }
 .watchlist-title {
   display: flex;
@@ -15,7 +23,7 @@
   gap: 10px;
 }
 .watchlist-slide-wrapper {
-  width: calc((100% - 5rem + 10px) / 8) !important;
+  width: calc((100% - 5rem + 40px) / 5) !important;
 }
 .wl-Slides {
   padding: 0 2.5rem;
@@ -50,7 +58,7 @@
 
 @media only screen and (max-width: 320px) {
   .watchlist-wrapper {
-    padding: 0;
+    padding: 0 10px;
   }
   .wl-Slides {
     padding: 0;
@@ -60,10 +68,16 @@
     left: 0;
     font-size: 1em;
   }
+  .watchlist-slide-wrapper {
+    width: calc((100% - 5rem + 70px) / 2) !important;
+  }
+  .watchlist-title{
+    font-size: 1em;
+  }
 }
-@media only screen and (min-width: 321px) and (max-width: 375px) {
+@media only screen and (min-width: 321px) and (max-width: 426px) {
   .watchlist-wrapper {
-    padding: 0;
+    padding: 0 10px;
   }
   .wl-Slides {
     padding: 0;
@@ -73,23 +87,16 @@
     left: 0;
     font-size: 1em;
   }
-}
-@media only screen and (min-width: 376px) and (max-width: 425px) {
-  .watchlist-wrapper {
-    padding: 0;
+  .watchlist-slide-wrapper {
+    width: calc((100% - 5rem + 70px) / 2) !important;
   }
-  .wl-Slides {
-    padding: 0;
-    padding-right: 1rem;
-
-  }
-  .list-title {
-    left: 0;
+  .watchlist-title{
+    font-size: 1em;
   }
 }
 @media only screen and (min-width: 426px) and (max-width: 768px) {
   .watchlist-wrapper {
-    padding: 0;
+    padding: 0 25px;
   }
   .wl-Slides {
     padding: 0;
@@ -99,10 +106,13 @@
   .list-title {
     left: 0;
   }
+  .watchlist-slide-wrapper {
+    width: calc((100% - 5rem + 60px) / 3) !important;
+  }
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   .watchlist-wrapper {
-    padding: 0;
+    padding: 0 5.5rem;
   }
   .wl-Slides {
     padding: 0;
@@ -112,8 +122,18 @@
   .list-title {
     left: 0;
   }
+  .watchlist-slide-wrapper {
+    width: calc((100% - 5rem + 50px) / 4) !important;
+  }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .watchlist-wrapper {
+    padding: 0 4rem;
+  }
+  .watchlist-slide-wrapper {
+    width: calc((100% - 5rem + 50px) / 4) !important;
+  }
 }
 @media only screen and (min-width: 1201px) {
+  
 }

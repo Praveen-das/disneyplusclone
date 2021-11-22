@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useLocation } from 'react-router';
 import { API_KEY, imageURL } from '../../assets/URLs/URLs'
 import { Link } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,7 +24,6 @@ function Banner(props) {
     return (
         <>
             <div className="bannerWrapper">
-
                 <Swiper
                     navigation={true}
                     spaceBetween='-17'
@@ -35,7 +34,7 @@ function Banner(props) {
                         disableOnInteraction: false
                     }}
                     breakpoints={{
-                        "321": {
+                        "320": {
                             "spaceBetween": -17
                         },
                         "376": {
@@ -51,7 +50,7 @@ function Banner(props) {
                             "spaceBetween": -70
                         },
                         "1440": {
-                            "spaceBetween": -80
+                            "spaceBetween": -65
                         },
                     }}
                     className="mySwiper"
@@ -65,7 +64,7 @@ function Banner(props) {
                                 <div className="bContainer">
                                     <div className="banner">
                                         <div className="bContents">
-                                            <h1 className='bTitle'>{movie.title}</h1>
+                                            <h1 className='bTitle'>{movie.title ? movie.title : movie.name}</h1>
                                             <div>
                                                 {genres && genres.filter(elements =>
                                                     movie.genre_ids.includes(elements.id)

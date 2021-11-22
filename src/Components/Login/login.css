@@ -1,156 +1,227 @@
+.login-container-overlay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  background: rgba(71, 66, 49, 0.199);
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
 .login-container,
-.login-container-alternate{
-    box-sizing: border-box;
-    display: block;
-    position: relative;
-    width: 460px;
-    max-width: 460px;
-    height: 440px;
-    background: #182031;
-    border-radius: 3px;
-    padding: 3.5rem;
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.274);
-    animation: popup 0.1s;
-    /* transition: 0.5s; */
+.login-container-alternate {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  height: 440px;
+  background: #182031;
+  border-radius: 3px;
+  padding: 3.5rem;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.274);
+  animation: popup 0.1s;
+  /* transition: 0.5s; */
 }
 @keyframes popup {
-    from{
-        transform: translateY(200px);
-    }to{
-        transform: translateY(0);
-    }
+  from {
+    transform: translateY(200px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
-.login-container-alternate{
-    height: 480px;
+.login-container-alternate {
+  height: 480px;
 }
-.fa-times{
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 1.5rem;
-    font-size: 20px;
-    color: #425886;
-    cursor: pointer;
+.fa-times {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1.5rem;
+  font-size: 20px;
+  color: #425886;
+  cursor: pointer;
 }
-.fa-arrow-left{
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 1.5rem;
-    font-size: 20px;
-    color: #425886;
-    cursor: pointer;
+.fa-arrow-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1.5rem;
+  font-size: 20px;
+  color: #425886;
+  cursor: pointer;
 }
 .login-container-label,
-.login-alternate-label{
-    display: inline-block;
-    font-size: 1.1em;
-    font-weight: 500;
-    margin-top: 3.9rem;
-    margin-bottom: 3.9rem;
-    color: white;
+.login-alternate-label {
+  display: inline-block;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-top: 3.9rem;
+  margin-bottom: 3.9rem;
+  color: white;
 }
-.login-alternate-label{
-    color: rgb(204, 204, 204);
-    font-size: 1.3em;
-    margin-bottom: 1rem;
+.login-alternate-label {
+  color: rgb(204, 204, 204);
+  font-size: 1.3em;
+  margin-bottom: 1rem;
 }
-.fb-login-btn{
-    /* margin-top: 50%; */
-    /* transform: translateY(-50%); */
-    width: 100%;
-    min-height: 50px;
-    border: 1px solid #1f80e0;
-    border-radius: 5px;
-    background: #16263f;
-    font-weight: 500;
-    color: #1f80e0;
-    cursor: pointer;
+.fb-login-btn {
+  /* margin-top: 50%; */
+  /* transform: translateY(-50%); */
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #1f80e0;
+  border-radius: 5px;
+  background: #16263f;
+  font-weight: 500;
+  color: #1f80e0;
+  cursor: pointer;
 }
 
 .login-container span,
-.login-container-alternate span{
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    font-weight: 500;
+.login-container-alternate span {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-weight: 500;
 }
-.login-container-alternate span{
-    font-size: 10px;
-    font-weight: 400;
+.login-container-alternate span {
+  font-size: 10px;
+  font-weight: 400;
 }
 .login-phoneNum,
-.login-email{
-    box-sizing: border-box;
-    width: 100%;
-    height: 40px;
-    font-weight: 400;
-    border: none;
-    background: none;
-    box-shadow: inset 0 -1px 0  #1f80e0;
-    /* color: rgb(255, 255, 255); */
-    font-weight: 500;
-    outline: none;
-    transition: box-shadow 0s 0.2s;
+.login-email {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  font-weight: 400;
+  border: none;
+  background: none;
+  box-shadow: inset 0 -1px 0 #1f80e0;
+  /* color: rgb(255, 255, 255); */
+  font-weight: 500;
+  outline: none;
+  transition: box-shadow 0s 0.2s;
 }
-.login-phoneNum::-webkit-textfield-decoration-container{
-    background: #000;
+.login-phoneNum::-webkit-textfield-decoration-container {
+  background: #000;
 }
-.login-phoneNum{
-    padding: 5px;
+.login-phoneNum {
+  padding: 5px;
 }
-.login-email{
-    padding: 5px 0;
+.login-email {
+  padding: 5px 0;
 }
-.login-warning{
-    display: flex;
-    position: relative;
-    transform: translateY(8px);
-    font-size: 12px;
-    font-weight: 400;
-    color: #f15151;
-    width: 100%;
+.login-warning {
+  display: flex;
+  position: relative;
+  transform: translateY(8px);
+  font-size: 12px;
+  font-weight: 400;
+  color: #f15151;
+  width: 100%;
 }
-.login-warning::after{
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900 ; 
-    content: "";
-    position: absolute;
-    right: 0;
+.login-warning::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "";
+  position: absolute;
+  right: 0;
 }
 .login-btn,
-.login-btn-fb{
-    width: 100%;
-    min-height: 50px;
-    border-radius: 3px;
-    border: none;
-    background:  #db3236;
-    font-size: 0.9em;
-    font-weight: 500;
-    color: white;
-    margin-top: 2rem;
-    cursor: pointer;
+.login-btn-fb {
+  width: 100%;
+  min-height: 50px;
+  border-radius: 3px;
+  border: none;
+  background: #db3236;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: white;
+  margin-top: 2rem;
+  cursor: pointer;
 }
-.fa-chevron-right{
-    color: white;
-    font-size: 10px;
-    transform: translate(3px, -1.3px);
+.fa-chevron-right {
+  color: white;
+  font-size: 10px;
+  transform: translate(3px, -1.3px);
 }
-.login-btn-fb{
-    margin-top: 0;
-    background:#3f51b5;
-
+.login-btn-fb {
+  margin-top: 0;
+  background: #3f51b5;
 }
 .fa-facebook-square,
-.fa-google{
-    color: white;
-    font-size: 18px;
-    transform: translateY(1px);
-    margin-right: 5px;
+.fa-google {
+  color: white;
+  font-size: 18px;
+  transform: translateY(1px);
+  margin-right: 5px;
 }
-.login-agree{
-    font-size: 11px;
-    color: rgb(151, 151, 151);
-    padding-top: 12px;
+.login-agree {
+  font-size: 11px;
+  color: rgb(151, 151, 151);
+  padding-top: 12px;
+}
+.device-disneyplus{
+  display: none;
+}
+@media only screen and (max-device-width: 768px) {
+  .login-container-overlay{
+    background: #0c111b;
+  }
+  .login-container,
+  .login-container-alternate {
+    width: 100%;
+    max-width: 380px;
+    height: 430px;
+    background: transparent;
+    padding: 1rem;
+    box-shadow: none;
+  }
+  .device-disneyplus{
+    display: inline-block;
+    position: fixed;
+    top: 8px;
+    left: 11px;
+  }
+  .fa-arrow-left{
+    margin: 1rem;
+  }
+  .header-login-btn{
+    display: none;
+  }
+}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+  .login-container-overlay{
+    background: #0c111b;
+  }
+  .login-container,
+  .login-container-alternate {
+    width: 100%;
+    max-width: 380px;
+    height: 430px;
+    background: transparent;
+    padding: 1rem;
+    box-shadow: none;
+  }
+  .device-disneyplus{
+    display: inline-block;
+    position: fixed;
+    top: 1.2rem;
+    left: 11px;
+  }
+  .fa-arrow-left{
+    margin: 1rem;
+  }
+}
+@media only screen and (min-device-width: 1025px) {
+  .device-disneyplus{
+    display: inline-block;
+    position: fixed;
+    top: 1.2rem;
+    left: 2rem;
+  }
 }

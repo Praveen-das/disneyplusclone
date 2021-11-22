@@ -45,7 +45,7 @@ export default function Firebase({ children }) {
 
     //Watchlist//////////////////////////////////////////////
     const db = getFirestore()
-    const [watchlist, setWatchlist] = useState()
+    const [watchlist, setWatchlist] = useState([])
 
     //Set Initial state///////////////////////////////////////
     useEffect(() => {
@@ -63,23 +63,11 @@ export default function Firebase({ children }) {
 
     //Handele database on watchlist update///////////////////////////////////////
 
-    // useEffect(() => {
-    //     console.log('currentuser rendered');
-    // }, [currentUser])
-    // useEffect(() => {
-    //     console.log('db rendered');
-    
-    // }, [db])
-    // useEffect(() => {
-    //     console.log('watchlist rendered');
-    // }, [watchlist])
-
     const addToDatabase = useCallback((movie) => {
         if (!currentUser) return
-        console.log(currentUser.uid);
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
         setDoc(watchlistDoc, { watchlist: movie })
-            .then(() => console.log('movie added to watchlist')).catch(err => console.log(err))
+            .then(() => console.log('Watchlist upadated')).catch(err => console.log(err))
     }, [currentUser, db])
 
     function addToWatchlist(movie) {
@@ -93,6 +81,7 @@ export default function Firebase({ children }) {
     function removeFromWatchlist(movie) {
         if (!currentUser) return
         setWatchlist(watchlist.filter(o => o.id !== movie.id))
+        addToDatabase(watchlist.filter(o => o.id !== movie.id))
     }
 
     const value = {

@@ -34,7 +34,8 @@
 .subscription,
 .user-logout{
     box-sizing: border-box;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     background: #182031;
     padding: 10px;
     border-radius: 3px;

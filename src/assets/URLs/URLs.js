@@ -22,4 +22,6 @@ export const URLs = [
 
 export const trendingMovies = `trending/movie/day?api_key=c240fd9f606fd0e4c6aca53d8a827e69`
 export const trendingShows = `trending/tv/day?api_key=c240fd9f606fd0e4c6aca53d8a827e69`
+export const popularShows = `tv/popular?api_key=c240fd9f606fd0e4c6aca53d8a827e69`
+export const topRatedTvShows = `tv/top_rated?api_key=c240fd9f606fd0e4c6aca53d8a827e69`
 export const recommended = `trending/tv/day?api_key=c240fd9f606fd0e4c6aca53d8a827e69`

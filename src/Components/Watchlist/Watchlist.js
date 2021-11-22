@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFirebase } from '../../contexts/FirebaseContext'
 import './watchlist.css'
-import MovieCard from '../Cards/MovieCard'
+import WatchlistCard from '../Cards/WatchlistCard'
 
 function Watchlist() {
     const { watchlist } = useFirebase()
@@ -14,7 +14,7 @@ function Watchlist() {
                     {
                         watchlist && watchlist.length !== 0  && watchlist.map((movie, index) => {
                             return <div key={index} className="watchlist-slide-wrapper">
-                                <MovieCard movie={movie} />
+                                <WatchlistCard movie={movie} />
                             </div>
                         })
                     }

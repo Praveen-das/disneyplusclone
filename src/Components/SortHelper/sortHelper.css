@@ -2,7 +2,6 @@
     position: relative;
     max-width: 100%;
     background: linear-gradient(0deg,var(--background),#141a28,#141a28);
-    overflow: hidden;
     padding: 0 2.5rem;
     padding-bottom: 5rem;
 }
@@ -15,9 +14,60 @@
 }
 .sh-tray{
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
 }
 .sh-slide-wrapper{
     width: calc((100% - 5rem + 10px) / 8);
 }
+
+@media only screen and (max-width: 320px) {
+    .sortHelper {
+      padding: 0 10px;
+    }
+    .sh-slide-wrapper {
+      width: calc((100% - 5rem + 70px) / 2) !important;
+    }
+    .title{
+      font-size: 1em;
+    }
+  }
+  @media only screen and (min-width: 321px) and (max-width: 426px) {
+    .sortHelper {
+      padding: 0 10px;
+    }
+    .sh-slide-wrapper {
+      width: calc((100% - 5rem + 60px) / 3) !important;
+    }
+    .title{
+      font-size: 1em;
+    }
+  }
+  @media only screen and (min-width: 426px) and (max-width: 768px) {
+    .sortHelper {
+      padding: 0 25px;
+    }
+    .sh-slide-wrapper {
+      width: calc((100% - 5rem + 40px) / 5) !important;
+    }
+  }
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .sortHelper {
+      padding: 0 5.5rem;
+    }
+    .sh-slide-wrapper {
+      width: calc((100% - 60px) / 6) !important;
+    }
+  }
+  @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .sortHelper {
+      padding: 0 4rem;
+    }
+    .sh-slide-wrapper {
+      width: calc((100% - 60px) / 7) !important;
+    }
+  }
+  @media only screen and (min-width: 1201px) {
+    
+  }

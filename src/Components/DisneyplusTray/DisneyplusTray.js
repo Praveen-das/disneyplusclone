@@ -22,7 +22,7 @@ function DisneyplusTray() {
     return (
         <>
             <div className="tray-wrapper">
-                <div className="tray-carousel">
+                <div className="tray-carousel ">
                     <Link to='/channels/disney' style={{ margin: '0' }}>
                         <img className='tray-carousel-image' src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_1x/sources/r1/cms/prod/6347/746347-h" alt="" />
                         <video ref={disneyRef} className='tray-carousel-video' src='disneyplus.mp4' loop muted></video>
