@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useFirebase } from '../../contexts/FirebaseContext';

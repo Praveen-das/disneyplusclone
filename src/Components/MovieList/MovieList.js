@@ -92,7 +92,7 @@ function MovieList(props) {
                     }}
                     className="mlSlides"
                 >
-                    {loading &&
+                    {loading && movies.length === 0 &&
                         skeletons.map((i, index) => {
                             return <SwiperSlide key={index}>
                                 <MovieCard />
