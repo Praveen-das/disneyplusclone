@@ -1,9 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
+/* @import url("./assets/Fonts/Roboto-Regular.ttf"); */
+@font-face{
+  font-family: 'Roboto';
+  src: local('Roboto'),url(./assets/Fonts/Roboto-Medium.ttf) format('truetype');
+}
 
 :root {
   --background: #0c111b;
   --headerFC: #ced0d2;
   --bannerBG: #030b17;
+  --skeleton :#2b38522f;
 }
 body {
   background: var(--background);

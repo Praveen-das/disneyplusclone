@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useFirebase } from '../../contexts/FirebaseContext';
@@ -15,17 +15,32 @@ function MovieCard({ movie, type }) {
                     pathname: '/movies',
                     state: { movie: movie }
                 }}>
-                    <div className="slide-container">
-                        {horizontal ?
-                            <img className='movieImage' src={movie.backdrop_path && imageURL + 'w300' + movie.backdrop_path} alt="" />
-                            :
-                            <img className='movieImage' src={movie.poster_path && imageURL + 'w154' + movie.poster_path} alt="" />
-                        }
-                        <div className="slideContents">
-                            <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
-                            <p className='movieDescription'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
+                    {!movie ?
+                        <div className="slide-container" style={{ background: 'var(--skeleton)', height: 300 }}> </div> :
+                        <div className="slide-container">
+                            {horizontal ?
+                                <img className='movieImage' src={movie.backdrop_path && imageURL + 'w300' + movie.backdrop_path} alt="" />
+                                :
+                                <div className="image-wrapper">
+                                    {movie.poster_path && <picture>
+                                        <source
+                                            srcSet={`${imageURL + 'w154' + movie.poster_path}`}
+                                            media="(max-width: 375px)"
+                                        />
+                                        <img
+                                            className='movieImage'
+                                            srcSet={`${imageURL + 'w300' + movie.poster_path}`}
+                                            alt=""
+                                        />
+                                    </picture>}
+                                </div>
+                            }
+                            <div className="slideContents">
+                                <label className='movieLabel' htmlFor="">{movie.title ? movie.title : movie.name}</label>
+                                <p className='movieDescription'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, perferendis.</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </Link>
                 <div className='bBtns'>
                     <div className='wmBtn'>
@@ -36,7 +51,7 @@ function MovieCard({ movie, type }) {
                         }}>WATCH MOVIE</Link>
                     </div>
                     {
-                        watchlist && watchlist.map(o => o.id).includes(movie.id)
+                        (movie && watchlist) && watchlist.map(o => o.id).includes(movie.id)
                             ?
                             <button onClick={() => removeFromWatchlist(movie)} className='atfBtn'>
                                 <i className='fa fa-plus'></i>

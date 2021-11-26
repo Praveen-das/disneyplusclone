@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useHelper } from '../../contexts/Contexts'
 import { useFirebase } from '../../contexts/FirebaseContext'
 import './login.css'
@@ -41,17 +40,21 @@ function Login({ open, onClose }) {
                 setLoginWindow(false)
                 setAlert(true)
                 console.log(res);
-            }).catch(err => setError(err))
+            }).catch(err => {
+                console.log(err);
+                setError(err)
+            })
         }
         if (type === 'phonenumber') {
             setError('')
             setLoading(true)
             phoneNumberRef.current.value = ''
             setOTPWindow(true)
-            await signinWithPhonenumber(phoneNumber, 'phonenumber').catch(err => {
-                setError(err)
-                console.log(err)
-            })
+            await signinWithPhonenumber(phoneNumber, 'phonenumber')
+                .catch(err => {
+                    setError(err)
+                    console.log(err)
+                })
             setLoading(false)
         }
         if (OTP) {
@@ -64,7 +67,10 @@ function Login({ open, onClose }) {
                 setLoading(false)
                 onClose()
                 setAlert(true)
-            }).catch(err => setError(err))
+            }).catch(err => {
+                console.log(err);
+                setError(err)
+            })
         }
     }
 

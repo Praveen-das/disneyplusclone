@@ -45,7 +45,6 @@ export default function AuthProvider({ children }) {
                 setLoading(false)
             }).catch(err => console.log(err))
         }, [pageNumber, url])
-
         return ({ movies, hasMore, loading })
     }
 
@@ -141,7 +140,7 @@ export default function AuthProvider({ children }) {
 
         return { movies, hasMore, loading }
     }
-
+    
     const value = {
         OTTList,
         Genres,
@@ -151,7 +150,7 @@ export default function AuthProvider({ children }) {
         setLoginWindow,
         loginWindow,
         alert,
-        setAlert
+        setAlert,
     }
 
     return (

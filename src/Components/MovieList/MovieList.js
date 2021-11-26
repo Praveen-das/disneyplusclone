@@ -30,8 +30,9 @@ function MovieList(props) {
         lastElementRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
                 setPageNumber(previous => previous + 1)
+                console.log('asdasd');
             }
-        }, { rootMargin: '100%' })
+        }, { rootMargin:'100%' })
         if (node) lastElementRef.current.observe(node)
     }, [hasMore, loading])
 
@@ -43,6 +44,8 @@ function MovieList(props) {
         }
     }
 
+    const skeletons = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
+
     return (
         <>
             <div className="trayContainer">
@@ -50,41 +53,52 @@ function MovieList(props) {
                 <Swiper
                     ref={swiper}
                     navigation={true}
-                    // slidesPerGroup={8}
                     slidesPerView={3}
                     speed={1000}
-                    // freeMode={true}
-                    // mousewheel={false}
+                    freeMode={true}
                     onBeforeInit={(e) => handleNavigation(e)}
                     onActiveIndexChange={(e) => handleNavigation(e)}
                     breakpoints={{
                         "320": {
                             "slidesPerView": 3,
+                            'slidesPerGroup': 3,
                             "spaceBetween": 18
                         },
                         "481": {
                             "slidesPerView": 4,
+                            'slidesPerGroup': 4,
                             "spaceBetween": 16
                         },
                         "581": {
                             "slidesPerView": 5,
+                            'slidesPerGroup': 5,
                             "spaceBetween": 15
                         },
                         "769": {
                             "slidesPerView": 6,
+                            'slidesPerGroup': 6,
                             "spaceBetween": 10
                         },
                         "1024": {
                             "slidesPerView": 7,
+                            'slidesPerGroup': 7,
                             "spaceBetween": 10
                         },
                         "1200": {
                             "slidesPerView": 8,
+                            'slidesPerGroup': 8,
                             "spaceBetween": 10
                         }
                     }}
                     className="mlSlides"
                 >
+                    {loading &&
+                        skeletons.map((i, index) => {
+                            return <SwiperSlide key={index}>
+                                <MovieCard />
+                            </SwiperSlide>
+                        })
+                    }
                     {
                         movies.length !== 0 && movies.map((movie, index) => {
                             if (movie.poster_path)

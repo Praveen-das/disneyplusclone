@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,7 +18,7 @@ function Banner(props) {
 
     const { OTTList, Genres } = useHelper()
 
-    const { movies } = OTTList(props.url, 1)
+    const { movies, loading } = OTTList(props.url, 1)
     const genres = Genres()
 
     return (
@@ -35,13 +35,13 @@ function Banner(props) {
                     }}
                     breakpoints={{
                         "320": {
-                            "spaceBetween": -17
+                            "spaceBetween": -17,
                         },
                         "376": {
-                            "spaceBetween": -20
+                            "spaceBetween": -20,
                         },
                         "581": {
-                            "spaceBetween": -35
+                            "spaceBetween": -35,
                         },
                         "769": {
                             "spaceBetween": -65
@@ -55,6 +55,13 @@ function Banner(props) {
                     }}
                     className="mySwiper"
                 >
+                    {loading &&
+                        <div className="bContainer">
+                            <div className="banner"
+                                style={{ height: 453, background: 'var(--skeleton)' }}
+                            ></div>
+                        </div>
+                    }
                     {movies && movies.map((movie, index) =>
                         <SwiperSlide key={index}>
                             <Link to={{
@@ -77,7 +84,24 @@ function Banner(props) {
                                             <p className='bDescription'>{movie.overview}</p>
                                         </div>
                                         <div className="imgWrapper">
-                                            <img className='bImage' src={movie.backdrop_path && imageURL + 'w780' + movie.backdrop_path} alt="" />
+                                            {movie.backdrop_path &&
+                                                <picture>
+                                                    <source
+                                                        srcSet={`${imageURL + 'w300' + movie.backdrop_path}`}
+                                                        media="(max-width: 375px)"
+                                                    />
+                                                    <source
+                                                        srcSet={`${imageURL + 'w780' + movie.backdrop_path}`}
+                                                        media="(max-width: 768px)"
+                                                    />
+                                                    <img
+                                                        className='bImage'
+                                                        srcSet={`${imageURL + 'w1280' + movie.backdrop_path}`}
+                                                        alt=""
+                                                    />
+                                                </picture>
+
+                                            }
                                         </div>
                                     </div>
                                 </div>

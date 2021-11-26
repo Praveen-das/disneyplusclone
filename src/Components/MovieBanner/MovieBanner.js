@@ -12,7 +12,6 @@ function MovieBanner() {
     const { movie } = location.state
     const { Genres } = useHelper()
     const genres = Genres()
-
     const { watchlist, addToWatchlist, removeFromWatchlist } = useFirebase()
 
     return (

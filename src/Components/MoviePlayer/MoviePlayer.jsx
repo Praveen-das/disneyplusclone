@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './moviePlayer.css'
 import { useLocation } from 'react-router'
 import YouTube from 'react-youtube';
@@ -10,17 +10,15 @@ function MoviePlayer() {
     const [movieKey, setMovieKey] = useState()
     const { movie } = location.state
 
-    try {
+    useEffect(() => {
         axios.get(`${BaseURL}/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`).then((res) => {
             setMovieKey(res.data.results[0].key)
-        }).catch((err)=> console.log(err))
-    } catch (error) {
-        console.log(error);
-    }
+        }).catch((err) => console.log(err))
+    }, [movie])
 
     const opts = {
-        height: '480',
-        width: '854',
+        width: '100%',
+        height: '100%',
         playerVars: {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
@@ -30,8 +28,8 @@ function MoviePlayer() {
     };
 
     return (
-        <div className='playerWrapper'>
-            <YouTube videoId={movieKey} opts={opts} />
+        <div className='player'>
+            <YouTube className='youtube' videoId={movieKey} opts={opts} />
         </div >
     )
 }

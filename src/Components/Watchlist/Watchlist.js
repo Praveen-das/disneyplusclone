@@ -5,7 +5,7 @@ import WatchlistCard from '../Cards/WatchlistCard'
 
 function Watchlist() {
     const { watchlist } = useFirebase()
-
+    
     return (
         <>
             <div className="watchlist-wrapper">

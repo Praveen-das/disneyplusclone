@@ -20,7 +20,7 @@ function loadScript(src) {
 }
 
 function GetStarted() {
-  const { currentUser, logout } = useFirebase();
+  const { currentUser, logout, addSubscriptionToDatabase } = useFirebase();
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState({ super: { color: '#fedf7b' }, premium: { color: 'white' } })
@@ -62,8 +62,8 @@ function GetStarted() {
   }
 
   async function displayRazorupe() {
-    if(!currentUser)
-    return history.push('/sign-in')
+    if (!currentUser)
+      return history.push('/sign-in')
     setLoading(true)
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
 
@@ -71,16 +71,17 @@ function GetStarted() {
       console.log('Razorupe not loaded');
       return setLoading(false)
     }
-
-    const data = await fetch(`http://www.localhost:3001/subscriptions/${subscription.id}`, { method: 'POST' }).then(res => res.json())
+    if(!subscription) return
+    const response = await fetch(`https://fae0-2409-4073-390-3350-106b-d8e7-92b9-bb60.ngrok.io/subscriptions/${subscription.id}`, { method: 'POST' }).then(res => res.json())
     setLoading(false)
 
     var options = {
       "key": "rzp_test_qCeMC5VrMj9CvS",
-      "subscription_id": data.id,
+      "subscription_id": response.id,
       "name": "Disney+ Hotastar.",
-      "handler":(res)=>{
-        window.location.assign(`https://api.razorpay.com/v1/t/subscriptions/${res.razorpay_subscription_id}`);
+      "handler": (res) => {
+        handleAuthentication(res)
+        history.push('/')
       },
       "prefill": {
         "name": "Gaurav Kumar",
@@ -90,6 +91,27 @@ function GetStarted() {
     };
     var rzp1 = new window.Razorpay(options);
     rzp1.open();
+  }
+
+  async function handleAuthentication(data) {
+    const res = await fetch('https://fae0-2409-4073-390-3350-106b-d8e7-92b9-bb60.ngrok.io/verification',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+    if (res.isAuthenticated) {
+      if(!currentUser) return
+      window.location.assign(`https://api.razorpay.com/v1/t/subscriptions/${data.razorpay_subscription_id}`)
+      addSubscriptionToDatabase({
+        plan: subscription.plan,
+        subscription_id: data.razorpay_subscription_id,
+        payment_id: data.razorpay_payment_id
+      })
+    }
   }
 
   useEffect(() => {

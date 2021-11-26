@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { auth } from '../config/firebaseApp'
 import { GoogleAuthProvider, RecaptchaVerifier, signInWithPopup, signInWithPhoneNumber } from "@firebase/auth"
-import { getFirestore, setDoc, getDocs, doc, collection } from 'firebase/firestore'
+import { getFirestore, setDoc, updateDoc, arrayRemove, arrayUnion, query, doc, collection, onSnapshot } from 'firebase/firestore'
 
 const FirebaseContext = React.createContext()
 export function useFirebase() {
@@ -10,6 +10,7 @@ export function useFirebase() {
 
 export default function Firebase({ children }) {
     const [loading, setLoading] = useState(true)
+    const [databaseLoading, setDatabaseLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState()
 
     // Authentication
@@ -46,42 +47,55 @@ export default function Firebase({ children }) {
     //Watchlist//////////////////////////////////////////////
     const db = getFirestore()
     const [watchlist, setWatchlist] = useState([])
+    const [subscriptions, setSubscriptions] = useState()
 
     //Set Initial state///////////////////////////////////////
+
     useEffect(() => {
-        if (currentUser)
-            getDocs(collection(db, currentUser.uid)).then((doc) => {
-                if (!doc.empty)
-                    return doc.forEach(doc => {
-                        const snapshot = doc.data()
-                        if (!snapshot) return
-                        setWatchlist(snapshot.watchlist)
-                    })
-                return setWatchlist([])
+        if (!currentUser) return
+        let queryRef = query(collection(db, currentUser.uid))
+        onSnapshot(queryRef, (snapshot) => {
+            if (!snapshot) return
+            snapshot.forEach((data) => {
+                if (data.data().subscriptions)
+                    setSubscriptions(data.data().subscriptions)
+                if (data.data().watchlist)
+                    setWatchlist(data.data().watchlist.reverse())
+                setDatabaseLoading(false)
             })
+        })
+        return
     }, [db, currentUser])
 
     //Handele database on watchlist update///////////////////////////////////////
 
-    const addToDatabase = useCallback((movie) => {
-        if (!currentUser) return
-        const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
-        setDoc(watchlistDoc, { watchlist: movie })
-            .then(() => console.log('Watchlist upadated')).catch(err => console.log(err))
-    }, [currentUser, db])
-
     function addToWatchlist(movie) {
         if (!currentUser) return
-        setWatchlist(pre => {
-            addToDatabase([movie, ...pre])
-            return [movie, ...pre]
-        })
+        const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
+        if (watchlist.length === 0) {
+            setDoc(watchlistDoc, { watchlist: [movie] })
+                .then(() => console.log('Watchlist upadated'))
+                .catch(err => console.log(err))
+            return
+        }
+        updateDoc(watchlistDoc, { watchlist: arrayUnion(movie) })
+            .then(() => console.log('Watchlist upadated'))
+            .catch(err => console.log(err))
     }
 
     function removeFromWatchlist(movie) {
         if (!currentUser) return
-        setWatchlist(watchlist.filter(o => o.id !== movie.id))
-        addToDatabase(watchlist.filter(o => o.id !== movie.id))
+        const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
+        updateDoc(watchlistDoc, { watchlist: arrayRemove(movie) })
+            .then(() => console.log('Watchlist upadated'))
+            .catch(err => console.log(err))
+    }
+
+    const addSubscriptionToDatabase = (data) => {
+        if (!currentUser) return
+        const subscriptionDoc = doc(db, currentUser.uid, 'subscriptions')
+        setDoc(subscriptionDoc, { subscriptions: data })
+            .then(() => console.log('subscription_details updated')).catch(err => console.log(err))
     }
 
     const value = {
@@ -91,7 +105,10 @@ export default function Firebase({ children }) {
         currentUser,
         addToWatchlist,
         removeFromWatchlist,
-        watchlist
+        watchlist,
+        subscriptions,
+        addSubscriptionToDatabase,
+        databaseLoading
     }
 
     return (

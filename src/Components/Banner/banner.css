@@ -1,4 +1,4 @@
-.bannerWrapper{
+.bannerWrapper {
   width: 100%;
   overflow: hidden;
 }
@@ -55,6 +55,10 @@
 .imgWrapper {
   position: relative;
   margin-left: auto;
+  pointer-events: none;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1.78;
 }
 .imgWrapper:after {
   position: absolute;
@@ -106,7 +110,6 @@
 /* /////////////////////////////////////////////////////////////////////// */
 
 @media only screen and (max-width: 320px) {
-  
   .bContainer {
     margin: 0 0.7rem 1rem 0.7rem;
   }
@@ -274,5 +277,12 @@
 @media only screen and (min-width: 1025px) {
   .bContainer {
     margin: 0 2.5rem 2rem 2.5rem;
+  }
+}
+
+@media only screen and (max-device-width: 425px) {
+  .mySwiper .swiper-button-next,
+  .mySwiper .swiper-button-prev {
+    display: none;
   }
 }

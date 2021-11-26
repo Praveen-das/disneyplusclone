@@ -21,6 +21,13 @@
     width: 100%;
     object-fit: cover;
 }
+.image-wrapper{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: var(--skeleton);
+    aspect-ratio: 0.67;
+}
 .slide-container::after{
     content: '';
     position: absolute;
