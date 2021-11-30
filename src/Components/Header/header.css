@@ -550,6 +550,7 @@
     display: none;
   }
   .h-user-profile {
+    border-radius: 50%;
     width: 50px;
   }
   .userInfo {

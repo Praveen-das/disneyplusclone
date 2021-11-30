@@ -63,6 +63,12 @@ function Header(props) {
         document.body.style.overflow = 'unset'
     }
 
+    function DetectDevice() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return 'mobile'
+        }
+    }
+
     return (
         <>
             <div className='navbar-wrapper'>
@@ -84,7 +90,7 @@ function Header(props) {
                                         } alt=''></img>
                                         <div className='device-user'>
                                             <label className='device-username' htmlFor="">{(currentUser.displayName || currentUser.phoneNumber)}</label>
-                                            <label className='device-type' htmlFor="">Logged in Via</label>
+                                            <label className='device-type' htmlFor="">Logged in Via <DetectDevice/></label>
                                         </div>
                                     </Link>
                                     :
