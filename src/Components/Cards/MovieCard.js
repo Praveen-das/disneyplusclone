@@ -10,7 +10,7 @@ function MovieCard({ movie, type }) {
 
     return (
         <>
-            <div className="slide active">
+            <div className="slide active noHover">
                 <Link to={{
                     pathname: '/movies',
                     state: { movie: movie }

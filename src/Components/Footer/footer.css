@@ -45,7 +45,7 @@
 }
 .fb,
 .tw {
-  background: url("https://www.hotstar.com/assets/00dd72dcb62378da1988866159d26cca.svg")
+  background: url('../../assets/Logos/share.svg')
     left bottom no-repeat;
   background-position: 0 0;
   width: 40px;
@@ -84,7 +84,7 @@
 }
 .playstore,
 .appstore {
-  background: url("https://www.hotstar.com/assets/67764ffe0b6b18e06d60049a00c86335.svg")
+  background: url('../../assets/Logos/appstore.svg')
     left bottom no-repeat;
   background-position: 0 0;
   width: 135px;
@@ -106,7 +106,7 @@
 
 @media only screen and (max-width: 375px) {
   .footer {
-    padding: 0rem 1rem 4.5rem 1rem;
+    padding: 0rem 8px 4.5rem 8px;
   }
   .footer-link {
     font-size: 0.85em;
@@ -121,7 +121,7 @@
 }
 @media only screen and (min-width: 376px) and (max-width: 425px) {
   .footer {
-    padding: 2rem 1.5rem 4.5rem 1.5rem;
+    padding: 2rem 10px 4.5rem 10px;
   }
   .footer-link {
     font-size: 0.85em;

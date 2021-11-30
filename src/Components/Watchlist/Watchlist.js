@@ -7,7 +7,7 @@ function Watchlist() {
     const { watchlist } = useFirebase()
     
     return (
-        <>
+        <div id='wrapper'>
             <div className="watchlist-wrapper">
                 <label className='watchlist-title' htmlFor="">Watchlist</label>
                 <div className="watchlist">
@@ -20,7 +20,7 @@ function Watchlist() {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

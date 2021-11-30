@@ -106,9 +106,48 @@
   font-weight: 600;
   color: white;
 }
-
+.movieBanner-details {
+  display: none;
+}
+.movieBanner-details h1 {
+  font-size: 1.1em;
+  /* margin-top: 1rem; */
+}
+.movieBanner-details label {
+  font-size: 0.8em;
+  line-height: 35px;
+  color: #1f80e0;
+}
+.movieBanner-details p {
+  font-size: 0.8em;
+  line-height: 20px;
+}
 @media only screen and (max-width: 768px) {
-  .mbContainer{
+  .device-btns {
+    position: relative;
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  .device-share {
+    position: absolute;
+    left: 3rem;
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+    transform: translateY(15px);
+  }
+  .device-btns i {
+    font-size: 23px;
+    color: rgb(119, 119, 119);
+  }
+  .device-btns .wl i {
+    font-size: 24px;
+    margin: 0 0 0 0.5rem;
+  }
+  .bWatchList {
+    display: none;
+  }
+  .mbContainer {
     margin-bottom: 1rem;
   }
   .mBanner-contents {
@@ -122,21 +161,45 @@
   .WatchMovieBtn2 {
     display: none;
   }
-  .bWatchMovie{
+  .bWatchMovie {
     font-size: 1em;
   }
-  .WatchMovieBtn span{
+  .WatchMovieBtn span {
     width: 15px;
     height: 18px;
   }
 }
+@media only screen and (max-device-width: 320px) {
+  .movieBanner-details {
+    display: block;
+    padding: 0 8px;
+  }
+  .imgWrapper:before{
+    display: none;
+  }
+}
+@media only screen and (min-device-width: 376px) and (max-device-width: 425px) {
+  .movieBanner-details {
+    display: block;
+    padding: 0 10px;
+  }
+  .WatchMovieBtn2-m {
+    display: flex;
+  }
+}
+@media only screen and (min-device-width: 426px) and (max-device-width: 768px) {
+  .movieBanner-details {
+    display: block;
+    padding: 0 12px;
+  }
+}
+
 @media only screen and (min-width: 321px) and (max-width: 375px) {
 }
 @media only screen and (min-width: 376px) and (max-width: 580px) {
 }
 
 @media only screen and (min-width: 581px) and (max-width: 768px) {
-  
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   .mBanner {
@@ -152,7 +215,7 @@
     grid-template-rows: auto 10%;
     padding: 4.5rem 2rem 4.5rem 3rem;
   }
-  .imgWrapper:before{
+  .imgWrapper:before {
     display: none;
   }
 }
@@ -171,7 +234,7 @@
     grid-template-rows: auto 10%;
     padding: 4.5rem 2rem 4.5rem 3rem;
   }
-  .imgWrapper:before{
+  .imgWrapper:before {
     display: none;
   }
 }

@@ -98,6 +98,7 @@ export default function Firebase({ children }) {
             .then(() => console.log('subscription_details updated')).catch(err => console.log(err))
     }
 
+
     const value = {
         signInWithGoogle,
         signinWithPhonenumber,

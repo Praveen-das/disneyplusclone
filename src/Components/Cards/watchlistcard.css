@@ -124,3 +124,13 @@
     opacity: 1;
     transition-delay: 0.3s;
 }
+@media only screen and (min-device-width: 0px) {
+  .active:hover {
+    transform: none !important;
+  }
+  .wl-slide-container::after,
+  .wl-slideContents,
+  .bBtns {
+    display: none;
+  }
+}

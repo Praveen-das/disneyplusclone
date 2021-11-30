@@ -47,7 +47,7 @@ function MovieList(props) {
     const skeletons = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
 
     return (
-        <>
+        <div>
             <div className="trayContainer">
                 <label className='list-title' htmlFor="">{props.title}</label>
                 <Swiper
@@ -114,7 +114,7 @@ function MovieList(props) {
                     }
                 </Swiper>
             </div>
-        </>
+        </div>
     )
 }
 

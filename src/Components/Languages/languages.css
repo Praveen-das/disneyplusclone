@@ -79,6 +79,7 @@
 @media only screen and (max-width: 320px) {
     .languages-container {
       padding: 0 10px;
+      padding-bottom: 3rem;
     }
     .languages-title {
       left: 0;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { imageURL } from '../../assets/URLs/URLs'
 import { useHelper } from '../../contexts/Contexts'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -57,8 +57,7 @@ function Banner(props) {
                 >
                     {loading &&
                         <div className="bContainer">
-                            <div className="banner"
-                                style={{ height: 453, background: 'var(--skeleton)' }}
+                            <div className="banner banner-skeleton"
                             ></div>
                         </div>
                     }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './navbarbottom.css'
+import mainLogo from '../../assets/Logos/disney-hotstar-logo-main.svg'
+
 function NavbarBottom() {
     return (
         <>
@@ -14,7 +16,7 @@ function NavbarBottom() {
                     <label htmlFor="">TV</label>
                 </Link>
                 <Link className='nb-links' to='/disneyplus'>
-                    <img src="/disney-hotstar-logo-main.svg" alt="" />
+                    <img src={mainLogo} alt="" />
                 </Link>
                 <Link className='nb-links' to='/languages'>
                     <div className="device-movies"></div>

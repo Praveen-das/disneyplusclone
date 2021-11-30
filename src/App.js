@@ -42,7 +42,7 @@ function App() {
           <Route path='/watchlist' component={WatchlistPage} />
           <Route path='/search' component={Searchbox} />
           <Route path='/sign-in' component={LoginPage} />
-          <Route path={['/sports','/kids']} component={ComingSoon} />
+          <Route path={['/sports', '/kids']} component={ComingSoon} />
           {currentUser ?
             <Route path='/my-account' component={MyAccountPage} /> :
             <Redirect to='/' />

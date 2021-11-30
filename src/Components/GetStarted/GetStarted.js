@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import "./getStarted.css";
 import { useFirebase } from "../../contexts/FirebaseContext";
 import { raw_images } from "./raw_images";
+import disneyplusLogo from '../../assets/Logos/disney-hotstar-logo.svg'
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -129,7 +130,7 @@ function GetStarted() {
         <Link to="/">
           <img
             className="disneyplus"
-            src="/disney-hotstar-logo.svg"
+            src={disneyplusLogo}
             alt="logo"
           />
         </Link>

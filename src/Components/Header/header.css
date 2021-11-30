@@ -319,7 +319,7 @@
 .genres-icon {
   width: 20px;
   height: 20px;
-  background: url(https://www.hotstar.com/assets/2220b001005f901871764a12537e6407.svg)
+  background: url('../../assets/Logos/logos.svg')
     no-repeat;
   background-position: -240px -35px;
 }

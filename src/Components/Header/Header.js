@@ -6,6 +6,9 @@ import { imageURL } from '../../assets/URLs/URLs'
 import Login from '../Login/Login'
 import Alert from '../Alert/Alert'
 import { useFirebase } from '../../contexts/FirebaseContext'
+import kidsLogo from '../../assets/Logos/kids-logo.svg'
+import disneyplusLogo from '../../assets/Logos/disney-hotstar-logo.svg'
+import defaultProfilePicture from '../../assets/Logos/default-profile-picture.svg'
 
 function Header(props) {
     const [query, setQuery] = useState()
@@ -24,8 +27,7 @@ function Header(props) {
     const {
         logout,
         currentUser,
-        subscriptions,
-        databaseLoading
+        subscriptions
     } = useFirebase()
 
     const { movies } = HandleSearch(query)
@@ -66,7 +68,7 @@ function Header(props) {
                                         <Link to='/my-account' className="device-account">
                                             <img className='h-user-profile' src={ currentUser.photoURL ?
                                                 currentUser.photoURL
-                                                : '/default-profile-picture.svg'
+                                                : defaultProfilePicture
                                             } alt=''></img>
                                             <div className='device-user'>
                                                 <label className='device-username' htmlFor="">{(currentUser.displayName || currentUser.phoneNumber)}</label>
@@ -96,7 +98,7 @@ function Header(props) {
                                     </div>
                                 </div>
                             </div>
-                            <Link to='/'><img className='disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
+                            <Link to='/'><img className='disneyplus' src={disneyplusLogo} alt="logo" /></Link>
                             <div className='dropDown dropDown-movies'>
                                 <label className='title-movies' htmlFor="">Movies</label>
                                 <div className='dropDownContents'>
@@ -111,7 +113,7 @@ function Header(props) {
                                 </div>
                             </div>
                             <Link className='title-disneyplus' to="/disneyplus">Disney+</Link>
-                            <Link to='/kids'><img className='kidsLogo' src='/kids-logo.svg' alt="kids" /></Link>
+                            <Link to='/kids'><img className='kidsLogo' src={kidsLogo} alt="kids" /></Link>
                         </div>
                         <div className="right">
                             <div className="searchbox" ref={searchbox}>
@@ -167,7 +169,7 @@ function Header(props) {
                                     !props.MyAccountPage && <div className="userInfo">
                                         <img className='user-profile' src={currentUser.photoURL ?
                                             currentUser.photoURL
-                                            : '/default-profile-picture.svg'
+                                            : defaultProfilePicture
                                         } alt=''></img>
                                         <div className='userInfo-dropDown'>
                                             <div className='dropdown-item'>

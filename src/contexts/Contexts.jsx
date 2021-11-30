@@ -140,7 +140,7 @@ export default function AuthProvider({ children }) {
 
         return { movies, hasMore, loading }
     }
-    
+
     const value = {
         OTTList,
         Genres,

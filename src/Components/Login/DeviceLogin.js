@@ -4,7 +4,7 @@ import { useHelper } from '../../contexts/Contexts'
 import { useFirebase } from '../../contexts/FirebaseContext'
 import { useHistory } from 'react-router'
 import './login.css'
-
+import disneyplusLogo from '../../assets/Logos/disney-hotstar-logo.svg'
 
 function Login() {
     const [phoneNumber, setPhoneNumber] = useState()
@@ -71,7 +71,7 @@ function Login() {
     return (
         <>
             <div className='login-container-overlay'>
-            <Link to='/'><img className='device-disneyplus' src='/disney-hotstar-logo.svg' alt="logo" /></Link>
+            <Link to='/'><img className='device-disneyplus' src={disneyplusLogo} alt="logo" /></Link>
                 {
                     !haveAlternateMethod ?
                         <div className="login-container">

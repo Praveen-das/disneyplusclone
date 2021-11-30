@@ -17,6 +17,7 @@ function DisneyPlusPage() {
          <Banner url={trendingMovies}/>
          <DisneyplusTray/>
          <MovieList title='Recommended For You' url={sortURL + '&with_genres=16'}/>
+         <MovieList title='New to Disney+' url={sortURL + '&with_genres=16'}/>
          <NavbarBottom/>
          <Footer/>   
         </>

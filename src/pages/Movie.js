@@ -9,12 +9,12 @@ function Movie() {
         window.scrollTo(0,0)
     },[])
     return (
-        <>
+        <div id='wrapper'>
             <Header />
             <MovieBanner/>
             <NavbarBottom/>
             <Footer />
-        </>
+        </div>
     )
 }
 

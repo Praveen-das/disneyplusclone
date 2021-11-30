@@ -1,13 +1,12 @@
 .watchlist-wrapper{
   background: linear-gradient(0deg, var(--background),#141a28);
+  padding: 0 3rem;
 }
 .watchlistTray{
+  box-sizing: border-box;
   width: 100%;
   padding-bottom: 2rem;
   overflow: hidden;
-}
-.watchlist-wrapper {
-  padding: 0 3rem;
 }
 .watchlist-title {
   display: flex;
@@ -24,9 +23,6 @@
 }
 .watchlist-slide-wrapper {
   width: calc((100% - 5rem + 40px) / 5) !important;
-}
-.wl-Slides {
-  padding: 0 2.5rem;
 }
 .wl-Slides .swiper-button-next,
 .wl-Slides .swiper-button-prev {
@@ -77,7 +73,7 @@
 }
 @media only screen and (min-width: 321px) and (max-width: 426px) {
   .watchlist-wrapper {
-    padding: 0 10px;
+    padding: 0 12px;
   }
   .wl-Slides {
     padding: 0;
@@ -134,6 +130,36 @@
     width: calc((100% - 5rem + 50px) / 4) !important;
   }
 }
-@media only screen and (min-width: 1201px) {
-  
+
+@media only screen and (max-device-width: 375px) {
+    .watchlistTray{
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-bottom: 1.5rem;
+    }
 }
+@media only screen and (min-device-width: 376px) and (max-device-width: 425px) {
+    .watchlistTray{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+}
+@media only screen and (min-device-width: 426px) and (max-device-width: 768px) {
+    .watchlistTray{
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+}
+@media only screen and (min-width: 769px) {
+  .watchlistTray{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media only screen and (min-device-width: 0px) {
+  .wl-Slides .swiper-button-next,
+  .wl-Slides .swiper-button-prev{
+    display: none;
+  }
+}
+
