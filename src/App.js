@@ -18,9 +18,15 @@ import Searchbox from './Components/Searchbox/Searchbox';
 import LoginPage from './pages/LoginPage';
 import TV from './pages/TV';
 import ComingSoon from './pages/ComingSoon';
+import { useEffect } from 'react';
 
 function App() {
   const { currentUser } = useFirebase()
+
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  })
 
   return (
     <>

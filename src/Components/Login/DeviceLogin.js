@@ -41,6 +41,9 @@ function Login() {
             setLoading(true)
             await signInWithGoogle().then(res => {
                 setLoginWindow(false)
+                setHaveAlternateMethod(false)
+                setLoading(false)
+                history.push('/')
                 setAlert(true)
             }).catch(err => setError(err))
         }
@@ -61,6 +64,8 @@ function Login() {
             signinWithPhonenumber(OTP, 'otp').then(() => {
                 setOTP('')
                 setPhoneNumber('')
+                setOTPWindow(false)
+                setLoading(false)
                 history.push('/')
                 setAlert(true)
             }).catch(err => setError(err))
