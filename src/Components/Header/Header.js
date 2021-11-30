@@ -56,11 +56,11 @@ function Header(props) {
     function handleOverlay(active) {
         if (active) {
             setOverlay(active)
-            document.body.style.overflow = 'hidden'
+            // document.body.style.overflow = 'hidden'
             return
         }
         setOverlay(active)
-        document.body.style.overflow = 'unset'
+        // document.body.style.overflow = 'unset'
     }
 
     function DetectDevice() {
