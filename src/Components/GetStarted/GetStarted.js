@@ -73,7 +73,7 @@ function GetStarted() {
       return setLoading(false)
     }
     if(!subscription) return
-    const response = await fetch(`https://fae0-2409-4073-390-3350-106b-d8e7-92b9-bb60.ngrok.io/subscriptions/${subscription.id}`, { method: 'POST' }).then(res => res.json())
+    const response = await fetch(`https://disneyplusclone-server.herokuapp.com/subscriptions/${subscription.id}`, { method: 'POST' }).then(res => res.json())
     setLoading(false)
 
     var options = {
@@ -95,7 +95,7 @@ function GetStarted() {
   }
 
   async function handleAuthentication(data) {
-    const res = await fetch('https://fae0-2409-4073-390-3350-106b-d8e7-92b9-bb60.ngrok.io/verification',
+    const res = await fetch('https://disneyplusclone-server.herokuapp.com/verification',
       {
         method: 'POST',
         headers: {
