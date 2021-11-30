@@ -173,6 +173,7 @@
   .login-container-alternate {
     width: 100%;
     max-width: 380px;
+    height: 440px;
     background: transparent;
     padding: 1rem;
     box-shadow: none;
