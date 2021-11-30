@@ -24,7 +24,7 @@ export default function Firebase({ children }) {
             const appVerifier = new RecaptchaVerifier('login-btn', {
                 'size': 'invisible'
             }, auth);
-            signInWithPhoneNumber(auth, '+1-202-555-0171', appVerifier).then((confirmationResult) => {
+            signInWithPhoneNumber(auth, input, appVerifier).then((confirmationResult) => {
                 window.confirmationResult = confirmationResult
             }).catch((err) => console.log(err))
             return

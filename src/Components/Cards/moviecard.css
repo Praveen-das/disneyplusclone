@@ -129,7 +129,7 @@
   opacity: 1;
   transition-delay: 0.3s;
 }
-@media only screen and (min-device-width: 0px) {
+@media only screen and (max-device-width: 1024px) {
   .active:hover {
     transform: none !important;
   }

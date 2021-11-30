@@ -38,8 +38,10 @@ function Login({ open, onClose }) {
             setLoading(true)
             await signInWithGoogle().then(res => {
                 setLoginWindow(false)
+                setHaveAlternateMethod(false)
+                setLoading(false)
+                onClose()
                 setAlert(true)
-                console.log(res);
             }).catch(err => {
                 console.log(err);
                 setError(err)
