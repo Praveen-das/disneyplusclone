@@ -42,7 +42,6 @@ function Login() {
             await signInWithGoogle().then(res => {
                 setLoginWindow(false)
                 setAlert(true)
-                console.log(res);
             }).catch(err => setError(err))
         }
         if (type === 'phonenumber') {

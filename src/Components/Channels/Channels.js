@@ -22,7 +22,6 @@ function Channels() {
             playPromise.then().catch(err => console.log(err))
         }
     })
-    console.log(params.q);
     return (
         <>
             <div className="cBanner">

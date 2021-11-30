@@ -13,7 +13,6 @@ export default function AuthProvider({ children }) {
     const [alert, setAlert] = useState(false)
 
     if (alert) {
-        console.log();
         setTimeout(() => {
             setAlert(false)
         }, 1000)

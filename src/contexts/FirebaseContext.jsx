@@ -74,12 +74,10 @@ export default function Firebase({ children }) {
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
         if (watchlist.length === 0) {
             setDoc(watchlistDoc, { watchlist: [movie] })
-                .then(() => console.log('Watchlist upadated'))
                 .catch(err => console.log(err))
             return
         }
         updateDoc(watchlistDoc, { watchlist: arrayUnion(movie) })
-            .then(() => console.log('Watchlist upadated'))
             .catch(err => console.log(err))
     }
 
@@ -87,7 +85,6 @@ export default function Firebase({ children }) {
         if (!currentUser) return
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
         updateDoc(watchlistDoc, { watchlist: arrayRemove(movie) })
-            .then(() => console.log('Watchlist upadated'))
             .catch(err => console.log(err))
     }
 
@@ -95,7 +92,7 @@ export default function Firebase({ children }) {
         if (!currentUser) return
         const subscriptionDoc = doc(db, currentUser.uid, 'subscriptions')
         setDoc(subscriptionDoc, { subscriptions: data })
-            .then(() => console.log('subscription_details updated')).catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
 
 

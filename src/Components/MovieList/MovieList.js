@@ -30,7 +30,6 @@ function MovieList(props) {
         lastElementRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
                 setPageNumber(previous => previous + 1)
-                console.log('asdasd');
             }
         }, { rootMargin:'100%' })
         if (node) lastElementRef.current.observe(node)
