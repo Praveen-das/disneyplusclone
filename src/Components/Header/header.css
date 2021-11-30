@@ -13,14 +13,6 @@
   position: fixed;
   z-index: 200;
 }
-
-.screen-overlay{
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(182, 182, 182, 0.411);
-  /* z-index: 100; */
-}
 .hamburger {
   display: block;
   padding-right: 1rem;
@@ -76,7 +68,7 @@
   opacity: 1;
   height: 0;
   padding-top: 5px;
-  z-index: 2;
+  z-index: 10;
   transition: 0.5s ease-in-out 0.5s, width;
 }
 .dropDown:hover .h-dropDownContents {
@@ -337,6 +329,15 @@
   color: rgb(255, 255, 255);
 }
 
+@media only screen and (max-width: 768px) {
+  .dropdown-overlay{
+    position: fixed;
+    z-index: 3;
+    inset: 0;
+    overflow: hidden;
+    background: rgba(216, 216, 216, 0.151);
+  }
+}
 @media only screen and (max-width: 425px) {
   .navbar {
     padding: 0 1rem;

@@ -82,9 +82,9 @@ function MovieBanner() {
                 <div className='device-btns'>
                     <WatchlistBtn movie={movie} />
                     <div className="device-share">
-                        <i class="fab fa-facebook-square"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fas fa-link"></i>
+                        <i className="fab fa-facebook-square"></i>
+                        <i className="fab fa-twitter"></i>
+                        <i className="fas fa-link"></i>
                     </div>
                 </div>
             </div>
