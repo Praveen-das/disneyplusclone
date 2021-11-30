@@ -25,6 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+  -webkit-tap-highlight-color: transparent;
 }
 #wrapper{
   height: calc(100vh);
