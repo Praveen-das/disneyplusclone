@@ -12,9 +12,9 @@ function TV() {
 
     const { watchlist, currentUser } = useFirebase()
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    })
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     
     return (
         <>

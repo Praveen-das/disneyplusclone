@@ -19,11 +19,12 @@ export default function Firebase({ children }) {
     }
 
     async function signinWithPhonenumber(input, type) {
+        const phonenumber = `+91${input}`
         if (type === 'phonenumber') {
             const appVerifier = new RecaptchaVerifier('login-btn', {
                 'size': 'invisible'
             }, auth);
-            signInWithPhoneNumber(auth, input, appVerifier).then((confirmationResult) => {
+            signInWithPhoneNumber(auth, phonenumber, appVerifier).then((confirmationResult) => {
                 window.confirmationResult = confirmationResult
             }).catch((err) => console.log(err))
             return

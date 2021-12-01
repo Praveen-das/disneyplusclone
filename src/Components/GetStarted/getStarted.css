@@ -142,6 +142,7 @@ header {
   text-align: center;
   font-size: 1.4em;
   color: white;
+  padding: 0 10px;
   padding-bottom: 1rem;
 }
 .subscription-details {

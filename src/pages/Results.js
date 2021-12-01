@@ -7,7 +7,7 @@ import SortHelper from '../Components/SortHelper/SortHelper'
 function Results() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    })
+    },[])
     return (
         <div id='wrapper'>
             <Header/>

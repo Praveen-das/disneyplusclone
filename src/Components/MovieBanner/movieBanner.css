@@ -64,7 +64,7 @@
   background: url(https://www.hotstar.com/assets/354b1f5d615ca67922644bf6bd842b8d.svg);
   width: 20px;
   aspect-ratio: 0.85;
-  background-size: contain;
+  background-size: cover;
   position: absolute;
   left: -2rem;
   top: -2px;

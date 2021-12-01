@@ -74,7 +74,7 @@ function Login() {
 
     return (
         <>
-            <div className='login-container-overlay'>
+            <div className='login-container-wrapper'>
             <Link to='/'><img className='device-disneyplus' src={disneyplusLogo} alt="logo" /></Link>
                 {
                     !haveAlternateMethod ?
@@ -93,7 +93,7 @@ function Login() {
                             {phoneNumber ? '' : OTPWindow ? '' : <button className="fb-login-btn" onClick={() => setHaveAlternateMethod(true)}>Have a Facebook/Email account ?</button>}
                             {phoneNumber ? '' : OTPWindow ? '' : <span>or</span>}
                             {OTPWindow ? <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'otp')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /> :
-                                <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" />}
+                                <div className='login-input-wrapper'><span className='country-code'>+91</span><input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /></div>}
                             {error && <label className='login-warning' htmlFor="">Invalid phone number</label>}
                             {(phoneNumber || OTPWindow) && <button style={loading ? { pointerEvents: 'none' } : { pointerEvents: 'initial' }} onClick={() => OTPWindow ? handleLogin('otp') : handleLogin('phonenumber')} className="login-btn" id='login-btn'>CONTINUE</button>}
                             {phoneNumber && !OTPWindow && <p className='login-agree'>By proceeding you Agree to the Terms of use and Privacy policy</p>}

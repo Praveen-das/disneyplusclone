@@ -328,13 +328,17 @@
   background-position: -274px -1px;
   color: rgb(255, 255, 255);
 }
-
+.dropdown-overlay{
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+  background: rgba(216, 216, 216, 0.151);
+}
 @media only screen and (max-width: 768px) {
-  .dropdown-overlay{
+  .dropdown-overlay-device{
     position: fixed;
     z-index: 3;
     inset: 0;
-    overflow: hidden;
     background: rgba(216, 216, 216, 0.151);
   }
 }

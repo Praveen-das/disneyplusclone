@@ -75,7 +75,7 @@ function Header(props) {
             <div className='navbar-wrapper'>
                 <div className="navbar">
                     <div className="left">
-                        {overlay && <div ref={overlayRef} className="dropdown-overlay" onClick={() => handleOverlay(false)}></div>}
+                        {overlay && <div ref={overlayRef} className="dropdown-overlay-device" onClick={() => handleOverlay(false)}></div>}
                         <div className='dropDown dropDown-hamburger'>
                             <div className="hamburger" onClick={() => handleOverlay(true)}>
                                 <span className='line'></span>

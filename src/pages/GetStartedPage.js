@@ -5,7 +5,7 @@ import GetStarted from '../Components/GetStarted/GetStarted'
 function GetStaredPage() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    })
+    },[])
     return (
         <>
             <GetStarted />

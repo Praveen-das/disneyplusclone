@@ -22,6 +22,7 @@
     align-self: flex-end;
     font-size: 5em;
     transform: translateY(-50px);
+    color: #1f80e0;
 }
 #loading label{
     line-height: 100px;

@@ -5,9 +5,9 @@ import Watchlist from '../Components/Watchlist/Watchlist'
 import NavbarBottom from '../Components/Navbar-bottom/NavbarBottom'
 
 function WatchlistPage() {
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    })
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     return (
         <div id="wrapper">
             <Header />
