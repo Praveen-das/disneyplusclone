@@ -10,7 +10,7 @@ import NavbarBottom from '../Components/Navbar-bottom/NavbarBottom'
 function DisneyPlusPage() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    },[])
+    })
     return (
         <>
          <Header/>

@@ -44,7 +44,7 @@ function MovieBanner() {
                         </div>
                         <div className="mbBtns">
                             <div className="WatchMovieBtn">
-                                <span></span>
+                                
                                 <Link to={{
                                     pathname: '/movies/watch',
                                     state: { movie: movie, genres: genres }

@@ -10,7 +10,6 @@ export function useFirebase() {
 
 export default function Firebase({ children }) {
     const [loading, setLoading] = useState(true)
-    const [databaseLoading, setDatabaseLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState()
 
     // Authentication
@@ -52,25 +51,41 @@ export default function Firebase({ children }) {
     //Set Initial state///////////////////////////////////////
 
     useEffect(() => {
-        if (!currentUser) return
+        if (!currentUser) return setSubscriptions(null)
+
         let queryRef = query(collection(db, currentUser.uid))
-        onSnapshot(queryRef, (snapshot) => {
+        const subscription = onSnapshot(queryRef, (snapshot) => {
             if (!snapshot) return
             snapshot.forEach((data) => {
                 if (data.data().subscriptions)
                     setSubscriptions(data.data().subscriptions)
                 if (data.data().watchlist)
                     setWatchlist(data.data().watchlist.reverse())
-                setDatabaseLoading(false)
             })
         })
-        return
+        return subscription
     }, [db, currentUser])
+
+    useEffect(() => {
+        if (currentUser) return
+        let localDB = localStorage.getItem('watchlist')
+        setWatchlist(JSON.parse(localDB))
+    }, [currentUser])
 
     //Handele database on watchlist update///////////////////////////////////////
 
     function addToWatchlist(movie) {
-        if (!currentUser) return
+        if (!currentUser) {
+            setWatchlist(pre => {
+                if (pre){
+                    localStorage.setItem('watchlist', JSON.stringify([movie, ...pre]))
+                    return [movie, ...pre]}
+                localStorage.setItem('watchlist', JSON.stringify([movie]))
+                return [movie]
+            })
+            return
+        }
+
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
         if (watchlist.length === 0) {
             setDoc(watchlistDoc, { watchlist: [movie] })
@@ -82,7 +97,12 @@ export default function Firebase({ children }) {
     }
 
     function removeFromWatchlist(movie) {
-        if (!currentUser) return
+        if (!currentUser) {
+            const newList = watchlist.filter(o=> o !== movie)
+            setWatchlist(newList)
+            localStorage.setItem('watchlist',JSON.stringify(newList))
+            return
+        }
         const watchlistDoc = doc(db, currentUser.uid, 'watchlist')
         updateDoc(watchlistDoc, { watchlist: arrayRemove(movie) })
             .catch(err => console.log(err))
@@ -95,7 +115,6 @@ export default function Firebase({ children }) {
             .catch(err => console.log(err))
     }
 
-
     const value = {
         signInWithGoogle,
         signinWithPhonenumber,
@@ -106,7 +125,6 @@ export default function Firebase({ children }) {
         watchlist,
         subscriptions,
         addSubscriptionToDatabase,
-        databaseLoading
     }
 
     return (

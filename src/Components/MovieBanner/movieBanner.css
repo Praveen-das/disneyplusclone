@@ -51,19 +51,23 @@
   transition: 0.2s;
 }
 .bWatchMovie {
+  position: relative;
   font-size: 1.3em;
   font-weight: 500;
   line-height: 20px;
   color: white;
   transition: 0.2s;
+  margin-left: 2rem;
 }
-.WatchMovieBtn span {
+.bWatchMovie::before {
+  content: '';
   background: url(https://www.hotstar.com/assets/354b1f5d615ca67922644bf6bd842b8d.svg);
-  width: 17px;
-  height: 20px;
+  width: 20px;
+  aspect-ratio: 0.85;
   background-size: contain;
-  margin-right: 1rem;
-  transition: 0.2s;
+  position: absolute;
+  left: -2rem;
+  top: -2px;
 }
 .mBanner:hover .WatchMovieBtn {
   opacity: 1;
@@ -163,10 +167,12 @@
   }
   .bWatchMovie {
     font-size: 1em;
+    margin-left: 1.5rem;
   }
-  .WatchMovieBtn span {
+  .bWatchMovie::before {
     width: 15px;
-    height: 18px;
+    transform: translateY(2px);
+    left: -1.5rem;
   }
 }
 @media only screen and (max-device-width: 320px) {

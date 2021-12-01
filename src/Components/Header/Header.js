@@ -18,6 +18,7 @@ function Header(props) {
     const loginRef = useRef()
     const [active, setActive] = useState(false)
     const [overlay, setOverlay] = useState(false)
+    const overlayRef = useRef()
 
     const {
         HandleSearch,
@@ -43,7 +44,6 @@ function Header(props) {
                 inputRef.current.value = ''
                 setQuery()
             }
-            // if (loginRef.current && loginRef.current === e.target) return setLoginWindow(false)
         }
     }, [loginRef, searchbox])
 
@@ -54,14 +54,14 @@ function Header(props) {
     }, [movies])
 
     function handleOverlay(active) {
-        if (active) {
-            setOverlay(active)
-            // document.body.style.overflow = 'hidden'
-            return
-        }
+        if (active) return setOverlay(active)
         setOverlay(active)
-        // document.body.style.overflow = 'unset'
     }
+
+    useEffect(() => {
+        if (overlay) return document.body.style.overflow = 'hidden'
+        return document.body.style.overflow = 'unset'
+    }, [overlay])
 
     function DetectDevice() {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -75,7 +75,7 @@ function Header(props) {
             <div className='navbar-wrapper'>
                 <div className="navbar">
                     <div className="left">
-                        {overlay && <div className="dropdown-overlay" onClick={() => handleOverlay(false)}></div>}
+                        {overlay && <div ref={overlayRef} className="dropdown-overlay" onClick={() => handleOverlay(false)}></div>}
                         <div className='dropDown dropDown-hamburger'>
                             <div className="hamburger" onClick={() => handleOverlay(true)}>
                                 <span className='line'></span>
@@ -91,7 +91,7 @@ function Header(props) {
                                         } alt=''></img>
                                         <div className='device-user'>
                                             <label className='device-username' htmlFor="">{(currentUser.displayName || currentUser.phoneNumber)}</label>
-                                            <label className='device-type' htmlFor="">Logged in Via <DetectDevice/></label>
+                                            <label className='device-type' htmlFor="">Logged in Via <DetectDevice /></label>
                                         </div>
                                     </Link>
                                     :

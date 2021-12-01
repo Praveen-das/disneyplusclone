@@ -7,7 +7,7 @@ import NavbarBottom from '../Components/Navbar-bottom/NavbarBottom'
 function LanguagesPage() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    },[])
+    })
     return (
         <div id='wrapper'>
             <Header/>

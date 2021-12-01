@@ -1,0 +1,28 @@
+#loading-container{
+    height: calc(var(--var)*100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 210;
+    background: rgba(255, 255, 255, 0.13);
+}
+#loading{
+    min-width: 300px;
+    width: 30%;
+    aspect-ratio: 0.8;
+    background: #182135;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 50% 35%;
+    place-items: center;
+}
+#loading .fa-spin{
+    align-self: flex-end;
+    font-size: 5em;
+    transform: translateY(-50px);
+}
+#loading label{
+    line-height: 100px;
+}

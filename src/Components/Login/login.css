@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   display: grid;
-  justify-content: center;
+  place-items: center;
   background: rgba(71, 66, 49, 0.199);
   z-index: 200;
 }

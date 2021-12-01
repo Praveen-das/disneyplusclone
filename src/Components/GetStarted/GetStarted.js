@@ -5,6 +5,7 @@ import "./getStarted.css";
 import { useFirebase } from "../../contexts/FirebaseContext";
 import { raw_images } from "./raw_images";
 import disneyplusLogo from '../../assets/Logos/disney-hotstar-logo.svg'
+import Loading from "../Loading/Loading";
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -233,7 +234,7 @@ function GetStarted() {
                 <div><label className='price'>&#8377;1499</label><label className='validity' htmlFor="">/Year</label></div>
               </button>
             </div>
-            <button disabled={loading} onClick={displayRazorupe} className='confirm-plan'>CONTINUE WITH {subscription.plan}</button>
+            <button onClick={displayRazorupe} className='confirm-plan'>CONTINUE WITH {subscription.plan}</button>
 
             {currentUser ? <small>Logged in with <small className='current-user'>{currentUser.displayName ? currentUser.displayName : currentUser.phoneNumber}</small></small>
 
@@ -245,7 +246,9 @@ function GetStarted() {
             {currentUser && <p className='change-current-user'>USE ANOTHER ACCOUNT</p>}
           </div>
         </div>
+        {loading && <Loading label={'Redirecting to Payment Gateway'}/>}
       </div>
+      
     </>
   );
 }

@@ -6,7 +6,7 @@ import Footer from '../Components/Footer/Footer'
 function MyAccountPage() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    },[])
+    })
     return (
         <>
             <Header MyAccountPage/>

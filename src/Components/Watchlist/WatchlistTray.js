@@ -25,7 +25,7 @@ function WatchlistTray() {
             e.el.children[0].style.cssText = 'visibility : hidden; transition: 0s'
         }
     }
-
+    
     useEffect(() => {
         if (watchlist && watchlist.length > 6) {
             swiper.current.children[1].style.cssText = 'visibility : visible; transition: 0.5s'

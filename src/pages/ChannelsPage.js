@@ -7,7 +7,7 @@ import NavbarBottom from '../Components/Navbar-bottom/NavbarBottom'
 function ChannelsPage() {
     useEffect(()=>{
         window.scrollTo(0,0)
-    },[])
+    })
     return (
         <>
             <Header/>

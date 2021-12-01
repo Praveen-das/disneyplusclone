@@ -10,17 +10,17 @@ import NavbarBottom from '../Components/Navbar-bottom/NavbarBottom'
 
 function Home() {
 
-    const { watchlist, currentUser } = useFirebase()
+    const { watchlist } = useFirebase()
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
+    })
 
     return (
         <>
             <Header />
             <Banner url={trendingMovies} />
-            {currentUser && watchlist && watchlist.length !== 0 && < WatchlistTray />}
+            {watchlist && watchlist.length !== 0 && < WatchlistTray />}
             <MovieList title='Latest & Trending' url={trendingMovies} />
             <MovieList title='Popular Shows' url={trendingShows} />
             <MovieList title='Shows Recommended For You' url={recommended} />
