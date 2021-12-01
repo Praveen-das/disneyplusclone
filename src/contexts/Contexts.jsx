@@ -15,7 +15,7 @@ export default function AuthProvider({ children }) {
     if (alert) {
         setTimeout(() => {
             setAlert(false)
-        }, 1000)
+        }, 3000)
     }
 
     function removeDuplicates(input) {
