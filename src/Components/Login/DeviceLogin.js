@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useHelper } from '../../contexts/Contexts'
 import { useFirebase } from '../../contexts/FirebaseContext'
 import { useHistory } from 'react-router'
+import OtpInput from 'react-otp-input';
 import './login.css'
 import disneyplusLogo from '../../assets/Logos/disney-hotstar-logo.svg'
 
@@ -75,7 +76,7 @@ function Login() {
     return (
         <>
             <div className='login-container-wrapper'>
-            <Link to='/'><img className='device-disneyplus' src={disneyplusLogo} alt="logo" /></Link>
+                <Link to='/'><img className='device-disneyplus' src={disneyplusLogo} alt="logo" /></Link>
                 {
                     !haveAlternateMethod ?
                         <div className="login-container">
@@ -92,7 +93,24 @@ function Login() {
                             }
                             {phoneNumber ? '' : OTPWindow ? '' : <button className="fb-login-btn" onClick={() => setHaveAlternateMethod(true)}>Have a Facebook/Email account ?</button>}
                             {phoneNumber ? '' : OTPWindow ? '' : <span>or</span>}
-                            {OTPWindow ? <input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'otp')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /> :
+                            {OTPWindow ?
+                                <OtpInput
+                                    value={OTP}
+                                    containerStyle={{ gap: '15px' }}
+                                    inputStyle={
+                                        {
+                                            width: 35,
+                                            height: 35,
+                                            border: 'none',
+                                            background: 'none',
+                                            borderBottom: '1px solid gray',
+                                            outline: 'none'
+                                        }}
+                                    className='login-otp'
+                                    onChange={setOTP}
+                                    numInputs={6}
+                                    separator={<span></span>}
+                                /> :
                                 <div className='login-input-wrapper'><span className='country-code'>+91</span><input ref={phoneNumberRef} className="login-phoneNum" onFocus={(e) => handleStyle(e, 'focus')} onBlur={(e) => handleStyle(e)} onChange={(e) => handleInput(e, 'phonenumber')} type="text" name="phoneNo" autoComplete='off' placeholder="Enter your mobile number" /></div>}
                             {error && <label className='login-warning' htmlFor="">Invalid phone number</label>}
                             {(phoneNumber || OTPWindow) && <button style={loading ? { pointerEvents: 'none' } : { pointerEvents: 'initial' }} onClick={() => OTPWindow ? handleLogin('otp') : handleLogin('phonenumber')} className="login-btn" id='login-btn'>CONTINUE</button>}
